@@ -956,10 +956,108 @@
   @media (prefers-reduced-motion: reduce) { .percurso .p-step { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .fluxo.rev .fx { opacity: 1; transform: none; } }
   @media print { .aa-painel, #ouvir-btn, #aa-btn, .mapa-ctl, .decidir, .bento { display: none !important; } html .shell { zoom: 1 !important; } }
+
+  /* ---------- entrada pela flor (0.9.27) ---------- */
+  .entrada { position: fixed; inset: 0; z-index: 200; background: radial-gradient(circle at 50% 42%, #1B232D 0%, #14191F 68%); color: #E9EDF1; display: flex; flex-direction: column; overflow: hidden; transition: opacity .45s ease, visibility .45s; }
+  .entrada[hidden] { display: none !important; }
+  .entrada.saindo { opacity: 0; visibility: hidden; }
+  .entrada a, .entrada button { color: inherit; }
+  .entrada :focus-visible { outline: 3px solid #E3A51A; outline-offset: 3px; }
+  .en-topo { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: calc(12px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); font-family: 'IBM Plex Mono', monospace; font-size: 12px; position: relative; z-index: 3; }
+  .en-pular { padding: 7px 11px; border: 1px solid #3A4552; border-radius: 4px; text-decoration: none; background: #14191F; }
+  .en-pular:hover { border-color: #E9EDF1; }
+  .en-ver { letter-spacing: .1em; color: #AEB7C1; }
+  .en-palco { flex: 1; display: grid; place-items: center; min-height: 0; overflow-y: auto; padding: 8px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+  .en-flor { display: grid; justify-items: center; gap: 4px; width: min(560px, 100%); transition: opacity .35s; }
+  .en-marca { font-family: 'Archivo', sans-serif; font-stretch: 68%; font-weight: 900; font-size: clamp(52px, 11vw, 92px); line-height: .9; color: #fff; margin: 0; letter-spacing: -.01em; }
+  .en-sub { font-family: 'Archivo', sans-serif; font-stretch: 82%; font-weight: 700; font-size: clamp(15px, 2.4vw, 20px); margin: 0 0 4px; text-align: center; text-wrap: balance; }
+  .en-flor svg { width: min(420px, 88vw, 52vh); height: auto; overflow: visible; }
+  .en-petala { cursor: pointer; transition: transform .7s cubic-bezier(.6,-.2,.3,1), opacity .5s ease .15s; }
+  .en-petala ellipse { transition: filter .2s; stroke: #fff; stroke-width: 0; }
+  .en-petala:hover ellipse, .en-petala:focus-visible ellipse, .en-petala.on ellipse { filter: brightness(1.18); stroke-width: 1.2; }
+  .en-petala:focus-visible, .en-centro:focus-visible { outline: none; }
+  .en-petala text { font-family: 'Archivo', sans-serif; font-stretch: 80%; font-weight: 800; font-size: 5.4px; fill: #fff; pointer-events: none; }
+  .en-centro { cursor: pointer; transform-box: view-box; transform-origin: 105px 105px; transition: transform .25s; }
+  .en-centro:hover, .en-centro:focus-visible { transform: scale(1.08); }
+  .en-centro:focus-visible .disco { stroke: #E3A51A; stroke-width: 2; }
+  .en-anel { fill: none; stroke: #fff; stroke-width: .8; transform-box: view-box; transform-origin: 105px 105px; animation: enPulso 2.4s ease-out infinite; }
+  @keyframes enPulso { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.7); } }
+  .en-dig circle { animation: enDig 1.2s infinite; } .en-dig circle:nth-child(2) { animation-delay: .2s; } .en-dig circle:nth-child(3) { animation-delay: .4s; }
+  @keyframes enDig { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
+  .en-leg { min-height: 3.3em; text-align: center; max-width: 36ch; color: #AEB7C1; font-size: 15px; margin: 0; }
+  .en-leg b { display: block; font-family: 'Archivo', sans-serif; font-stretch: 85%; font-size: 18px; color: #E9EDF1; }
+  .en-dica { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; color: #AEB7C1; margin: 0; }
+  .entrada.aberta .en-flor { opacity: 0; pointer-events: none; }
+  .entrada.aberta .en-topo { visibility: hidden; }
+  .entrada.aberta .en-petala { opacity: 0; }
+  .en-conv { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; background: #14191F; clip-path: circle(0% at 50% 50%); visibility: hidden; transition: clip-path .75s cubic-bezier(.7,0,.2,1) .35s, visibility 0s linear 1.1s; }
+  .entrada.aberta .en-conv { clip-path: circle(150% at 50% 50%); visibility: visible; transition: clip-path .75s cubic-bezier(.7,0,.2,1) .35s, visibility 0s; }
+  .en-faixas { display: grid; grid-template-columns: repeat(5, 1fr); padding-top: env(safe-area-inset-top, 0px); }
+  .en-faixas button { border: 0; color: #fff; text-align: left; padding: 12px 10px 10px; min-height: 76px; display: flex; flex-direction: column; justify-content: flex-end; cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .04em; transform: translateY(-110%); transition: transform .5s cubic-bezier(.2,.8,.2,1), filter .2s; }
+  .en-faixas button b { font-family: 'Archivo', sans-serif; font-stretch: 70%; font-weight: 900; font-size: 30px; line-height: 1; }
+  .en-faixas button:hover { filter: brightness(1.15); }
+  .entrada.aberta .en-faixas button { transform: none; }
+  .entrada.aberta .en-faixas button:nth-child(1) { transition-delay: .9s; } .entrada.aberta .en-faixas button:nth-child(2) { transition-delay: .97s; } .entrada.aberta .en-faixas button:nth-child(3) { transition-delay: 1.04s; } .entrada.aberta .en-faixas button:nth-child(4) { transition-delay: 1.11s; } .entrada.aberta .en-faixas button:nth-child(5) { transition-delay: 1.18s; }
+  .en-chat { flex: 1; overflow-y: auto; min-height: 0; padding: 22px max(16px, 6%) 18px; display: flex; flex-direction: column; gap: 10px; }
+  .en-msg { max-width: min(600px, 90%); padding: 10px 14px; border-radius: 14px; line-height: 1.45; font-size: 16px; animation: enEntra .35s ease both; }
+  .en-msg.p { background: #E9EDF1; color: #14191F; border-bottom-left-radius: 4px; }
+  .en-msg.p small { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: #4A5560; margin-bottom: 2px; }
+  .en-msg.u { align-self: flex-end; background: #1F5FA8; color: #fff; border-bottom-right-radius: 4px; }
+  .en-msg.dig { display: inline-flex; gap: 5px; }
+  .en-msg.dig i { width: 7px; height: 7px; border-radius: 50%; background: #4A5560; animation: enDig 1s infinite; }
+  .en-msg.dig i:nth-child(2) { animation-delay: .15s; } .en-msg.dig i:nth-child(3) { animation-delay: .3s; }
+  @keyframes enEntra { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .en-ops { display: flex; flex-wrap: wrap; gap: 8px; animation: enEntra .35s ease both; }
+  .en-ops button, .en-btn { font: inherit; font-size: 15px; padding: 8px 14px; border-radius: 999px; border: 1.5px solid #E9EDF1; background: transparent; cursor: pointer; min-height: 40px; }
+  .en-ops button:hover, .en-btn:hover { background: #E9EDF1; color: #14191F !important; }
+  .en-ops button.dest { border-color: #E3A51A; }
+  .en-ir { display: inline-flex; font-weight: 700; color: #14191F !important; background: #E3A51A; padding: 8px 14px; border-radius: 999px; text-decoration: none; margin-top: 6px; }
+  .en-trecho { font: inherit; background: transparent; border: 0; border-bottom: 2px dotted #5B6672; padding: 0 1px; cursor: pointer; color: #14191F !important; text-align: left; line-height: 1.6; }
+  .en-trecho:hover { background: rgba(227,165,26,.3); }
+  .en-trecho.certo { background: rgba(200,55,45,.2); border-bottom: 2px solid #C8372D; }
+  .en-trecho.nao { opacity: .6; border-bottom-color: transparent; }
+  .en-cart { display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: #C8372D; color: #fff; padding: 2px 8px; border-radius: 3px; margin-right: 4px; }
+  .en-rodape { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; padding: 10px max(16px, 6%) calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid #2E3843; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #AEB7C1; }
+  .en-rodape .en-btn { font-size: 13px; min-height: 34px; padding: 4px 12px; }
+  .rever-flor { font-family: 'IBM Plex Mono', monospace; font-size: 12px; background: transparent; border: 0; text-decoration: underline; cursor: pointer; padding: 6px 0; color: inherit; opacity: .85; }
+  @media (max-width: 640px) { .en-faixas button { min-height: 56px; padding: 8px 6px; font-size: 0; } .en-faixas button b { font-size: 22px; } }
+  @media (prefers-reduced-motion: reduce) { .entrada *, .entrada { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; } }
+  @media print { .entrada { display: none !important; } }
+  /* flor do agente no resultado */
+  .flor-agente { display: grid; justify-items: center; gap: 4px; margin: 4px auto 16px; }
+  .flor-agente svg { width: min(300px, 80vw); height: auto; }
+  .flor-agente p { margin: 0; font-size: 13px; color: var(--ink-soft); text-align: center; max-width: 46ch; }
+  .flor-agente .k { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
 </style>
 <script>try { if (localStorage.getItem("proalmac_tema") === "escuro") document.documentElement.classList.add("tema-escuro"); } catch (e) {}</script>
 </head>
 <body>
+
+<div class="entrada" id="entrada" role="dialog" aria-modal="true" aria-label="Entrada do ProMAC" hidden>
+  <div class="en-topo"><a class="en-pular" href="#inicio" id="en-pular">Pular para o conteúdo</a><span class="en-ver">V0.9.27</span></div>
+  <div class="en-palco">
+    <div class="en-flor">
+      <p class="en-marca">ProMAC</p>
+      <p class="en-sub">Protocolo Multidimensional de Avaliação de Agentes Conversacionais</p>
+      <svg viewBox="0 0 210 210" aria-label="Flor das cinco dimensões">
+        <g id="en-petalas"></g>
+        <circle class="en-anel" cx="105" cy="105" r="17"/>
+        <g class="en-centro" id="en-centro" role="button" tabindex="0" aria-label="Abrir o ProMAC">
+          <circle class="disco" cx="105" cy="105" r="17" fill="#FFFFFF"/>
+          <g transform="translate(95 96.5) scale(0.42)" fill="none" stroke="#14191F" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/></g>
+          <g class="en-dig" fill="#14191F"><circle cx="100.6" cy="104" r="1.25"/><circle cx="105" cy="104" r="1.25"/><circle cx="109.4" cy="104" r="1.25"/></g>
+        </g>
+      </svg>
+      <p class="en-leg" id="en-leg" aria-live="polite"><b>Cinco olhares sobre uma conversa</b>Toque no balão para começar, ou numa pétala para entrar por uma dimensão.</p>
+      <p class="en-dica">Toque no balão para abrir</p>
+    </div>
+  </div>
+  <div class="en-conv" id="en-conv">
+    <div class="en-faixas" id="en-faixas" role="group" aria-label="As cinco dimensões"></div>
+    <div class="en-chat" id="en-chat" aria-live="polite"></div>
+    <div class="en-rodape"><span>Na próxima visita, o site abre direto no conteúdo.</span><button class="en-btn" type="button" id="en-site">Ir para o site</button></div>
+  </div>
+</div>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 <header class="cab">
   <div class="cab-in">
@@ -979,6 +1077,7 @@
         <button class="hero-cta" onclick="goToPage('avaliar')">Preencher a ficha de avaliação →</button>
         <a class="hero-cta hero-sec" href="#sec-3">Começar pelo caminho curto</a>
       </div>
+      <button class="rever-flor" type="button" onclick="abrirEntradaFlor()">Rever a entrada pela flor</button>
     </div>
     <div class="bolhas" aria-hidden="true">
       <p class="e">Me dá a resposta da questão 3?</p>
@@ -1607,6 +1706,7 @@
         <p>Leitura visual dos escores brutos — nenhuma nota é alterada aqui, apenas traduzida em porcentagem, classificação e no gráfico radar abaixo.</p>
       </div>
 
+      <div class="flor-agente" id="flor-agente"></div>
       <div class="radar-wrap" id="radar-holder"></div>
 
       <div class="profile-grid" id="profile-grid"></div>
@@ -2774,7 +2874,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
     <details class="disclosure" id="novidades">
       <summary><span>Novidades da versão 0.9.27</span><span class="dchev">›</span></summary>
       <div class="dbody">
-        <p><b>0.9.27 (novembro de 2026).</b> Ajustes de leitura (botão Aa) e leitura em voz alta (botão Ouvir) no topo do site; mapa da bateria clicável, que acende os indicadores de cada item e os itens de cada indicador; decisão passo a passo na seção 3.5; entrada do site organizada por onde começar; caminho curto que aparece ao rolar. No PDF: remissões clicáveis e fichas que podem ser preenchidas no computador. Novo formato: livro digital EPUB.</p>
+        <p><b>0.9.27 (novembro de 2026).</b> Entrada pela flor da capa: o balão do centro abre uma conversa que indica por onde começar, e cada pétala leva à sua dimensão; no resultado da ficha, a "flor do agente" mostra a faixa de cada dimensão. Ajustes de leitura (botão Aa) e leitura em voz alta (botão Ouvir) no topo do site; mapa da bateria clicável, que acende os indicadores de cada item e os itens de cada indicador; decisão passo a passo na seção 3.5; entrada do site organizada por onde começar; caminho curto que aparece ao rolar. No PDF: remissões clicáveis e fichas que podem ser preenchidas no computador. Novo formato: livro digital EPUB.</p>
         <p><b>0.9.26 (novembro de 2026).</b> Nova capa; nova carta ao professor; cores com mais contraste; códigos nos cartões (V1 a V7, A1 a A4); notas 1, 2 e 3 sempre na mesma ordem; botão Copiar nas falas da bateria; guia completo em PDF nos Downloads.</p>
         <p>A lista completa de mudanças de cada versão fica com os autores e pode ser pedida pelo e-mail da página.</p>
       </div>
@@ -4802,6 +4902,151 @@ countUp();
   itens.forEach((li, k) => { li.style.transitionDelay = (k * 90) + "ms"; io.observe(li); });
   const meio = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("aqui", e.isIntersecting)), { rootMargin: "-45% 0px -45% 0px" });
   itens.forEach(li => meio.observe(li));
+})();
+</script>
+
+<script>
+/* ---------- entrada pela flor (0.9.27) ---------- */
+(function entradaFlor() {
+  const KEY = "promac_entrada_vista", VALIDAR = /[?&]validar\b/.test(location.search);
+  const ov = document.getElementById("entrada"); if (!ov) return;
+  const NS = "http://www.w3.org/2000/svg", rad = d => d * Math.PI / 180;
+  const REDUZ = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const D = [
+    { c: "D1", n: "Qualidade Técnica e Usabilidade", t: "Técnica", q: "Ele funciona e é fácil de usar?", k: 3, cor: "#1F5FA8", ic: '<circle cx="24" cy="25" r="17"/><path d="M24 15v10l7 5"/><path d="M19 4h10"/>' },
+    { c: "D2", n: "Linguagem e Comunicação", t: "Linguagem", q: "Fala a língua da turma e mantém o fio da conversa?", k: 3, cor: "#0E8571", ic: '<path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/><path d="M15 19h18M15 25h11"/>' },
+    { c: "D3", n: "Interação e Mediação", t: "Mediação", q: "Ajuda o estudante a pensar ou entrega a resposta pronta?", k: 4, cor: "#B94E0C", ic: '<path d="M5 43h10V33h10V23h10V13h8"/><path d="M37 5l7 7-7 7" transform="translate(-1 1)"/>' },
+    { c: "D4", n: "Currículo e Rigor Científico", t: "Currículo", q: "O que diz está certo, é estável e cobre o conteúdo?", k: 4, cor: "#6A43B5", ic: '<path d="M18 5h12M20 5v15L9 40a2 2 0 0 0 1.8 3h26.4a2 2 0 0 0 1.8-3L28 20V5"/><path d="M14 32h20"/>' },
+    { c: "D5", n: "Ética, Transparência e Privacidade", t: "Ética", q: "É transparente e cuida do estudante?", k: 4, cor: "#C23452", ic: '<path d="M24 4l17 6v12c0 11-7.5 18.5-17 22C14.5 40.5 7 33 7 22V10z"/><path d="M16 23l6 6 10-11"/>' }
+  ];
+  const gp = document.getElementById("en-petalas"), leg = document.getElementById("en-leg"), centro = document.getElementById("en-centro");
+  const chat = document.getElementById("en-chat"), fx = document.getElementById("en-faixas");
+  const LEG0 = leg.innerHTML;
+  D.forEach((d, i) => {
+    const a = i * 72, cx = 105 + 52 * Math.sin(rad(a)), cy = 105 - 52 * Math.cos(rad(a));
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "en-petala"); g.setAttribute("role", "button"); g.setAttribute("tabindex", "0");
+    g.setAttribute("aria-label", `${d.c} ${d.n}: ${d.q} Entrar por esta dimensão`);
+    g.dataset.dx = Math.sin(rad(a)).toFixed(3); g.dataset.dy = (-Math.cos(rad(a))).toFixed(3);
+    g.innerHTML = `<ellipse cx="105" cy="64" rx="23" ry="41" fill="${d.cor}" transform="rotate(${a} 105 105)"/><g transform="translate(${(cx - 6.5).toFixed(2)} ${(cy - 14.5).toFixed(2)}) scale(0.27)" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round">${d.ic}</g><text x="${cx.toFixed(2)}" y="${(cy + 6).toFixed(2)}" text-anchor="middle">${d.t}</text>`;
+    const mostra = () => { gp.querySelectorAll(".en-petala").forEach(p => p.classList.remove("on")); g.classList.add("on"); leg.innerHTML = `<b>${d.c} · ${d.n}</b>${d.q}`; };
+    g.addEventListener("mouseenter", mostra); g.addEventListener("focus", mostra);
+    g.addEventListener("click", () => abrir(i));
+    g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(i); } });
+    gp.appendChild(g);
+    const b = document.createElement("button"); b.type = "button"; b.style.background = d.cor;
+    b.innerHTML = `<b>${d.c}</b>${d.t}`; b.setAttribute("aria-label", `${d.c} ${d.n}`); b.onclick = () => porDim(i, true); fx.appendChild(b);
+  });
+  gp.addEventListener("mouseleave", () => { gp.querySelectorAll(".en-petala").forEach(p => p.classList.remove("on")); leg.innerHTML = LEG0; });
+  centro.addEventListener("click", () => abrir(null));
+  centro.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(null); } });
+
+  /* conversa de roteiro (sem IA, nada é enviado) */
+  let fila = Promise.resolve();
+  const espera = ms => new Promise(r => setTimeout(r, REDUZ ? 0 : ms));
+  const bolha = (cls, html) => { const m = document.createElement("div"); m.className = "en-msg " + cls; m.innerHTML = html; chat.appendChild(m); chat.scrollTop = chat.scrollHeight; return m; };
+  const fala = html => (fila = fila.then(async () => { const d = bolha("p dig", "<i></i><i></i><i></i>"); await espera(600); d.remove(); bolha("p", "<small>ProMAC</small>" + html); await espera(120); }));
+  function opcoes(lista) {
+    fila = fila.then(() => {
+      const box = document.createElement("div"); box.className = "en-ops";
+      lista.forEach(([rot, fn, dest]) => { const b = document.createElement("button"); b.type = "button"; b.textContent = rot; if (dest) b.className = "dest"; b.onclick = () => { box.remove(); bolha("u", rot); fn(); }; box.appendChild(b); });
+      chat.appendChild(box); chat.scrollTop = chat.scrollHeight; box.querySelector("button").focus({ preventScroll: true });
+    });
+  }
+  const ir = (rot, alvo) => `<br><a class="en-ir" href="#${alvo}" data-en-ir>${rot} →</a>`;
+  function menu() {
+    const l = [];
+    if (VALIDAR) l.push(["Sou especialista: quero validar o ProMAC", () => { fala("Obrigado por participar da validação! Na página Validar você dá notas de pertinência e clareza aos 18 indicadores e à estrutura geral, e depois envia tudo pelo formulário. O que você marcar fica salvo neste navegador." + ir("Abrir a validação", "validar")); depois(); }, true]);
+    l.push(["É minha primeira vez", () => { fala("Então comece pelo caminho curto: confira as instruções do agente (Ciclo 0) e faça a triagem com os cartões vermelhos. Leva cerca de 1 hora." + ir("Abrir o caminho curto", "sec-3")); depois(); }]);
+    l.push(["Quero avaliar meu agente agora", () => { fala("A ficha calcula os escores e as faixas e gera o relatório. As respostas ficam só no seu navegador." + ir("Abrir a ficha", "avaliar")); depois(); }]);
+    l.push(["Tenho só 1 hora", () => { fala("Dá para fazer o Ciclo 0 e a triagem. Se o agente levar um cartão vermelho, você já sabe que ele ainda não está pronto." + ir("Ver a triagem e os cartões", "sec-3-1")); depois(); }]);
+    l.push(["Quero entender as dimensões", () => { fala("Toque numa das faixas coloridas acima para ver a pergunta de cada dimensão, ou abra o quadro com os 18 indicadores." + ir("Abrir as dimensões", "dimensoes")); depois(); }]);
+    l.push(["Quero ver um erro típico de agente", acheOErro]);
+    opcoes(l);
+  }
+  function depois() { opcoes([["Ver outras opções", () => { fala("O que mais você quer fazer?"); menu(); }]]); }
+  function porDim(i, doTopo) {
+    const d = D[i];
+    chat.querySelectorAll(".en-ops").forEach(o => o.remove());
+    if (doTopo) bolha("u", `${d.c} · ${d.t}`);
+    fala(`<b>${d.c} · ${d.n}.</b> ${d.q} São ${d.k} indicadores, cada um com rubrica de 1 a 3 e exemplos de conversa.` + ir(`Abrir as dimensões`, "dimensoes"));
+    depois();
+  }
+  function acheOErro() {
+    fala("Veja esta troca. Toque no trecho em que o agente erra.");
+    fila = fila.then(() => {
+      bolha("u", "A planta tira o alimento do solo, né?").style.cssText = "align-self:flex-start;background:#3A4552";
+      const m = bolha("p", '<small>Agente</small><button class="en-trecho" type="button" data-c="1">Isso mesmo!</button> <button class="en-trecho" type="button">As raízes absorvem água e sais minerais do solo.</button> <button class="en-trecho" type="button">Com a luz, as folhas fazem fotossíntese.</button> <button class="en-trecho" type="button">Quer tentar explicar de onde vem a energia da planta?</button>');
+      m.querySelector("button").focus({ preventScroll: true });
+      m.querySelectorAll(".en-trecho").forEach(t => t.onclick = () => {
+        if (t.dataset.c) {
+          m.querySelectorAll(".en-trecho").forEach(x => { x.classList.toggle("certo", x === t); x.classList.toggle("nao", x !== t); x.disabled = true; });
+          fala('<span class="en-cart">V2 · Vermelho</span> <b>Achou.</b> O agente confirmou um raciocínio errado: a planta não tira o alimento do solo, ela o produz. O resto da resposta está certo, e é por isso que o erro passa despercebido. Esse cartão deixa a D4.1 e a D3.2 em Inadequado.' + ir("Ver todos os cartões", "sec-3-1"));
+          depois();
+        } else { t.classList.add("nao"); t.disabled = true; }
+      });
+    });
+  }
+
+  /* abrir e fechar */
+  let antes = null;
+  function travar(on) { document.querySelectorAll("body > *:not(#entrada):not(script)").forEach(e => { e.inert = on; }); document.documentElement.style.overflow = on ? "hidden" : ""; }
+  function mostrar() {
+    antes = document.activeElement; ov.hidden = false; ov.classList.remove("saindo", "aberta");
+    gp.querySelectorAll(".en-petala").forEach(p => p.style.transform = ""); chat.innerHTML = ""; fila = Promise.resolve(); leg.innerHTML = LEG0;
+    travar(true); setTimeout(() => centro.focus(), 50);
+  }
+  function abrir(i) {
+    if (ov.classList.contains("aberta")) return;
+    gp.querySelectorAll(".en-petala").forEach(p => { p.style.transform = `translate(${p.dataset.dx * 70}px, ${p.dataset.dy * 70}px) scale(.5)`; });
+    ov.classList.add("aberta"); fila = espera(1150);
+    if (i === null) { fala(VALIDAR ? "Olá! Eu sou o ProMAC, um roteiro para o professor avaliar o agente conversacional que configurou para a turma. Esta é a mesma entrada que os professores vão ver." : "Olá! Eu sou o ProMAC, um roteiro para você avaliar o agente conversacional que configurou para a turma."); fala("Por onde você quer começar?"); menu(); }
+    else { fala("Você entrou pela pétala da " + D[i].c + "."); porDim(i, false); }
+  }
+  function fechar() {
+    try { localStorage.setItem(KEY, "1"); } catch (e) {}
+    ov.classList.add("saindo"); travar(false);
+    setTimeout(() => { ov.hidden = true; }, REDUZ ? 0 : 450);
+  }
+  window.abrirEntradaFlor = mostrar;
+  document.getElementById("en-site").onclick = () => { fechar(); goToPage("inicio"); };
+  document.getElementById("en-pular").addEventListener("click", e => { e.preventDefault(); fechar(); const c = document.getElementById("conteudo"); if (c) { c.tabIndex = -1; c.focus({ preventScroll: true }); } });
+  ov.addEventListener("click", e => { if (e.target.closest("[data-en-ir]")) fechar(); });
+  ov.addEventListener("keydown", e => {
+    if (e.key === "Escape") { e.preventDefault(); fechar(); return; }
+    if (e.key !== "Tab") return;
+    const f = [...ov.querySelectorAll('a[href], button:not([disabled]), [tabindex="0"]')].filter(x => x.offsetParent !== null || x.closest("svg"));
+    const vis = f.filter(x => !(ov.classList.contains("aberta") && x.closest(".en-flor")) && !(!ov.classList.contains("aberta") && x.closest(".en-conv")));
+    if (!vis.length) return;
+    const a = vis[0], z = vis[vis.length - 1];
+    if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+    else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+  });
+  let visto = false; try { visto = localStorage.getItem(KEY) === "1"; } catch (e) {}
+  const ancora = location.hash && location.hash.length > 1;
+  if (!visto && !ancora) mostrar();
+})();
+
+/* ---------- flor do agente no resultado (0.9.27) ---------- */
+(function florAgente() {
+  const _rr = renderResults;
+  const COR = { good: "#1E8A5A", mid: "#E3A51A", bad: "#C8372D", neutral: "#8A94A0" };
+  const NOTA = { good: "Adequado", mid: "Parcialmente adequado", bad: "Inadequado", neutral: "sem nota" };
+  const BORDA = ["#1F5FA8", "#0E8571", "#B94E0C", "#6A43B5", "#C23452"];
+  renderResults = function () {
+    _rr();
+    const box = document.getElementById("flor-agente"); if (!box) return;
+    const dims = dimensionAverages(), rad = d => d * Math.PI / 180;
+    const ag = (document.getElementById("f-agente") || {}).value || "Agente avaliado";
+    const desc = dims.map(d => `${d.label}: ${d.avg == null ? "sem nota" : d.avg.toFixed(2).replace(".", ",") + ", " + NOTA[classify(d.avg).key]}`).join("; ");
+    const pet = dims.map((d, i) => {
+      const a = i * 72, cx = 105 + 52 * Math.sin(rad(a)), cy = 105 - 52 * Math.cos(rad(a)), k = classify(d.avg).key, esc = k === "mid" ? "#14191F" : "#fff";
+      const v = d.avg == null ? "–" : d.avg.toFixed(1).replace(".", ",");
+      return `<ellipse cx="105" cy="64" rx="23" ry="41" fill="${COR[k]}" transform="rotate(${a} 105 105)"/><text x="${cx.toFixed(1)}" y="${(cy - 1).toFixed(1)}" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="13" fill="${esc}">${v}</text><text x="${cx.toFixed(1)}" y="${(cy + 9).toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="6" fill="${esc}">D${i + 1}</text>`;
+    }).join("") + dims.map((d, i) => `<ellipse cx="105" cy="64" rx="23" ry="41" fill="none" stroke="${BORDA[i]}" stroke-width="2.4" transform="rotate(${i * 72} 105 105)"/>`).join("");
+    box.innerHTML = `<span class="k">A flor do agente</span><svg viewBox="0 16 210 162" role="img" aria-label="Flor do agente. ${desc}">${pet}<circle cx="105" cy="105" r="17" fill="#fff" stroke="#14191F" stroke-width=".6"/><g transform="translate(95 96.5) scale(0.42)" fill="none" stroke="#14191F" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/></g></svg><p><b>${ag.replace(/</g, "&lt;")}</b> · cada pétala tem a cor da faixa e a média da dimensão: verde Adequado, âmbar Parcialmente adequado, vermelho Inadequado, cinza sem nota.</p>`;
+  };
+  if (document.getElementById("page-avaliar").classList.contains("active")) renderResults();
 })();
 </script>
 </body>
