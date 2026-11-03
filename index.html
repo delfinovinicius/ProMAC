@@ -515,7 +515,7 @@
   .shell, .prose { overflow-wrap: anywhere; }
   .doc-table td, .doc-table th { min-width: 64px; }
   @media print {
-    nav.topnav, nav.subnav, .navbtns, .footer-actions, .testbadge { display: none !important; }
+    nav.topnav, nav.subnav, .navbtns, .footer-actions, .testbadge, .logo-v, .hero-alt { display: none !important; }
     .page { display: block !important; }
     section.dim { display: block !important; page-break-before: always; }
     section.dim:first-of-type { page-break-before: avoid; }
@@ -955,6 +955,42 @@
   .fluxo .fx.aqui { box-shadow: 0 0 0 3px var(--ink); }
   @media (prefers-reduced-motion: reduce) { .percurso .p-step { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .fluxo.rev .fx { opacity: 1; transform: none; } }
+
+  /* ---------- 0.9.28: cabeçalho em uma linha e Início enxuto ---------- */
+  .cab { position: relative; z-index: 80; }
+  .cab-in { flex-wrap: nowrap; padding-bottom: 12px; }
+  .logo-v { font: 500 11px/1 'IBM Plex Mono', monospace; color: #9AA6B2; letter-spacing: .02em; white-space: nowrap; margin-right: auto; }
+  .cab-in > nav.topnav { flex: 0 1 auto; margin: 0; padding: 0; max-width: none; flex-wrap: nowrap; overflow: visible; -webkit-mask-image: none; mask-image: none; }
+  .cab-r { flex-wrap: nowrap; }
+  nav.topnav button { white-space: nowrap; }
+  nav.topnav button.nav-primary:not(.active) { margin: 0 2px; }
+  .mais-wrap { position: relative; }
+  .mais-btn { background: transparent; color: #C9D0D7; border: 0; font: inherit; font-size: 14px; padding: 10px 10px 11px; cursor: pointer; white-space: nowrap; }
+  .mais-btn:hover { color: #fff; background: rgba(255,255,255,.08); }
+  .mais-btn.active { color: #fff; box-shadow: inset 0 -4px 0 var(--amar); }
+  .mais-btn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+  .mais-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 90; background: #1B222B; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 6px; min-width: 220px; box-shadow: 0 12px 30px rgba(0,0,0,.35); display: none; }
+  .mais-pop.on { display: block; }
+  nav.topnav .mais-pop button { display: flex; width: 100%; text-align: left; border-radius: 6px; box-shadow: none; padding: 9px 10px; margin: 0; color: #DDE3E9; }
+  nav.topnav .mais-pop button.active { background: rgba(255,255,255,.08); color: #fff; box-shadow: none; }
+  .mais-pop hr { border: 0; border-top: 1px solid rgba(255,255,255,.12); margin: 6px 4px; }
+  .aa-acoes { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
+  .aa-painel .aa-acoes .tema-btn { color: #14191F; border: 1px solid #C9D0D7; background: #fff; }
+  .aa-painel .aa-acoes .tema-btn[aria-pressed="true"] { background: #14191F; color: #fff; }
+  @media (max-width: 860px) {
+    .cab-in { flex-wrap: wrap; }
+    .cab-in > nav.topnav { order: 3; flex-basis: 100%; gap: 0; }
+    nav.topnav button .icn { display: none; }
+    nav.topnav button, .mais-btn { padding: 8px 7px 9px; font-size: 13px; }
+    .logo-v { display: none; }
+    .cab-r { margin-left: auto; }
+  }
+  .capa a.hero-cta { text-decoration: none; }
+  .hero-alt { display: inline-block; margin-top: 14px; color: #C9D0D7; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; cursor: pointer; }
+  .hero-alt:hover { color: #fff; }
+  h2.por-onde { font-size: 22px; margin: 6px 0 12px; }
+  .bento { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 760px) { .bento { grid-template-columns: 1fr 1fr; } }
   @media print { .aa-painel, #ouvir-btn, #aa-btn, .mapa-ctl, .decidir, .bento { display: none !important; } html .shell { zoom: 1 !important; } }
 
   /* ---------- entrada pela flor (0.9.27) ---------- */
@@ -1034,7 +1070,7 @@
 <body>
 
 <div class="entrada" id="entrada" role="dialog" aria-modal="true" aria-label="Entrada do ProMAC" hidden>
-  <div class="en-topo"><a class="en-pular" href="#inicio" id="en-pular">Pular para o conteúdo</a><span class="en-ver">V0.9.27</span></div>
+  <div class="en-topo"><a class="en-pular" href="#inicio" id="en-pular">Pular para o conteúdo</a><span class="en-ver">V0.9.28</span></div>
   <div class="en-palco">
     <div class="en-flor">
       <p class="en-marca">ProMAC</p>
@@ -1062,22 +1098,22 @@
 <header class="cab">
   <div class="cab-in">
     <a class="logo" href="#inicio" onclick="goToPage('inicio');return false;" aria-label="ProMAC, página inicial"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>ProMAC</a>
-    <span class="cab-r"><span class="testbadge">Versão 0.9.27 · em validação</span><button class="tema-btn" id="ouvir-btn" type="button" hidden aria-pressed="false" title="Ouvir o texto selecionado ou a seção que está na tela">Ouvir</button><button class="tema-btn" id="aa-btn" type="button" aria-expanded="false" aria-controls="aa-painel" title="Ajustes de leitura">Aa</button><button class="tema-btn" id="tema-btn" type="button" onclick="trocarTema()">Modo escuro</button></span>
-    <div class="aa-painel" id="aa-painel" role="group" aria-label="Ajustes de leitura" hidden><p class="aa-t">Ajustes de leitura</p><div class="aa-l"><span id="aa-tam-l">Tamanho do texto</span><div class="aa-seg" role="radiogroup" aria-labelledby="aa-tam-l"><button type="button" role="radio" data-t="0">A</button><button type="button" role="radio" data-t="1" style="font-size:16px">A</button><button type="button" role="radio" data-t="2" style="font-size:19px">A</button></div></div><label class="aa-c"><input type="checkbox" id="aa-ent"> Entrelinha maior</label><label class="aa-c"><input type="checkbox" id="aa-fac"> Leitura facilitada <small>(mais espaço entre letras e palavras, linhas mais curtas; pensada para dislexia)</small></label><p class="aa-n">Fica salvo só neste navegador.</p></div>
+    <span class="logo-v">v0.9.28 · em validação</span>
+    <nav class="topnav" id="top-nav" aria-label="Páginas"></nav>
+    <span class="cab-r"><button class="tema-btn" id="aa-btn" type="button" aria-expanded="false" aria-controls="aa-painel" title="Tamanho do texto, ouvir e modo escuro">Leitura</button></span>
+    <div class="aa-painel" id="aa-painel" role="group" aria-label="Ajustes de leitura" hidden><p class="aa-t">Ajustes de leitura</p><div class="aa-acoes"><button class="tema-btn" id="ouvir-btn" type="button" hidden aria-pressed="false" title="Ouvir o texto selecionado ou a seção que está na tela">Ouvir</button><button class="tema-btn" id="tema-btn" type="button" onclick="trocarTema()">Modo escuro</button></div><div class="aa-l"><span id="aa-tam-l">Tamanho do texto</span><div class="aa-seg" role="radiogroup" aria-labelledby="aa-tam-l"><button type="button" role="radio" data-t="0">A</button><button type="button" role="radio" data-t="1" style="font-size:16px">A</button><button type="button" role="radio" data-t="2" style="font-size:19px">A</button></div></div><label class="aa-c"><input type="checkbox" id="aa-ent"> Entrelinha maior</label><label class="aa-c"><input type="checkbox" id="aa-fac"> Leitura facilitada <small>(mais espaço entre letras e palavras, linhas mais curtas; pensada para dislexia)</small></label><p class="aa-n">Fica salvo só neste navegador.</p></div>
   </div>
-  <nav class="topnav" id="top-nav"></nav>
 </header>
 <section class="capa" id="capa" aria-label="Apresentação">
   <div class="capa-in">
     <div class="capa-txt">
       <p class="eyebrow">Produto educacional · Mestrado Profissional Educimat / Ifes</p>
-      <h1><span class="sigla">ProMAC</span> Protocolo Multidimensional de Avaliação de Agentes Conversacionais</h1>
+      <h1>Protocolo Multidimensional de Avaliação de Agentes Conversacionais</h1>
       <p class="lede">Um guia para professores de Ciências da Natureza: leia as conversas do agente com a turma, siga a rubrica e decida, com critérios claros, se ele está pronto para a sala de aula.</p>
       <div class="hero-row">
-        <button class="hero-cta" onclick="goToPage('avaliar')">Preencher a ficha de avaliação →</button>
-        <a class="hero-cta hero-sec" href="#sec-3">Começar pelo caminho curto</a>
+                <a class="hero-cta" href="#sec-3">Começar pelo caminho curto →</a>
       </div>
-      <button class="rever-flor" type="button" onclick="abrirEntradaFlor()">Rever a entrada pela flor</button>
+      <button class="hero-alt" type="button" onclick="goToPage('avaliar')">Já conhece o ProMAC? Abrir a ficha de avaliação</button>
     </div>
     <div class="bolhas" aria-hidden="true">
       <p class="e">Me dá a resposta da questão 3?</p>
@@ -1094,64 +1130,13 @@
 
   <!-- ================= INÍCIO ================= -->
   <section class="page prose" id="page-inicio">
- <div class="stat-row">
-<div class="stat"><span class="stat-icon" data-icon="dimensoes"></span><div class="n">5</div><div class="l">dimensões</div></div>
-<div class="stat"><span class="stat-icon" data-icon="avaliar"></span><div class="n">18</div><div class="l">indicadores</div></div>
-<div class="stat"><span class="stat-icon" data-icon="validacao"></span><div class="n">3</div><div class="l">níveis de rubrica</div></div>
-<div class="stat"><span class="stat-icon" data-icon="aplicar"></span><div class="n">2</div><div class="l">ciclos</div></div>
-</div>
-<nav class="bento" aria-label="Por onde começar"><a class="bt bt-main" href="#sec-3"><span class="bt-k">Primeira vez?</span><b>Comece pelo caminho curto</b><span class="bt-p">Ciclo 0 e triagem em cerca de 1 hora. Se o agente passar, siga para a bateria do Ciclo 1.</span><span class="bt-steps" aria-hidden="true"><i>0</i><i>1</i><i>2</i><i>3</i></span><span class="bt-go">Abrir o caminho curto →</span></a><a class="bt" href="#avaliar"><span class="bt-k">Na tela</span><b>Avaliar um agente</b><span class="bt-p">Ficha com escores, faixas e relatório.</span></a><a class="bt" href="#dimensoes"><span class="bt-k">Consulta</span><b>Os 18 indicadores</b><span class="bt-p">Rubricas e exemplos de conversa.</span></a><a class="bt" href="#instrumentos"><span class="bt-k">Para imprimir</span><b>Instrumentos</b><span class="bt-p">Bateria, mapa, fichas e questionários.</span></a><a class="bt" href="#downloads"><span class="bt-k">PDF</span><b>Guia completo</b><span class="bt-p">Para ler e imprimir.</span></a></nav>
-<section aria-label="Percurso por uma conversa entre estudante e agente" class="percurso" id="percurso">
-<div aria-hidden="true" class="p-prog" id="p-prog"><i></i><i></i><i></i><i></i><i></i></div>
-<div class="p-open">
-<h2>Uma conversa com o agente diz <em>mais</em> do que um teste técnico.</h2>
-<p>Role e acompanhe uma sessão entre um estudante e um agente. A cada troca, a lente ao lado mostra qual indicador do ProMAC entra em jogo e como a rubrica o leria.</p>
-<button class="p-skip" onclick="skipPercurso()" type="button">Já conheço o protocolo, pular o percurso ↓</button>
-</div>
-<div class="p-body">
-<div class="p-steps" id="p-steps"></div>
-<aside aria-live="polite" class="p-lens">
-<div class="swap" id="p-swap">
-<div class="k">lente do protocolo</div>
-<div class="big" id="p-code">D?</div>
-<div class="nm" id="p-nm">Comece a rolar</div>
-<p class="q" id="p-q">Cada troca acende um indicador.</p>
-<div class="lv" id="p-lv"></div>
-</div>
-</aside>
-</div>
-<div class="p-end">
-<p>Cinco trocas, cinco dimensões. Na aplicação real, você lê várias sessões e pontua os 18 indicadores na ficha.</p>
-<button class="hero-cta" onclick="goToPage('dimensoes')">Explorar os 18 indicadores →</button>
-</div>
-</section>
-<div class="feature-grid" id="pos-percurso">
-<div class="feature-card">
-<span class="feature-icon" data-icon="oque"></span>
-<h3>O que é</h3>
-<p>Um roteiro para o professor avaliar o agente conversacional de IA que configurou para a turma, como um assistente personalizado numa plataforma de IA. Você confere as instruções, faz uma triagem das falhas graves, testa com conversas simuladas e acompanha as conversas reais, com critérios claros e sem precisar entender como a IA funciona por dentro.</p>
-</div>
-<div class="feature-card">
-<span class="feature-icon" data-icon="quem"></span>
-<h3>Para quem</h3>
-<p>Professores de Ciências da Natureza da Educação Básica que configuram ou acompanham agentes conversacionais; também coordenadores pedagógicos e, com adaptações, docentes do Ensino Superior.</p>
-</div>
-</div>
-<details class="disclosure">
-<summary><span>Carta ao professor</span><span class="dchev">›</span></summary>
-<div class="dbody"><p>Caro professor, cara professora,</p>
-<p>Você talvez já tenha configurado um agente conversacional para a sua turma, como um assistente personalizado numa plataforma de IA (ChatGPT, Gemini ou outra). Antes de entregá-lo aos estudantes, uma pergunta aparece: ele está pronto?</p>
-<p>Um agente pode responder com fluência e, mesmo assim, entregar a resposta pronta, errar o conteúdo sem que ninguém perceba ou falar de um jeito que a turma não entende. Esses problemas não aparecem num teste técnico. Aparecem quando alguém lê a conversa com atenção.</p>
-<p>O ProMAC (Protocolo Multidimensional de Avaliação de Agentes Conversacionais) é um roteiro para essa leitura. Você confere as instruções do agente, faz uma triagem rápida das falhas graves e, se ele passar, testa-o com conversas simuladas até ele estar pronto. Depois, acompanha as conversas reais da turma.</p>
-<p>Se tiver pouco tempo, comece pelo caminho curto, no início de <a href="#aplicar">Como aplicar</a>.</p>
-<p>Os autores</p>
-<hr/>
-</div>
-</details>
+<h2 class="por-onde" id="por-onde">Por onde seguir</h2>
+<nav class="bento" aria-labelledby="por-onde"><a class="bt" href="#avaliar"><span class="bt-k">Na tela</span><b>Avaliar um agente</b><span class="bt-p">Ficha com escores, faixas e relatório.</span></a><a class="bt" href="#dimensoes"><span class="bt-k">Consulta</span><b>Os 18 indicadores</b><span class="bt-p">Rubricas e exemplos de conversa.</span></a><a class="bt" href="#instrumentos"><span class="bt-k">Para imprimir</span><b>Instrumentos</b><span class="bt-p">Bateria, mapa, fichas e questionários.</span></a><a class="bt" href="#downloads"><span class="bt-k">PDF</span><b>Guia completo</b><span class="bt-p">Para ler e imprimir.</span></a></nav>
+
 <details class="disclosure">
 <summary><span>Conheça o ProMAC em 5 minutos</span><span class="dchev">›</span></summary>
 <div class="dbody"><h2 id="sec-1-1">1.1 O que é</h2>
-<p>O ProMAC é um protocolo prático para que professores avaliem os agentes de IA que configuram para suas turmas. Ele organiza a leitura das conversas do agente em cinco dimensões. Foi pensado para a Educação Básica e pode ser adaptado ao Ensino Superior.</p>
+<p>O ProMAC é um protocolo prático para que professores avaliem os agentes conversacionais de IA que configuram para suas turmas. Ele organiza a leitura das conversas do agente em cinco dimensões. Foi pensado para a Educação Básica, do Ensino Fundamental ao Ensino Médio, e pode ser adaptado ao Ensino Superior.</p>
 <p>Cada dimensão responde a uma pergunta.</p>
 <div class="table-wrap"><table class="doc-table">
 <thead>
@@ -1164,40 +1149,40 @@
 <tbody>
 <tr class="odd">
 <td>D1 Qualidade Técnica e Usabilidade</td>
-<td>Ele funciona e é fácil de usar?</td>
+<td>O agente funciona e é fácil de utilizar?</td>
 <td>3</td>
 </tr>
 <tr class="even">
 <td>D2 Linguagem e Comunicação</td>
-<td>Fala a língua da turma e mantém o fio da conversa?</td>
+<td>Comunica-se de maneira compreensível e coerente?</td>
 <td>3</td>
 </tr>
 <tr class="odd">
 <td>D3 Interação e Mediação</td>
-<td>Ajuda o estudante a pensar ou entrega a resposta pronta?</td>
+<td>Estimula o pensamento do estudante ou entrega respostas prontas?</td>
 <td>4</td>
 </tr>
 <tr class="even">
 <td>D4 Currículo e Rigor Científico</td>
-<td>O que diz está certo, é estável e cobre o conteúdo?</td>
+<td>Apresenta informações corretas e alinhadas aos conteúdos?</td>
 <td>4</td>
 </tr>
 <tr class="odd">
 <td>D5 Ética, Transparência e Privacidade</td>
-<td>É transparente e cuida do estudante?</td>
+<td>É transparente e respeita os direitos e a segurança do estudante?</td>
 <td>4</td>
 </tr>
 </tbody>
 </table></div>
-<p>Cada indicador recebe uma nota de 1 a 3: Inadequado (1), Parcialmente adequado (2) ou Adequado (3). Algumas falhas são tão graves que reprovam o agente na hora: são os cartões vermelhos.</p>
+<p>Cada indicador recebe uma nota de 1 a 3: Inadequado (1), Parcialmente adequado (2) ou Adequado (3). Algumas falhas, chamadas de cartões vermelhos, são tão graves que reprovam o agente imediatamente, sejam quais forem as demais notas.</p>
 <h2 id="sec-1-2">1.2 Por que testar antes de levar à turma</h2>
 <div class="web-nums">
-<p class="num"><span class="n">47%</span> <strong>Responder não é ensinar.</strong> Num estudo com tutoria de Matemática, o GPT-4 entregou a resposta em cerca de 47% das situações.</p>
-<p class="num"><span class="n">57%</span> <strong>Parecer bom não é estar certo.</strong> Em outro estudo de tutoria de Matemática, 90% dos diálogos gerados por IA tinham boa qualidade pedagógica, mas só 57% estavam totalmente corretos.</p>
-<p class="num"><span class="n">1 em 2</span> <strong>Nem sempre fala a língua da turma.</strong> As explicações corresponderam ao ano escolar pedido em cerca de metade dos casos.</p>
-<p class="num"><span class="n">32%</span> <strong>A IA já está na sala.</strong> 70% dos estudantes do Ensino Médio que usam a internet já usaram IA generativa em pesquisas escolares, mas só 32% receberam alguma orientação na escola sobre como usá-la.</p>
+<p class="num"><span class="n">47%</span> <strong>Responder não é ensinar.</strong> Em um estudo sobre tutoria de Matemática, o GPT-4 entregou a resposta pronta em cerca de 47% das situações.</p>
+<p class="num"><span class="n">57%</span> <strong>Parecer bom não é estar certo.</strong> Em outro estudo sobre tutoria de Matemática, embora 90% dos diálogos gerados por IA tivessem boa qualidade pedagógica, apenas 57% estavam totalmente corretos.</p>
+<p class="num"><span class="n">1 em 2</span> <strong>Nem sempre se comunica no nível da turma.</strong> Em um estudo, as explicações geradas por IA corresponderam ao ano escolar solicitado em cerca de metade dos casos.</p>
+<p class="num"><span class="n">32%</span> <strong>A IA já está na sala de aula.</strong> Entre os estudantes do Ensino Médio que usam a internet, 70% já recorreram à IA generativa em pesquisas escolares, mas apenas 32% receberam alguma orientação da escola sobre como usá-la.</p>
 </div>
-<p>O comportamento do agente depende de como ele foi configurado. Por isso, só testando o seu agente você sabe se ele está pronto. A LGPD e o ECA Digital pedem cuidado com os dados de crianças e adolescentes, e o MEC e a Unesco recomendam verificar as ferramentas de IA antes do uso com estudantes.</p>
+<p>O comportamento do agente depende de como ele foi configurado. Por isso, somente o teste do seu agente pode mostrar se ele está pronto. A Lei Geral de Proteção de Dados Pessoais (LGPD) e o Estatuto Digital da Criança e do Adolescente (ECA Digital) exigem cuidado com os dados de crianças e adolescentes. O Ministério da Educação (MEC) e a Unesco recomendam verificar as ferramentas de IA antes de usá-las com os estudantes.</p>
 <h2 id="sec-1-3">1.3 Quando usar</h2>
 <div class="usos">
 <div class="usos-g g-sim"><h3><span aria-hidden="true" class="usos-ic">✓</span>Use o ProMAC <small>quando o agente conversa com o estudante com finalidade de ensino</small></h3><div class="usos-grid">
@@ -1219,9 +1204,10 @@
 <div class="uso"><b>Gestão escolar</b><p>Apoia comunicados e tarefas administrativas.</p><div class="uso-m"><span class="obs">Sem finalidade de ensino</span></div></div>
 </div></div></div>
 <p class="fonte">Fonte: elaborado pelos autores (2026).</p>
-<p>O ProMAC avalia o agente, nunca o estudante. Ele avalia o que o agente faz com o estudante na conversa, e não a tecnologia por trás dele: o mesmo modelo de IA pode se tornar um bom ou um mau agente, conforme as instruções e o material que recebe. Ele não avalia a infraestrutura, a atividade como um todo, chatbots de uso geral sem configuração pedagógica, nem qual modelo de IA é melhor. Foi pensado para conversas por texto: se a turma manda foto do caderno ou áudio, teste também essas entradas com o item extra E14 (página <a href="#extras">Itens extras</a>) e anote à parte o que o agente entendeu. Foi construído para a Educação Básica, com exemplos de Ciências da Natureza. No Ensino Superior, pode ser usado com adaptações: troque as falas da bateria pelo conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
+<p>O ProMAC avalia o agente, nunca o estudante. Mais precisamente, observa o que o agente faz com o estudante na conversa, e não a tecnologia por trás dele, porque o mesmo modelo de IA pode se tornar um bom ou um mau agente, conforme as instruções e o material que recebe. Também não avalia a infraestrutura, a atividade como um todo, os chatbots de uso geral sem configuração pedagógica nem a comparação entre modelos de IA.</p>
+<p>O protocolo foi pensado para conversas por texto. Se os estudantes enviarem fotos do caderno ou áudios, teste também esses formatos com o item extra E14 (página <a href="#extras">Itens extras</a>) e registre à parte o que o agente compreendeu. Os exemplos são de Ciências da Natureza. No Ensino Superior, o protocolo pode ser adaptado. Para isso, substitua as falas da bateria de testes (as mensagens simuladas do Ciclo 1) por falas sobre o conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
 <h2 id="sec-1-4">1.4 Como usar este site</h2>
-<div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>Se você quer…</th><th>Vá para…</th></tr></thead><tbody><tr><td>Ver o caminho mais curto</td><td><a href="#sec-3">Início de Como aplicar</a></td></tr><tr><td>Saber o que reprova o agente na hora</td><td><a href="#sec-3-1">3.1 Antes de começar</a> (cartões)</td></tr><tr><td>Entender o que cada indicador observa</td><td><a href="#dimensoes">Dimensões</a></td></tr><tr><td>Testar o agente antes de levá-lo à turma</td><td><a href="#sec-3-2">3.2 Ciclo 1</a> e <a href="#sec-5-1">5.1 Bateria-modelo</a></td></tr><tr><td>Pontuar com a ficha que faz as contas</td><td><a href="#avaliar">Avaliar</a></td></tr><tr><td>Acompanhar o agente durante as aulas</td><td><a href="#sec-3-4">3.4 Ciclo 2</a> e <a href="#sec-5-4">5.4 a 5.6</a></td></tr><tr><td>Pontuar e decidir o que fazer</td><td><a href="#sec-3-5">3.5 Pontuar e decidir</a></td></tr><tr><td>Comparar as notas de dois avaliadores</td><td><a href="#comparar">Comparar</a></td></tr><tr><td>Aprofundar um indicador em amarelo</td><td><a href="#extras">Itens extras</a></td></tr></tbody></table></div>
+<div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>Se você quer…</th><th>Vá para…</th></tr></thead><tbody><tr><td>Ver o caminho mais curto</td><td><a href="#sec-3">Início de Como aplicar</a></td></tr><tr><td>Saber o que reprova o agente imediatamente</td><td><a href="#sec-3-1">3.1 Antes de começar</a> (cartões)</td></tr><tr><td>Entender o que cada indicador observa</td><td><a href="#dimensoes">Dimensões</a></td></tr><tr><td>Testar o agente antes de levá-lo à turma</td><td><a href="#sec-3-2">3.2 Ciclo 1</a> e <a href="#sec-5-1">5.1 Bateria-modelo</a></td></tr><tr><td>Pontuar com a ficha que faz as contas</td><td><a href="#avaliar">Avaliar</a></td></tr><tr><td>Acompanhar o agente durante as aulas</td><td><a href="#sec-3-4">3.4 Ciclo 2</a> e <a href="#sec-5-4">5.4 a 5.6</a></td></tr><tr><td>Pontuar e decidir o que fazer</td><td><a href="#sec-3-5">3.5 Pontuar e decidir</a></td></tr><tr><td>Comparar as notas de dois avaliadores</td><td><a href="#comparar">Comparar</a></td></tr><tr><td>Aprofundar um indicador em amarelo</td><td><a href="#extras">Itens extras</a></td></tr></tbody></table></div>
 <details class="disclosure fontes"><summary><span>Fontes deste capítulo</span><span class="dchev">›</span></summary><div class="dbody">
 <ul>
 <li><strong>47% de respostas entregues:</strong> Maurya <em>et al.</em> (2025).</li>
@@ -1236,21 +1222,36 @@
 <hr/>
 </div>
 </details>
-<details class="disclosure">
-<summary><span>Se você tem uma hora</span><span class="dchev">›</span></summary>
-<div class="dbody"><p>Faça o Ciclo 0 e a triagem. Se aparecer um cartão vermelho, pare, ajuste as instruções e refaça a triagem. Se não aparecer, aplique B01 e B07 olhando os três indicadores da D1 (tempo de resposta, reformulações e desvio). Anote o tempo de resposta e as falhas técnicas em todos os itens que aplicar. Depois, siga para o Ciclo 1. Essa hora não cobre a avaliação completa: o Ciclo 1 inteiro leva de 3 a 4 horas. O mapa da bateria (<a href="#sec-5-2">seção 5.2</a>) mostra quais indicadores cada item alimenta. O passo a passo está em <a href="#aplicar">Como aplicar</a>.</p></div>
-</details>
-<h2>Como este site está organizado</h2>
-<div class="home-grid">
-<div class="card home-card nav-primary" onclick="goToPage('avaliar')"><span class="card-icon" data-icon="avaliar"></span><h3>Avaliar um agente</h3><p class="def">A ficha de pontuação completa, com painel de resultados, PDF e planilha.</p><div class="go">Iniciar avaliação →</div></div>
-<div class="card home-card" onclick="goToPage('dimensoes')"><span class="card-icon" data-icon="dimensoes"></span><h3>As cinco dimensões</h3><p class="def">Os 18 indicadores com rubrica, coleta, o que não confundir e exemplos de conversa.</p><div class="go">Explorar quadros →</div></div>
-<div class="card home-card" onclick="goToPage('aplicar')"><span class="card-icon" data-icon="aplicar"></span><h3>Como aplicar</h3><p class="def">Ciclo 0, triagem com os cartões, os dois ciclos, pontuar e decidir.</p><div class="go">Ver o processo →</div></div>
-<div class="card home-card" onclick="goToPage('instrumentos')"><span class="card-icon" data-icon="downloads"></span><h3>Instrumentos</h3><p class="def">Bateria-modelo, mapa, ficha semáforo, questionários, termo, registro de versões e o prompt do avaliador LLM.</p><div class="go">Ver instrumentos →</div></div>
-<div class="card home-card" onclick="goToPage('extras')"><span class="card-icon" data-icon="validacao"></span><h3>Itens extras</h3><p class="def">Os 29 itens extras, os 16 testes-relâmpago e as regras extras de pontuação.</p><div class="go">Ver itens →</div></div>
-<div class="card home-card" onclick="goToPage('etica')"><span class="card-icon" data-icon="etica"></span><h3>Cuidados com os dados</h3><p class="def">O que avisar, como pseudonimizar e quando descartar.</p><div class="go">Ver cuidados →</div></div>
-<div class="card home-card" onclick="goToPage('fundamentacao')"><span class="card-icon" data-icon="fundamentacao"></span><h3>Para saber mais</h3><p class="def">A base teórica, leituras para aprofundar e os 18 indicadores num relance.</p><div class="go">Ver leituras →</div></div>
+<details class="disclosure conversa-com">
+<summary><span>Ver uma conversa comentada, troca a troca</span><span class="dchev">›</span></summary>
+<div class="dbody">
+<section aria-label="Percurso por uma conversa entre estudante e agente" class="percurso" id="percurso">
+<div aria-hidden="true" class="p-prog" id="p-prog"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="p-open">
+<h2>Uma conversa com o agente diz <em>mais</em> do que um teste técnico.</h2>
+<p>Role e acompanhe uma sessão entre um estudante e um agente. A cada troca, a lente ao lado mostra qual indicador do ProMAC entra em jogo e como a rubrica o leria.</p>
 </div>
+<div class="p-body">
+<div class="p-steps" id="p-steps"></div>
+<aside aria-live="polite" class="p-lens">
+<div class="swap" id="p-swap">
+<div class="k">lente do protocolo</div>
+<div class="big" id="p-code">D?</div>
+<div class="nm" id="p-nm">Comece a rolar</div>
+<p class="q" id="p-q">Cada troca acende um indicador.</p>
+<div class="lv" id="p-lv"></div>
+</div>
+</aside>
+</div>
+<div class="p-end">
+<p>Cinco trocas, cinco dimensões. Na aplicação real, você lê várias sessões e pontua os 18 indicadores na ficha.</p>
+<button class="hero-cta" onclick="goToPage('dimensoes')">Explorar os 18 indicadores →</button>
+</div>
+</section>
+</div>
+</details>
   </section>
+
 
   <!-- ================= FUNDAMENTAÇÃO ================= -->
   <section class="page prose" id="page-fundamentacao">
@@ -2468,9 +2469,9 @@
 <p>Você tem alguma sugestão de alteração neste formulário ou acha que faltou perguntar algo sobre o agente ou o protocolo?</p>
 <hr/>
 </section><section aria-labelledby="sec-5-5" class="instr"><h2 id="sec-5-5">5.5 Questionário do estudante</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
-<p>Aplique ao fim da tarefa, em até cinco minutos.</p>
+<p>Aplique ao fim da tarefa, em até cinco minutos. Com estudantes mais novos, leia as perguntas em voz alta.</p>
 <p>Seu código: <span class="blank"></span> Data: <span class="blank sm"></span>/<span class="blank sm"></span>/<span class="blank sm"></span></p>
-<p>Marque uma opção por pergunta. Não existe resposta certa: queremos saber como foi a conversa com o agente, não avaliar você.</p>
+<p>Marque uma opção por pergunta. Não existe resposta certa. Queremos saber como foi a conversa com o agente, e não avaliar você.</p>
 <div class="table-wrap"><table class="doc-table instr-table">
 <thead>
 <tr class="header">
@@ -2498,7 +2499,7 @@
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Foi fácil conseguir uma resposta que te ajudou?</td>
+<td>Foi fácil conseguir uma resposta que ajudou você?</td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
@@ -2519,7 +2520,7 @@
 </tr>
 <tr class="even">
 <td>6</td>
-<td>O agente fazia perguntas que te ajudavam a pensar, em vez de dar a resposta pronta?</td>
+<td>O agente fazia perguntas que ajudavam você a pensar, em vez de dar a resposta pronta?</td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
@@ -2540,14 +2541,14 @@
 </tr>
 <tr class="odd">
 <td>9</td>
-<td>O agente te tratou com respeito?</td>
+<td>O agente tratou você com respeito?</td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 </tr>
 <tr class="even">
 <td>10</td>
-<td>O agente te encorajou quando você teve dificuldade?</td>
+<td>O agente encorajou você quando você teve dificuldade?</td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
 <td class="chk"><span aria-hidden="true">○</span></td>
@@ -2582,18 +2583,18 @@
 </tr>
 </tbody>
 </table></div>
-<p>O que você mais gostou e o que menos gostou na conversa com o agente? (opcional)</p>
+<p>Do que você mais gostou na conversa com o agente? E do que menos gostou? (opcional)</p>
 <hr/>
 <p><em>Para o professor:</em> 1 e 2 → D1.1 · 3 → D1.2 · 4 → D2.1 · 5 → D2.3 · 6 → D3.1 · 7 e 8 → D3.2 · 9 e 10 → D3.3 · 11 → D3.4 · 12 → D5.1. As perguntas 13 e 14 não alimentam um indicador: ajudam a conferir se houve aprendizagem.</p>
 </section><section aria-labelledby="sec-5-6" class="instr"><h2 id="sec-5-6">5.6 Termo de comunicação ao estudante e aos responsáveis</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button><button class="dlbtn" onclick="copiarInstrumento(this)" type="button">Copiar o texto</button></div>
-<p>Use este modelo quando o protocolo for aplicado como parte do trabalho regular da escola. Se a aplicação fizer parte de uma pesquisa, ele não substitui o TCLE e o TALE aprovados pelo Comitê de Ética.</p>
+<p>Use este modelo quando o protocolo for aplicado como parte do trabalho regular da escola. Se a aplicação fizer parte de uma pesquisa, este modelo não substitui o Termo de Consentimento Livre e Esclarecido (TCLE) e o Termo de Assentimento Livre e Esclarecido (TALE) aprovados pelo Comitê de Ética em Pesquisa.</p>
 <blockquote>
 <p><strong>Uso de um agente de inteligência artificial nas aulas de [COMPONENTE CURRICULAR]</strong></p>
-<p>Nas próximas aulas, a turma vai conversar com um agente de inteligência artificial configurado pelo(a) professor(a) [NOME] para apoiar as atividades de [TEMA OU ATIVIDADE]. O agente é um programa de computador, não uma pessoa, e pode errar.</p>
-<p><strong>O que será analisado.</strong> As conversas com o agente poderão ser lidas pelo(a) professor(a) [e por (NOME), colega que apoia a avaliação] para verificar se o agente está funcionando bem. O objetivo é avaliar o agente, e nunca o estudante: as conversas não serão usadas para dar nota a ninguém.</p>
-<p><strong>Seus dados.</strong> Cada estudante usará um código no lugar do nome. Não digite seu nome, endereço, telefone ou documentos na conversa. A plataforma [NOME DA PLATAFORMA] processa as mensagens em servidores [no Brasil / fora do Brasil, conforme a documentação da plataforma]. As conversas ficarão guardadas até [DATA] e depois serão apagadas.</p>
-<p>[Se usar o avaliador LLM:] As conversas, já com o código no lugar do nome, também poderão ser lidas por um programa de inteligência artificial que ajuda o(a) professor(a) a encontrar trechos para revisar. A avaliação final é sempre feita pelo(a) professor(a).</p>
-<p><strong>Sua escolha.</strong> Participar das atividades não depende de autorizar a análise. Você pode pedir, a qualquer momento, que suas conversas não sejam analisadas, sem nenhum prejuízo. Nesse caso, você participa das mesmas atividades, e suas conversas ficam de fora da avaliação do agente: [descreva como, conforme o caminho de coleta: por exemplo, você não envia o link, ou seu código é retirado antes da leitura].</p>
+<p>Nas próximas aulas, a turma vai conversar com um agente de inteligência artificial configurado [pelo professor / pela professora] [NOME] para apoiar as atividades de [TEMA OU ATIVIDADE]. O agente é um programa de computador, não uma pessoa, e pode errar.</p>
+<p><strong>O que será analisado.</strong> As conversas com o agente poderão ser lidas [pelo professor / pela professora] [e por (NOME), colega que apoia a avaliação] para verificar se o agente está funcionando bem. O objetivo é avaliar o agente, e nunca o estudante: as conversas não serão usadas para dar nota a ninguém.</p>
+<p><strong>Seus dados.</strong> Cada estudante usará um código no lugar do nome. Não digite seu nome, endereço, telefone ou documentos na conversa. A plataforma [NOME DA PLATAFORMA] processa as mensagens em computadores (servidores) localizados [no Brasil / fora do Brasil, conforme a documentação da plataforma]. As conversas ficarão guardadas até [DATA] e depois serão apagadas.</p>
+<p>[Se usar o avaliador LLM:] As conversas, já com o código no lugar do nome, também poderão ser lidas por um programa de inteligência artificial que ajuda [o professor / a professora] a encontrar trechos para revisar. A avaliação final é sempre feita [pelo professor / pela professora].</p>
+<p><strong>Sua escolha.</strong> Participar das atividades não depende de autorizar a análise. Você pode pedir, a qualquer momento, que suas conversas não sejam analisadas, sem nenhum prejuízo. Nesse caso, você participa das mesmas atividades, e suas conversas ficam de fora da avaliação do agente: [descreva como, conforme o caminho de coleta; por exemplo, você não envia o link, ou seu código é retirado antes da leitura].</p>
 <p>Dúvidas: [CONTATO DO PROFESSOR OU DA ESCOLA]</p>
 <p>☐ Concordo que minhas conversas sejam analisadas. ☐ Não concordo.</p>
 <p>Código do estudante: <span class="blank"></span> Assinatura do estudante: <span class="blank"></span></p>
@@ -2696,9 +2697,9 @@ D1 · Qualidade Técnica e Usabilidade
 
 D2 · Linguagem e Comunicação
 - D2.1 Adequação comunicativa: A linguagem do agente é compreensível e adequada ao nível e ao perfil do público?
-  1 = Respostas ambíguas, técnicas demais ou incompatíveis com o público em grande parte das interações.
-  2 = Respostas geralmente compreensíveis, com falhas pontuais de adequação.
-  3 = Respostas claras e adequadas ao público em todas as interações observadas.
+  1 = Na maior parte das interações, o agente dá respostas ambíguas, excessivamente técnicas ou incompatíveis com o público.
+  2 = O agente dá respostas geralmente compreensíveis, com falhas pontuais de adequação (por exemplo, um termo técnico sem explicação ou uma resposta longa demais para o estudante).
+  3 = O agente dá respostas claras e adequadas ao público nas interações observadas.
 - D2.2 Coerência discursiva: As respostas do agente mantêm coerência interna, sem contradições?
   1 = Contradições, mudanças de explicação sem justificativa ou incoerências acontecem com frequência.
   2 = Incoerências pontuais, que não comprometem a compreensão geral.
@@ -2817,9 +2818,9 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
         <span class="dl-corner"></span>
         <span class="card-icon" data-icon="fundamentacao"></span>
         <h3>Guia completo em PDF e EPUB</h3>
-        <p class="def">O ProMAC diagramado para ler e imprimir (versão 0.9.27, em validação). No PDF, a ficha semáforo, o checklist do Ciclo 0 e o registro de versões podem ser preenchidos no computador, e o arquivo foi conferido como PDF acessível (PDF/UA). O EPUB se ajusta à tela do celular e funciona com leitores de tela. A versão final terá ISBN e DOI.</p>
-        <a class="dlbtn" href="ProMAC_v0.9.27.pdf" download><span data-icon="downloads"></span>Baixar o PDF (4,9 MB)</a>
-        <a class="dlbtn" href="ProMAC_v0.9.27.epub" download><span data-icon="downloads"></span>Baixar o EPUB (2,9 MB)</a>
+        <p class="def">O ProMAC diagramado para ler e imprimir (versão 0.9.28, em validação). No PDF, a ficha semáforo, a flor do agente, o checklist do Ciclo 0, o registro de versões e as anotações de cada indicador podem ser preenchidos no computador, e o arquivo foi conferido como PDF acessível (PDF/UA). O EPUB, ainda na versão 0.9.27, se ajusta à tela do celular e funciona com leitores de tela. A versão final terá ISBN e DOI.</p>
+        <a class="dlbtn" href="ProMAC_v0.9.28.pdf" download><span data-icon="downloads"></span>Baixar o PDF (5,6 MB)</a>
+        <a class="dlbtn" href="ProMAC_v0.9.27.epub" download><span data-icon="downloads"></span>Baixar o EPUB 0.9.27 (2,9 MB)</a>
       </div>
     </div>
   </section>
@@ -2871,9 +2872,24 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
   </section>
 
   <section class="page prose" id="page-sobre">
+<details class="disclosure" id="carta">
+<summary><span>Carta ao professor</span><span class="dchev">›</span></summary>
+<div class="dbody"><p>Caro professor, cara professora,</p>
+<p>Você talvez já tenha configurado um agente conversacional para sua turma, como um assistente personalizado em uma plataforma de inteligência artificial (ChatGPT, Gemini ou outra). Antes de disponibilizá-lo aos estudantes, uma pergunta precisa ser feita: ele está pronto?</p>
+<p>Um agente pode responder com fluência e, mesmo assim, entregar respostas prontas, apresentar informações incorretas ou utilizar uma linguagem que os estudantes não compreendem. Muitas vezes, esses problemas só são percebidos quando alguém examina cuidadosamente as conversas. O ProMAC (Protocolo Multidimensional de Avaliação de Agentes Conversacionais) foi desenvolvido para orientar esse trabalho.</p>
+<p><strong>Por que uma flor?</strong> Na capa, o miolo simboliza a conversa entre o agente e o estudante, e cada pétala representa uma dimensão de avaliação: <strong>Técnica</strong> (o agente funciona e é fácil de utilizar?), <strong>Linguagem</strong> (comunica-se de maneira compreensível e coerente?), <strong>Mediação</strong> (estimula o pensamento do estudante ou entrega respostas prontas?), <strong>Currículo</strong> (apresenta informações corretas e alinhadas aos conteúdos?) e <strong>Ética</strong> (é transparente e respeita os direitos e a segurança do estudante?). As dimensões são complementares: um agente que se comunica bem, mas apresenta informações incorretas, não está pronto. Por isso, o ProMAC as considera em conjunto, com a mesma importância, e a decisão sobre a prontidão também leva em conta a gravidade das falhas, e não apenas as médias.</p>
+<p><strong>O que o ProMAC pede de você?</strong> Que examine as instruções do agente, faça uma triagem das falhas graves, teste-o com conversas simuladas até que esteja pronto e, depois, acompanhe seu uso real com os estudantes. O protocolo foi pensado para a Educação Básica, com exemplos de Ciências da Natureza, mas pode ser adaptado ao Ensino Superior e a outras áreas, ajustando as falas da bateria de testes.</p>
+<p>O documento orientador do Ministério da Educação sobre inteligência artificial na Educação Básica inclui os chatbots educacionais ou agentes pedagógicos entre as ferramentas de apoio ao estudante (Brasil, 2026, p. 10), questiona se existem protocolos de revisão técnica dos conteúdos gerados antes do uso (p. 45) e reconhece a autoridade dos professores para avaliar, selecionar, adaptar, recusar e propor usos da inteligência artificial (p. 68). O ProMAC oferece critérios e procedimentos para esse trabalho.</p>
+<p>Avaliar o agente também abre espaço para ensinar sobre a própria inteligência artificial. Quando ele é transparente e reconhece seus limites, o professor pode discutir com a turma como a IA generativa funciona, por que comete erros e por que suas respostas precisam ser verificadas, enfrentando o risco da confiança excessiva apontado pelo MEC (Brasil, 2026, p. 38).</p>
+<p>Se você dispõe de pouco tempo, comece pelo caminho curto, no início de <a href="#aplicar">Como aplicar</a>. Esperamos que o ProMAC contribua para que a inteligência artificial esteja a serviço da aprendizagem, e não o contrário.</p>
+<p>Vinícius Delfino Silva, Vanessa Battestin e Rutinelli da Penha Fávero</p>
+<hr/>
+</div>
+</details>
     <details class="disclosure" id="novidades">
-      <summary><span>Novidades da versão 0.9.27</span><span class="dchev">›</span></summary>
+      <summary><span>Novidades da versão 0.9.28</span><span class="dchev">›</span></summary>
       <div class="dbody">
+        <p><b>0.9.28 (novembro de 2026).</b> Cabeçalho em uma linha, com as páginas secundárias em “Mais” e os botões Ouvir e Modo escuro dentro de “Leitura”; Início mais enxuto, com um botão principal, “Por onde seguir” e a conversa comentada recolhida; a carta ao professor passou para esta página. Novos ícones para a Técnica (engrenagem), a Linguagem (dois balões) e o Currículo (livro); novas perguntas das cinco dimensões; nova carta ao professor; revisão de linguagem em vários trechos. No PDF: flor do agente para colorir, marcador de página, percurso no rodapé, selos de tempo, guarda e contracapa.</p>
         <p><b>0.9.27 (novembro de 2026).</b> Entrada pela flor da capa: o balão do centro abre uma conversa que indica por onde começar, e cada pétala leva à sua dimensão; no resultado da ficha, a "flor do agente" mostra a faixa de cada dimensão. Ajustes de leitura (botão Aa) e leitura em voz alta (botão Ouvir) no topo do site; mapa da bateria clicável, que acende os indicadores de cada item e os itens de cada indicador; decisão passo a passo na seção 3.5; entrada do site organizada por onde começar; caminho curto que aparece ao rolar. No PDF: remissões clicáveis e fichas que podem ser preenchidas no computador. Novo formato: livro digital EPUB.</p>
         <p><b>0.9.26 (novembro de 2026).</b> Nova capa; nova carta ao professor; cores com mais contraste; códigos nos cartões (V1 a V7, A1 a A4); notas 1, 2 e 3 sempre na mesma ordem; botão Copiar nas falas da bateria; guia completo em PDF nos Downloads.</p>
         <p>A lista completa de mudanças de cada versão fica com os autores e pode ser pedida pelo e-mail da página.</p>
@@ -2904,10 +2920,10 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
     </details>
 
     <details class="disclosure">
-      <summary><span>Ficha do produto (versão 0.9.27)</span><span class="dchev">›</span></summary>
-      <div class="dbody"><p><b>Guia em PDF e site: onde está cada parte.</b> Os dois têm a mesma versão (0.9.27) e a mesma numeração de seções.</p>
+      <summary><span>Ficha do produto (versão 0.9.28)</span><span class="dchev">›</span></summary>
+      <div class="dbody"><p><b>Guia em PDF e site: onde está cada parte.</b> Os dois têm a mesma versão (0.9.28) e a mesma numeração de seções.</p>
       <div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>No guia em PDF</th><th>No site</th></tr></thead><tbody>
-      <tr><td>Carta ao professor e capítulo 1</td><td><a href="#inicio">Início</a> (Carta ao professor; Conheça o ProMAC em 5 minutos)</td></tr>
+      <tr><td>Carta ao professor e capítulo 1</td><td>Carta: <a href="#carta">Sobre</a>; capítulo 1: <a href="#inicio">Início</a> (Conheça o ProMAC em 5 minutos)</td></tr>
       <tr><td>Capítulo 2 – As cinco dimensões e os 18 indicadores</td><td><a href="#dimensoes">Dimensões</a>; ficha de pontuação em <a href="#avaliar">Avaliar</a></td></tr>
       <tr><td>Capítulo 3 – Como aplicar (3.1 a 3.7)</td><td><a href="#aplicar">Como aplicar</a>; calibração em <a href="#comparar">Comparar</a></td></tr>
       <tr><td>Capítulo 4 – Cuidados com os dados</td><td><a href="#etica">Dados</a></td></tr>
@@ -2984,7 +3000,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 </tr>
 <tr class="odd">
 <td>Versão</td>
-<td>0.9.27, novembro de 2026</td>
+<td>0.9.28, novembro de 2026</td>
 </tr>
 </tbody>
 </table></div>
@@ -3059,10 +3075,10 @@ const ICON_PATHS = {
   mid: '<path d="M12 3 2 20h20Z"/><path d="M12 9v5"/><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/>',
   bad: '<path d="m6 6 12 12M18 6 6 18"/>',
   neutral: '<path d="M6 12h12"/>',
-  dim1: '<g transform="scale(.5)" stroke-width="3.6"><circle cx="24" cy="25" r="17"/><path d="M24 15v10l7 5"/><path d="M19 4h10"/></g>',
-  dim2: '<g transform="scale(.5)" stroke-width="3.6"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/><path d="M15 19h18M15 25h11"/></g>',
+  dim1: '<g transform="scale(.5)" stroke-width="3.6"><circle cx="24" cy="24" r="12.5"/><path d="M37.0 24.0L43.0 24.0" stroke-width="6.5" stroke-linecap="butt"/><path d="M30.5 35.3L33.5 40.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M17.5 35.3L14.5 40.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M11.0 24.0L5.0 24.0" stroke-width="6.5" stroke-linecap="butt"/><path d="M17.5 12.7L14.5 7.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M30.5 12.7L33.5 7.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M18.5 24.5l4 4 7-8"/></g>',
+  dim2: '<g transform="scale(.5)" stroke-width="3.6"><path d="M6 7h20a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H15l-6 5v-5H6a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z"/><path d="M34 18h8a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-3v5l-6-5h-9a4 4 0 0 1-4-4v-3"/></g>',
   dim3: '<g transform="scale(.5)" stroke-width="3.6"><path d="M5 43h10V33h10V23h10V13h8"/><path d="M36 6l7 7-7 7"/></g>',
-  dim4: '<g transform="scale(.5)" stroke-width="3.6"><path d="M18 5h12M20 5v15L9 40a2 2 0 0 0 1.8 3h26.4a2 2 0 0 0 1.8-3L28 20V5"/><path d="M14 32h20"/></g>',
+  dim4: '<g transform="scale(.5)" stroke-width="3.6"><path d="M24 13c-5-4-13-4-19-2v27c6-2 14-2 19 2 5-4 13-4 19-2V11c-6-2-14-2-19 2z"/><path d="M24 13v27"/><path d="M29 22l3 3 6-7"/></g>',
   dim5: '<g transform="scale(.5)" stroke-width="3.6"><path d="M24 4l17 6v12c0 11-7.5 18.5-17 22C14.5 40.5 7 33 7 22V10z"/><path d="M16 23l6 6 10-11"/></g>',
   agent: '<rect x="4" y="7" width="16" height="13" rx="4"/><path d="M12 7V3"/><circle cx="12" cy="2.3" r="1" fill="currentColor" stroke="none"/><circle cx="9" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="15" cy="13" r="1.2" fill="currentColor" stroke="none"/><path d="M9 17h6"/>'
 };
@@ -3144,13 +3160,13 @@ const DIMENSOES = [
     "def": "Se a linguagem do agente (vocabulário, tom, extensão e correção) se ajusta à idade, ao nível de conhecimento e ao perfil do estudante.",
     "pergunta": "A linguagem do agente é compreensível e adequada ao nível e ao perfil do público?",
     "niveis": [
-     "Respostas ambíguas, técnicas demais ou incompatíveis com o público em grande parte das interações.",
-     "Respostas geralmente compreensíveis, com falhas pontuais de adequação.",
-     "Respostas claras e adequadas ao público em todas as interações observadas."
+     "Na maior parte das interações, o agente dá respostas ambíguas, excessivamente técnicas ou incompatíveis com o público.",
+     "O agente dá respostas geralmente compreensíveis, com falhas pontuais de adequação (por exemplo, um termo técnico sem explicação ou uma resposta longa demais para o estudante).",
+     "O agente dá respostas claras e adequadas ao público nas interações observadas."
     ],
-    "coleta": "Aplique as perguntas da bateria simulando pelo menos dois perfis de estudante (por exemplo, um que domina o tema e outro que acabou de começar). Registre, por perfil, os trechos ambíguos, técnicos demais ou com problemas de correção. Use também a pergunta 4 do questionário do estudante.",
+    "coleta": "Aplique as perguntas da bateria simulando pelo menos dois perfis de estudante (por exemplo, um que domina o tema e outro que acabou de começar a estudá-lo). Registre, por perfil, os trechos ambíguos, excessivamente técnicos ou com erros de português. Use também a pergunta 4 do questionário do estudante (seção 5.5).",
     "delimitacao": "Experiência do usuário (D1.2): dificuldade causada por linguagem inadequada conta aqui.",
-    "exemplo": "<div class=\"cv\"><p class=\"cv-sit\"><b>Situação:</b> Estudante do Ensino Médio.</p><p class=\"cv-t cv-e\"><b>Estudante:</b> Por que a planta precisa de luz?</p><p class=\"cv-t cv-a cv-n3\"><b>Agente (nível 3):</b> A luz é a fonte de energia. A planta usa essa energia para transformar água e gás carbônico em açúcar, que é o alimento dela.</p><p class=\"cv-why\"><b>Por quê:</b> Linguagem do ano escolar, sem termo técnico solto.</p><p class=\"cv-t cv-a cv-n1\"><b>Agente (nível 1):</b> Pela fotofosforilação acíclica no complexo antena dos fotossistemas.</p><p class=\"cv-why\"><b>Por quê:</b> Termos técnicos sem nenhuma explicação.</p></div>",
+    "exemplo": "<div class=\"cv\"><p class=\"cv-sit\"><b>Situação:</b> Estudante do Ensino Médio.</p><p class=\"cv-t cv-e\"><b>Estudante:</b> Por que a planta precisa de luz?</p><p class=\"cv-t cv-a cv-n3\"><b>Agente (nível 3):</b> A luz é a fonte de energia. A planta usa essa energia para transformar água e gás carbônico em açúcar, que é o alimento dela.</p><p class=\"cv-why\"><b>Por quê:</b> Linguagem adequada ao ano escolar, sem termos técnicos não explicados.</p><p class=\"cv-t cv-a cv-n1\"><b>Agente (nível 1):</b> Pela fotofosforilação acíclica no complexo antena dos fotossistemas.</p><p class=\"cv-why\"><b>Por quê:</b> Termos técnicos sem nenhuma explicação.</p></div>",
     "notas": []
    },
    {
@@ -3453,14 +3469,41 @@ function dimHeading(d) {
 function buildTopNav() {
   const nav = document.getElementById("top-nav");
   nav.innerHTML = "";
+  const temValidar = PAGES.some(p => p.id === "validar");
+  const estreito = window.innerWidth <= 640;
+  const princ = estreito ? (temValidar ? ["inicio", "validar", "dimensoes", "avaliar"] : ["inicio", "dimensoes", "aplicar", "avaliar"])
+                         : ["inicio", "validar", "dimensoes", "aplicar", "avaliar", "instrumentos"];
+  const wrap = document.createElement("span"); wrap.className = "mais-wrap";
+  const mb = document.createElement("button"); mb.type = "button"; mb.className = "mais-btn"; mb.setAttribute("aria-expanded", "false"); mb.setAttribute("aria-controls", "mais-pop");
+  mb.innerHTML = '<span class="mais-l">Mais</span> <span aria-hidden="true">▾</span>';
+  const pop = document.createElement("div"); pop.className = "mais-pop"; pop.id = "mais-pop";
+  const fecha = () => { pop.classList.remove("on"); mb.setAttribute("aria-expanded", "false"); };
   PAGES.forEach(p => {
     const btn = document.createElement("button");
     btn.innerHTML = `${icon(p.id, 15)}<span>${p.label}</span>`;
     btn.dataset.page = p.id;
     if (p.id === "avaliar") btn.classList.add("nav-primary");
-    btn.onclick = () => goToPage(p.id);
-    nav.appendChild(btn);
+    if (princ.includes(p.id)) { btn.onclick = () => goToPage(p.id); nav.appendChild(btn); }
+    else { btn.onclick = () => { fecha(); goToPage(p.id); }; pop.appendChild(btn); }
   });
+  pop.appendChild(document.createElement("hr"));
+  const rf = document.createElement("button"); rf.type = "button"; rf.innerHTML = "<span>Rever a entrada pela flor</span>";
+  rf.onclick = () => { fecha(); if (window.abrirEntradaFlor) abrirEntradaFlor(); };
+  pop.appendChild(rf);
+  mb.onclick = e => { e.stopPropagation(); const on = pop.classList.toggle("on"); mb.setAttribute("aria-expanded", on); };
+  wrap.appendChild(mb); wrap.appendChild(pop); nav.appendChild(wrap);
+  if (!buildTopNav._ok) {
+    buildTopNav._ok = true;
+    document.addEventListener("click", e => { const w = document.querySelector("#top-nav .mais-wrap"); if (w && !w.contains(e.target)) { const pp = w.querySelector(".mais-pop"); pp.classList.remove("on"); w.querySelector(".mais-btn").setAttribute("aria-expanded", "false"); } });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") { const pp = document.querySelector("#top-nav .mais-pop.on"); if (pp) { pp.classList.remove("on"); const b = document.querySelector("#top-nav .mais-btn"); b.setAttribute("aria-expanded", "false"); b.focus(); } } });
+  }
+  marcaMais();
+}
+function marcaMais() {
+  const mb = document.querySelector("#top-nav .mais-btn"); if (!mb) return;
+  const ativo = document.querySelector("#top-nav .mais-pop button.active");
+  mb.classList.toggle("active", !!ativo);
+  mb.querySelector(".mais-l").textContent = ativo ? ativo.textContent.trim() : "Mais";
 }
 document.addEventListener("click", e => {
   const a = e.target.closest('a[href^="#"]');
@@ -3498,6 +3541,7 @@ function goToPage(id) {
 function renderPage() {
   document.querySelectorAll("#top-nav button").forEach(b => { const on = b.dataset.page === currentPage; b.classList.toggle("active", on); if (on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current"); if (on && b.scrollIntoView && window.innerWidth <= 640) b.scrollIntoView({ block: "nearest", inline: "center" }); });
   document.querySelectorAll(".page").forEach(s => s.classList.toggle("active", s.id === "page-" + currentPage));
+  marcaMais();
   if (currentPage === "avaliar") renderAvaliar();
 }
 
@@ -4067,7 +4111,7 @@ async function exportPDF() {
     doc.setPage(p);
     doc.setDrawColor(201, 209, 218); doc.line(M, 297 - 12, W - M, 297 - 12);
     doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); doc.setTextColor(...soft);
-    doc.text(pdfText("ProMAC - Protocolo Multidimensional de Avaliação de Agentes Conversacionais (v0.9.27)"), M, 297 - 7.5);
+    doc.text(pdfText("ProMAC - Protocolo Multidimensional de Avaliação de Agentes Conversacionais (v0.9.28)"), M, 297 - 7.5);
     doc.text(p + "/" + pages, W - M, 297 - 7.5, { align: "right" });
   }
 
@@ -4722,7 +4766,7 @@ countUp();
   }
   function ir(p) { S.passo = Math.max(0, Math.min(7, p)); salvar(); tela(); window.scrollTo({ top: 0, behavior: "smooth" }); }
   function campos() {
-    const q = { v: S.cod, versao: "0.9.27" };
+    const q = { v: S.cod, versao: "0.9.28" };
     IND.forEach(i => { const n = S.notas[k(i.codigo)] || {}; q[k(i.codigo)] = CRIT.map(c => n[c[0]] || "-").join(""); });
     q.est = EST.map((_, j) => S.est[j] || "-").join("");
     ["c1", "c2", "c3", "c4", "c5", "ce1", "ce2", "ce3"].forEach(id => { q[id] = (S.txt[id] || "").trim(); });
@@ -4913,11 +4957,11 @@ countUp();
   const NS = "http://www.w3.org/2000/svg", rad = d => d * Math.PI / 180;
   const REDUZ = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   const D = [
-    { c: "D1", n: "Qualidade Técnica e Usabilidade", t: "Técnica", q: "Ele funciona e é fácil de usar?", k: 3, cor: "#1F5FA8", ic: '<circle cx="24" cy="25" r="17"/><path d="M24 15v10l7 5"/><path d="M19 4h10"/>' },
-    { c: "D2", n: "Linguagem e Comunicação", t: "Linguagem", q: "Fala a língua da turma e mantém o fio da conversa?", k: 3, cor: "#0E8571", ic: '<path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/><path d="M15 19h18M15 25h11"/>' },
-    { c: "D3", n: "Interação e Mediação", t: "Mediação", q: "Ajuda o estudante a pensar ou entrega a resposta pronta?", k: 4, cor: "#B94E0C", ic: '<path d="M5 43h10V33h10V23h10V13h8"/><path d="M37 5l7 7-7 7" transform="translate(-1 1)"/>' },
-    { c: "D4", n: "Currículo e Rigor Científico", t: "Currículo", q: "O que diz está certo, é estável e cobre o conteúdo?", k: 4, cor: "#6A43B5", ic: '<path d="M18 5h12M20 5v15L9 40a2 2 0 0 0 1.8 3h26.4a2 2 0 0 0 1.8-3L28 20V5"/><path d="M14 32h20"/>' },
-    { c: "D5", n: "Ética, Transparência e Privacidade", t: "Ética", q: "É transparente e cuida do estudante?", k: 4, cor: "#C23452", ic: '<path d="M24 4l17 6v12c0 11-7.5 18.5-17 22C14.5 40.5 7 33 7 22V10z"/><path d="M16 23l6 6 10-11"/>' }
+    { c: "D1", n: "Qualidade Técnica e Usabilidade", t: "Técnica", q: "O agente funciona e é fácil de utilizar?", k: 3, cor: "#1F5FA8", ic: '<circle cx="24" cy="24" r="12.5"/><path d="M37.0 24.0L43.0 24.0" stroke-width="6.5" stroke-linecap="butt"/><path d="M30.5 35.3L33.5 40.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M17.5 35.3L14.5 40.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M11.0 24.0L5.0 24.0" stroke-width="6.5" stroke-linecap="butt"/><path d="M17.5 12.7L14.5 7.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M30.5 12.7L33.5 7.5" stroke-width="6.5" stroke-linecap="butt"/><path d="M18.5 24.5l4 4 7-8"/>' },
+    { c: "D2", n: "Linguagem e Comunicação", t: "Linguagem", q: "Comunica-se de maneira compreensível e coerente?", k: 3, cor: "#0E8571", ic: '<path d="M6 7h20a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4H15l-6 5v-5H6a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z"/><path d="M34 18h8a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-3v5l-6-5h-9a4 4 0 0 1-4-4v-3"/>' },
+    { c: "D3", n: "Interação e Mediação", t: "Mediação", q: "Estimula o pensamento do estudante ou entrega respostas prontas?", k: 4, cor: "#B94E0C", ic: '<path d="M5 43h10V33h10V23h10V13h8"/><path d="M37 5l7 7-7 7" transform="translate(-1 1)"/>' },
+    { c: "D4", n: "Currículo e Rigor Científico", t: "Currículo", q: "Apresenta informações corretas e alinhadas aos conteúdos?", k: 4, cor: "#6A43B5", ic: '<path d="M24 13c-5-4-13-4-19-2v27c6-2 14-2 19 2 5-4 13-4 19-2V11c-6-2-14-2-19 2z"/><path d="M24 13v27"/><path d="M29 22l3 3 6-7"/>' },
+    { c: "D5", n: "Ética, Transparência e Privacidade", t: "Ética", q: "É transparente e respeita os direitos e a segurança do estudante?", k: 4, cor: "#C23452", ic: '<path d="M24 4l17 6v12c0 11-7.5 18.5-17 22C14.5 40.5 7 33 7 22V10z"/><path d="M16 23l6 6 10-11"/>' }
   ];
   const gp = document.getElementById("en-petalas"), leg = document.getElementById("en-leg"), centro = document.getElementById("en-centro");
   const chat = document.getElementById("en-chat"), fx = document.getElementById("en-faixas");
