@@ -676,6 +676,12 @@
   .chip-pop .cp-t span { font-family: 'IBM Plex Mono', monospace; color: var(--c, var(--ink-soft)); }
   .chip-pop .cp-p { color: var(--ink-soft); }
   .chip-pop .cp-l { font-weight: 600; color: var(--ink); margin-top: 2px; }
+  .chip-pop { background: color-mix(in srgb, var(--c, var(--ink-soft)) 7%, var(--surface)); }
+  a.ref-t { color: inherit; font-weight: inherit; text-decoration: underline dotted; text-decoration-color: var(--c, var(--ink-soft)); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  a.ref-t:hover { color: var(--c, var(--ink)); text-decoration-style: solid; }
+  a.ref-t:focus-visible { outline: 2px solid var(--c, var(--ink)); outline-offset: 1px; border-radius: 2px; }
+  tr.flash, .cart.flash { animation: flashRef 1.6s ease-out; }
+  @keyframes flashRef { 0% { box-shadow: 0 0 0 3px var(--amar); } 100% { box-shadow: 0 0 0 3px transparent; } }
   .web-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin: 0.9rem 0; }
   .web-nums p.num { margin: 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
   .web-nums .num-fonte { display: block; margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
@@ -4386,43 +4392,117 @@ setupCmpDrop();
 const REDUCE_MOTION = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.find(i => i.codigo === cod); if (ind) return { d, ind }; } return null; };
 
-/* ---------- cartão das etiquetas coloridas (D3.1, Ciclo 2...) ao passar o mouse ou focar ---------- */
+/* ---------- cartões de referência: ao passar o mouse (ou focar) em uma menção a uma parte do ProMAC ---------- */
 (function () {
-  const CICLOS = {
-    "sec-3-4": { k: "Ciclo 2", t: "Aplicação com estudantes", p: "O agente já está com a turma. Você lê as conversas reais, aplica os questionários e reaplica a bateria sempre que mudar a configuração.", l: "Ver a seção 3.4" },
-    "sec-3-2": { k: "Ciclos 1 e 2", t: "Antes e durante o uso", p: "No Ciclo 1, você testa o agente com a bateria de perguntas simuladas antes de liberá-lo. No Ciclo 2, acompanha as conversas reais dos estudantes.", l: "Ver a seção 3.2" }
-  };
+  const REF = {};
+  const corta = (t, n) => { t = (t || "").replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, "") + "…" : t; };
+  // indicadores e dimensões
+  DIMENSOES.forEach((d, i) => {
+    const c = `var(--${d.id})`;
+    REF[d.id.toUpperCase()] = { c, k: `Dimensão ${i + 1}`, t: d.nome.replace(" · ", " "), p: corta(d.desc, 200), h: "#ind-" + d.indicadores[0].codigo, l: "Ver os indicadores" };
+    d.indicadores.forEach(ind => { REF[ind.codigo] = { c, k: d.curto, t: `<span>${ind.codigo}</span> ${ind.nome}`, p: ind.pergunta, h: "#ind-" + ind.codigo, l: "Ver no quadro dos indicadores" }; });
+  });
+  // ciclos
+  const cic = (k, t, p, h) => ({ c: "var(--ink-soft)", k, t, p, h, l: "Ver a seção " + h.replace("#sec-", "").replace("-", ".") });
+  REF["Ciclo 0"] = cic("Ciclo 0", "Antes de começar", "Você confere as instruções do agente com um checklist de 9 itens e faz a triagem com os itens dos cartões vermelhos.", "#sec-3-1");
+  REF["Ciclo 1"] = cic("Ciclo 1", "Bateria de testes simulados", "Antes de liberar o agente, você o testa com a bateria de perguntas preparadas, pontua a ficha e decide.", "#sec-3-2");
+  REF["Ciclo 2"] = cic("Ciclo 2", "Aplicação com estudantes", "O agente já está com a turma. Você lê as conversas reais, aplica os questionários e reaplica a bateria sempre que mudar a configuração.", "#sec-3-4");
+  REF["Ciclos 1 e 2"] = cic("Ciclos 1 e 2", "Antes e durante o uso", "No Ciclo 1, você testa o agente com a bateria simulada antes de liberá-lo. No Ciclo 2, acompanha as conversas reais dos estudantes.", "#sec-3-2");
+  // itens da bateria (B) e itens extras (E), lidos das tabelas
+  const txt = el => { const c = el.cloneNode(true); c.querySelectorAll("button").forEach(b => b.remove()); return c.textContent; };
+  document.querySelectorAll("table tr").forEach(tr => {
+    const td = tr.querySelectorAll("td"); if (td.length < 3) return;
+    const m = td[0].textContent.trim().match(/^([BE]\d\d)\b/); if (!m || REF[m[1]]) return;
+    tr.id = tr.id || "item-" + m[1];
+    const e = m[1][0] === "E";
+    REF[m[1]] = { c: "var(--ink-soft)", k: e ? "Item extra" : "Bateria básica", t: `<span>${m[1]}</span> ${corta(txt(td[1]), 70)}`, p: "Exemplo: " + corta(txt(td[2]), 150) + (e && td[4] ? ` Indicadores: ${td[4].textContent.trim()}.` : ""), h: "#" + tr.id, l: e ? "Ver nos itens extras" : "Ver na bateria" };
+  });
+  // cartões vermelhos e amarelos
+  document.querySelectorAll(".cart").forEach(cd => {
+    const kk = cd.querySelector(".cart-k"); if (!kk) return;
+    const m = kk.textContent.match(/^([VA]\d)/); if (!m) return;
+    cd.id = cd.id || "cartao-" + m[1];
+    const v = m[1][0] === "V";
+    REF[m[1]] = { c: v ? "var(--verm)" : "var(--amar)", k: v ? "Cartão vermelho" : "Cartão amarelo", t: `<span>${m[1]}</span> ${cd.querySelector("b").textContent}`, p: (cd.querySelector("q") || {}).textContent || "", h: "#" + cd.id, l: "Ver o cartão" };
+  });
+  // seções (links #sec-x-y)
+  function refSecao(h) {
+    if (REF[h]) return REF[h];
+    const el = document.getElementById(h.slice(1)); if (!el) return null;
+    let p = el.nextElementSibling; while (p && p.tagName !== "P") p = p.nextElementSibling;
+    return REF[h] = { c: "var(--ink-soft)", k: "Seção do guia", t: corta(el.textContent, 80), p: p ? corta(p.textContent, 170) : "", h, l: "Ir para a seção" };
+  }
+
+  // marca as menções em texto corrido
+  const RX = /\b(Ciclos 1 e 2|Ciclo [0-2]|D[1-5]\.[1-4]|D[1-5]|[BE](?:0[1-9]|1\d|2\d)|[VA][1-7])\b/g;
+  const RX1 = new RegExp(RX.source);
+  const PULA = "a, button, script, style, summary, label, input, textarea, select, code, h1, h2, h3, .cart-k, .indcode, .cv, .bolhas, #q-board, #q-detail, #live-panel, table.mapa, .tile, .fx-k, .p-step, .en-faixas, .dimfaixa, #chip-pop, .flor-agente, .sumgrid, .profile-grid, .ref-level, .levels, svg";
+  function marca(raiz) {
+    const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, { acceptNode: n => (!n.nodeValue.trim() || !RX1.test(n.nodeValue) || n.parentElement.closest(PULA)) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nos = []; let n; while ((n = w.nextNode())) nos.push(n);
+    nos.forEach(t => {
+      RX.lastIndex = 0;
+      const tr = t.parentElement.closest("tr");
+      const s = t.nodeValue, f = document.createDocumentFragment(); let i = 0, m, mudou = false;
+      while ((m = RX.exec(s))) {
+        const r = REF[m[1]];
+        if (!r || (tr && tr.id === "item-" + m[1])) continue;
+        // "V1" etc. só quando parece cartão (evita falsos positivos em textos como "A1" fora de contexto)
+        if (/^[VA]\d$/.test(m[1]) && !/cart|sinal|vermelh|amarel|V\d|A\d/i.test(s)) continue;
+        f.append(s.slice(i, m.index));
+        const a = document.createElement("a"); a.className = "ref-t"; a.href = r.h; a.textContent = m[1]; a.style.setProperty("--c", r.c); a.dataset.ref = m[1];
+        f.append(a); i = m.index + m[1].length; mudou = true;
+      }
+      if (!mudou) return; f.append(s.slice(i)); t.replaceWith(f);
+    });
+  }
+
   const pop = document.createElement("div");
   pop.className = "chip-pop"; pop.id = "chip-pop"; pop.setAttribute("role", "tooltip"); pop.hidden = true;
   document.body.appendChild(pop);
   let alvo = null, tFecha = 0;
-  function conteudo(a) {
+  function dados(a) {
+    if (a.dataset.ref) return REF[a.dataset.ref];
     const h = a.getAttribute("href") || "";
-    if (h.startsWith("#ind-")) {
-      const r = findInd(h.slice(5)); if (!r) return null;
-      pop.style.setProperty("--c", `var(--${r.d.id})`);
-      return `<span class="cp-k">${r.d.curto}</span><b class="cp-t"><span>${r.ind.codigo}</span> ${r.ind.nome}</b><span class="cp-p">${r.ind.pergunta}</span><a class="cp-l" href="${h}">Ver no quadro dos indicadores →</a>`;
-    }
-    const c = CICLOS[h.slice(1)]; if (!c) return null;
-    pop.style.setProperty("--c", "var(--ink-soft)");
-    return `<span class="cp-k">${c.k}</span><b class="cp-t">${c.t}</b><span class="cp-p">${c.p}</span><a class="cp-l" href="${h}">${c.l} →</a>`;
+    if (a.classList.contains("chipd")) { const tx = a.textContent.trim(); return REF[tx] || null; }
+    if (/^#sec-\d/.test(h)) return refSecao(h);
+    return null;
   }
   function abre(a) {
     clearTimeout(tFecha);
-    const html = conteudo(a); if (!html) return;
-    alvo = a; pop.innerHTML = html; pop.hidden = false; a.setAttribute("aria-describedby", "chip-pop");
-    const r = a.getBoundingClientRect(), w = pop.offsetWidth, hh = pop.offsetHeight;
-    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
-    let y = r.bottom + 8; if (y + hh > innerHeight - 8 && r.top - hh - 8 > 8) y = r.top - hh - 8;
+    const r = dados(a); if (!r) return;
+    alvo = a; pop.style.setProperty("--c", r.c);
+    pop.innerHTML = `<span class="cp-k">${r.k}</span><b class="cp-t">${r.t}</b>${r.p ? `<span class="cp-p">${r.p}</span>` : ""}<a class="cp-l" href="${r.h}">${r.l} →</a>`;
+    pop.hidden = false; a.setAttribute("aria-describedby", "chip-pop");
+    const b = a.getBoundingClientRect(), w = pop.offsetWidth, hh = pop.offsetHeight;
+    const x = Math.min(Math.max(8, b.left + b.width / 2 - w / 2), innerWidth - w - 8);
+    let y = b.bottom + 8; if (y + hh > innerHeight - 8 && b.top - hh - 8 > 8) y = b.top - hh - 8;
     pop.style.left = (x + scrollX) + "px"; pop.style.top = (y + scrollY) + "px";
   }
   function fecha(j) { clearTimeout(tFecha); tFecha = setTimeout(() => { pop.hidden = true; if (alvo) alvo.removeAttribute("aria-describedby"); alvo = null; }, j ? 0 : 180); }
+  const SEL = "a.chipd, a.ref-t, a[href^='#sec-']";
   const temHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
-  document.addEventListener("mouseover", e => { if (!temHover) return; const a = e.target.closest && e.target.closest("a.chipd"); if (a && a !== alvo) abre(a); else if (a || e.target.closest && e.target.closest("#chip-pop")) clearTimeout(tFecha); });
-  document.addEventListener("mouseout", e => { const de = e.target.closest && e.target.closest("a.chipd, #chip-pop"); const para = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest("a.chipd, #chip-pop"); if (de && !para) fecha(); });
-  document.addEventListener("focusin", e => { const a = e.target.closest && e.target.closest("a.chipd"); if (a) abre(a); else if (!(e.target.closest && e.target.closest("#chip-pop"))) fecha(true); });
+  const perto = (el, s) => el && el.closest && el.closest(s);
+  document.addEventListener("mouseover", e => { if (!temHover) return; const a = perto(e.target, SEL); if (a && !perto(a, "#chip-pop") && a !== alvo) abre(a); else if (a || perto(e.target, "#chip-pop")) clearTimeout(tFecha); });
+  document.addEventListener("mouseout", e => { const de = perto(e.target, SEL + ", #chip-pop"); const para = perto(e.relatedTarget, SEL + ", #chip-pop"); if (de && !para) fecha(); });
+  document.addEventListener("focusin", e => { const a = perto(e.target, SEL); if (a && !perto(a, "#chip-pop")) abre(a); else if (!perto(e.target, "#chip-pop")) fecha(true); });
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) fecha(true); });
-  document.addEventListener("click", e => { if (e.target.closest && e.target.closest("a.chipd, #chip-pop a")) fecha(true); });
+  document.addEventListener("click", e => { if (perto(e.target, SEL)) fecha(true); });
+
+  // destinos novos (itens e cartões): abre a página e o recolhível certos
+  document.addEventListener("click", e => {
+    const a = perto(e.target, "a.ref-t, #chip-pop a"); if (!a) return;
+    const h = a.getAttribute("href"); if (!/^#(item|cartao)-/.test(h)) return;
+    const el = document.getElementById(h.slice(1)); if (!el) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const pg = el.closest(".page");
+    for (let d = el.closest("details"); d; d = d.parentElement && d.parentElement.closest("details")) d.open = true;
+    if (pg) { currentPage = pg.id.replace("page-", ""); renderPage(); }
+    setTimeout(() => { el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "center" }); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }, 60);
+  }, true);
+
+  const roda = () => document.querySelectorAll(".page").forEach(marca);
+  if (document.readyState === "complete") setTimeout(roda, 300); else addEventListener("load", () => setTimeout(roda, 300));
 })();
 
 /* contadores da capa */
