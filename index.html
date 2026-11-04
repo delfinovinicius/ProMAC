@@ -1100,7 +1100,13 @@
   @keyframes enDig { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
   .en-leg { min-height: 3.3em; text-align: center; max-width: 36ch; color: #AEB7C1; font-size: 15px; margin: 0; }
   .en-leg b { display: block; font-family: 'Archivo', sans-serif; font-stretch: 85%; font-size: 18px; color: #E9EDF1; }
-  .en-val { margin-top: 4px; background: #1E8A5A; color: #fff; border: 0; border-radius: 6px; padding: 12px 22px; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 6px 18px rgba(30,138,90,.35); }
+  .en-val { margin-top: 0; background: #1E8A5A; color: #fff; border: 0; border-radius: 6px; padding: 12px 22px; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 6px 18px rgba(30,138,90,.35); }
+  #entrada.en-validar .en-pular, #entrada.en-validar .en-rodape { display: none; }
+  #entrada.en-validar #en-petalas, #entrada.en-validar #en-centro { pointer-events: none; }
+  .en-acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
+  .en-pdf { display: inline-flex; align-items: center; gap: 6px; padding: 12px 18px; border-radius: 6px; color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+  .en-pdf span { font-weight: 400; opacity: .75; font-size: 13px; }
+  .en-pdf:hover { background: rgba(255,255,255,.08); } .en-pdf:focus-visible { outline: 3px solid #FFD089; outline-offset: 3px; }
   .en-val:hover { background: #24A06A; } .en-val:focus-visible { outline: 3px solid #FFD089; outline-offset: 3px; }
   .en-dica { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; color: #AEB7C1; margin: 0; }
   .entrada.aberta .en-flor { opacity: 0; pointer-events: none; }
@@ -3130,7 +3136,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
       .vl-painel .vp-lbl { display: block; font-weight: 600; font-size: 14px; margin: 8px 0 6px; }
       .vl-painel textarea { width: 100%; min-height: 64px; font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--surface); color: var(--ink); box-sizing: border-box; }
       .vl-painel .vl-cnt { font-size: 12px; color: var(--ink-faint); text-align: right; }
-      .vl-painel .vp-nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); }
+      .vl-painel .vp-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); }
       .vl-painel .vp-nav button, .vl-painel .vl-send { padding: 9px 12px; border-radius: 4px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
       .vl-painel .vp-nav button[disabled] { opacity: .4; cursor: default; }
       .vl-painel .vp-nav .prim, .vl-painel .vl-send { background: var(--ink); color: var(--surface); }
@@ -5158,19 +5164,16 @@ countUp();
     const falta = P.filter(p => p.t !== "fim" && !feita(p));
     let h = `<h1 style="margin-bottom:6px">Validação por especialistas</h1>
       <div class="vl-prog" aria-live="polite"><span>${feitos()} de ${totalItens} respostas</span><span class="bar"><i style="width:${pct}%"></i></span><span>${pct}%</span></div>
-      <div class="vl-intro">
+      <div class="vl-intro" ${S.parada === P.length - 1 ? "hidden" : ""}>
         <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. A validação é uma <b>trilha pelo site</b>, com ${P.length} paradas: em cada uma, o site mostra o trecho de que a pergunta trata, e você responde no painel ao lado (no celular, na parte de baixo da tela).</p>
         <p><b>Escalas:</b> pertinência de 1 (Não pertinente) a 4 (Muito pertinente); clareza e estrutura de 1 (Inadequado) a 3 (Adequado). Se marcar 1 ou 2, diga no comentário o que mudaria. <b>Tempo:</b> 20 a 30 minutos.</p>
         <p class="vl-priv">As respostas ficam salvas neste navegador até você clicar em <b>Enviar</b>, no fim da trilha. Então abre um formulário curto, já com as suas notas, para a identificação e o parecer final.</p>
         <p style="margin-bottom:0"><button type="button" class="vl-send" id="vl-comecar">${S.parada < 0 ? "Começar a trilha →" : `Retomar a trilha na parada ${S.parada + 1} →`}</button></p>
       </div>
-      <h2>Mapa da trilha</h2><p>Clique numa parada para ir direto a ela. As bolinhas verdes mostram o que já foi respondido.</p>
-      ${mapaHTML("vl-mapa")}
-      <section id="vl-enviar" class="vl-env"><h2>Enviar</h2>
-      ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo: as que faltarem chegam em branco, sem problema.</p><details class="vl-more"><summary>Ver quais faltam</summary><p class="vl-falta">${falta.map(p => p.rot.split(" ")[0] === "Clareza" ? p.rot : p.rot.replace(/^(D\d\.\d) .*/, "$1")).join(", ")}</p></details>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
+      <section id="vl-enviar" class="vl-env" ${S.parada === P.length - 1 ? "" : "hidden"}><h2>Enviar</h2>
+      ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo: as que faltarem chegam em branco, sem problema.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
       <p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
-      <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o Tally não abrir, copie o resumo abaixo e envie ao autor por e-mail.</p>
-      <details class="vl-more"><summary>Ver resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px">${esc(resumo())}</pre></details></section>`;
+      <p class="vl-priv">Se o formulário não abrir, envie ao autor por e-mail o seu código de validação: <b>${S.cod}</b>.</p></section>`;
     root.innerHTML = h;
     root.querySelector("#vl-comecar").onclick = () => irPara(Math.max(0, S.parada));
     root.querySelector("#vl-send").onclick = enviar;
@@ -5202,8 +5205,7 @@ countUp();
       <fieldset><legend>${EST[p.e]}</legend>${opts("vp_est_" + p.e, S.est[p.e], `data-e="${p.e}"`)}</fieldset>
       ${(p.com || []).map(id => campo(id, ESTC[id])).join("")}`;
     const falta = P.filter(q => q.t !== "fim" && !feita(q)).length;
-    return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}. O mapa mostra quais.` : "Tudo respondido."} Você pode enviar agora mesmo; o que ficar em branco não impede o envio.</p>
-      ${falta ? `<p><button type="button" class="vp-1falta" data-ir1="1">Responder as que faltam</button></p>` : ""}
+    return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}, mas você pode enviar assim mesmo.` : "Tudo respondido."} Clique no botão para abrir o formulário final, já com as suas notas.</p>
       <p><button type="button" class="vl-send" data-enviar="1">Enviar e continuar no Tally →</button></p>`;
   }
   function painel() {
@@ -5217,16 +5219,12 @@ countUp();
       <div class="vp-corpo" id="vp-corpo" aria-live="polite">${corpo(p)}</div>
       <div class="vp-nav">
         <button type="button" data-n="-1" ${i === 0 ? "disabled" : ""}>← Anterior</button>
-        <button type="button" class="vp-ver" data-ver="1">Ver o trecho</button>
         ${i < P.length - 1 ? `<button type="button" class="prim" data-n="1">Próxima →</button>` : `<span></span>`}
-      </div>
-      <details class="vp-mapa"><summary>Mapa da trilha · ${feitos()} de ${totalItens} respondidas</summary>${mapaHTML("vl-mapa vp-m")}</details>`;
+      </div>`;
     pn.querySelector(".vp-tog").onclick = () => { S.min = !S.min; salvar(); painel(); };
     pn.querySelectorAll("[data-n]").forEach(b => b.onclick = () => irPara(i + +b.dataset.n));
-    pn.querySelector("[data-ver]").onclick = () => irPara(i);
     pn.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => irPara(+b.dataset.ir));
     const env = pn.querySelector("[data-enviar]"); if (env) env.onclick = enviar;
-    const f1 = pn.querySelector("[data-ir1]"); if (f1) f1.onclick = () => { const i = P.findIndex(q => q.t !== "fim" && !feita(q)); if (i >= 0) irPara(i); };
     const at = () => { salvar(); atualiza(); };
     pn.querySelectorAll("input[data-v]").forEach(r => r.onchange = () => { S.vid = r.value; at(); });
     pn.querySelectorAll("input[data-i]").forEach(r => r.onchange = () => { (S.notas[r.dataset.i] = S.notas[r.dataset.i] || {}).p = r.value; at(); });
@@ -5293,7 +5291,7 @@ countUp();
   // quem chega pelo link de validação começa direto na página Validar, sem a flor
   document.body.classList.add("modo-validar");
   const cta = document.querySelector(".capa .hero-cta");
-  if (cta) { const v = document.createElement("a"); v.className = "hero-cta hero-val"; v.href = "#validar"; v.textContent = "Começar a validação →"; cta.before(v); cta.classList.add("hero-sec"); }
+  if (cta) { const v = document.createElement("a"); v.className = "hero-cta hero-val"; v.href = "#validar"; v.textContent = "Começar a validação →"; cta.replaceWith(v); }
   if (!location.hash) { currentPage = "validar"; renderPage(); tela(); }
   painel();
   goToPage("validar");
@@ -5473,12 +5471,23 @@ countUp();
   ];
   const gp = document.getElementById("en-petalas"), leg = document.getElementById("en-leg"), centro = document.getElementById("en-centro");
   const chat = document.getElementById("en-chat"), fx = document.getElementById("en-faixas");
-  if (VALIDAR) {
-    leg.innerHTML = "<b>Validação por especialistas</b>Obrigado por participar! A validação começa no botão abaixo. Se quiser, antes explore a flor: cada pétala é uma dimensão.";
-    const dica = ov.querySelector(".en-dica");
-    if (dica) { const bv = document.createElement("button"); bv.type = "button"; bv.className = "en-val"; bv.textContent = "Começar a validação →"; bv.onclick = () => { fechar(); goToPage("validar"); }; dica.replaceWith(bv); }
-    centro.setAttribute("aria-label", "Abrir a conversa de apresentação do ProMAC");
+  /* abertura com dois caminhos fáceis: entrar (ou validar) e baixar o PDF */
+  {
+    const dica = ov.querySelector(".en-dica"), pdf = document.querySelector(".capa a.hero-pdf");
+    const box = document.createElement("div"); box.className = "en-acoes";
+    const bv = document.createElement("button"); bv.type = "button"; bv.className = "en-val";
+    bv.textContent = VALIDAR ? "Começar a validação →" : "Entrar no ProMAC →";
+    bv.onclick = () => { fechar(); goToPage(VALIDAR ? "validar" : "inicio"); };
+    box.append(bv);
+    if (pdf) { const a = document.createElement("a"); a.className = "en-pdf"; a.href = pdf.getAttribute("href"); a.setAttribute("download", ""); a.innerHTML = pdf.innerHTML; box.append(a); }
+    if (dica) dica.replaceWith(box);
+    ov.querySelector(".en-pular").hidden = true;
   }
+  if (VALIDAR) {
+    leg.innerHTML = "<b>Validação por especialistas</b>Obrigado por participar! Para começar, clique no botão verde abaixo.";
+    ov.classList.add("en-validar");
+    centro.setAttribute("tabindex", "-1"); centro.setAttribute("aria-hidden", "true");
+  } else leg.innerHTML = "<b>Cinco olhares sobre uma conversa</b>Cada pétala é uma dimensão. Toque numa delas para conhecê-la.";
   const LEG0 = leg.innerHTML;
   D.forEach((d, i) => {
     const a = i * 72, cx = 105 + 52 * Math.sin(rad(a)), cy = 105 - 52 * Math.cos(rad(a));
@@ -5552,7 +5561,7 @@ countUp();
   function mostrar() {
     antes = document.activeElement; ov.hidden = false; ov.classList.remove("saindo", "aberta");
     gp.querySelectorAll(".en-petala").forEach(p => p.style.transform = ""); chat.innerHTML = ""; fila = Promise.resolve(); leg.innerHTML = LEG0;
-    travar(true); setTimeout(() => centro.focus(), 50);
+    travar(true); setTimeout(() => (ov.querySelector(".en-val") || centro).focus(), 50);
   }
   function abrir(i) {
     if (ov.classList.contains("aberta")) return;
