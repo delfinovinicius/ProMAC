@@ -3058,6 +3058,65 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
       #page-validar .vl-falta { color: var(--bad); font-size: 14px; }
       #page-validar .vl-dimh { display: flex; align-items: center; gap: 10px; color: var(--c); margin: 6px 0 4px; }
       #page-validar .vl-priv { font-size: 13.5px; color: var(--ink-soft); border-left: 3px solid var(--line-strong); padding-left: 10px; }
+      /* trilha da validação */
+      #page-validar .vl-mapa, .vl-painel .vl-mapa { list-style: none; padding: 0; margin: 0 0 18px; }
+      .vl-mapa ol { list-style: none; padding: 0; margin: 4px 0 10px; display: grid; gap: 4px; }
+      .vl-mapa .vm-sec > span { font: 600 11px/1 var(--mono, monospace); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+      .vl-mapa button { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 7px 10px; cursor: pointer; }
+      .vl-mapa button:hover { border-color: var(--line-strong); }
+      .vl-mapa button.atual { border-color: var(--ink); box-shadow: inset 3px 0 0 var(--ink); }
+      .vl-mapa .vm-n { flex: none; width: 22px; font: 600 12px/1 var(--mono, monospace); color: var(--ink-faint); }
+      .vl-mapa .vm-t { flex: 1; }
+      .vl-mapa .vm-dot { flex: none; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--line-strong); }
+      .vl-mapa button.ok .vm-dot { background: var(--verde); border-color: var(--verde); }
+      #page-validar .vl-env { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 4px; }
+      .vl-alvo { outline: 3px solid var(--accent); outline-offset: 6px; border-radius: 6px; scroll-margin-top: 18px; }
+      .vl-painel { position: fixed; z-index: 90; background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong); box-shadow: 0 8px 30px rgba(0,0,0,.18); display: flex; flex-direction: column; font-size: 15px; }
+      .vl-painel[hidden] { display: none; }
+      .vl-painel .vp-tog { width: 100%; display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--ink-fixo, #14191F); color: #fff; border: 0; font: inherit; cursor: pointer; text-align: left; }
+      .vl-painel .vp-k { font-weight: 700; font-size: 14px; flex: 1; }
+      .vl-painel .vp-r { font: 600 11px/1 var(--mono, monospace); letter-spacing: .06em; text-transform: uppercase; opacity: .75; }
+      .vl-painel .vp-prog { height: 5px; background: var(--line); } .vl-painel .vp-prog i { display: block; height: 100%; background: var(--good, var(--verde)); transition: width .3s; }
+      .vl-painel .vp-corpo { padding: 12px 16px 6px; overflow-y: auto; flex: 1; min-height: 0; }
+      .vl-painel h3 { margin: 2px 0 6px; font-size: 18px; line-height: 1.3; outline: none; }
+      .vl-painel .vp-cod { color: var(--c); margin-right: 4px; }
+      .vl-painel .vp-dica { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 10px; }
+      .vl-painel fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+      .vl-painel legend { font-size: 14.5px; margin-bottom: 8px; padding: 0; line-height: 1.45; }
+      .vl-painel .vl-opts { display: grid; gap: 6px; }
+      .vl-painel .vl-opts label { cursor: pointer; display: block; }
+      .vl-painel .vl-opts input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+      .vl-painel .vl-opts span { display: block; padding: 8px 12px; border: 1px solid var(--line-strong); border-radius: 6px; font-size: 14px; background: var(--surface); }
+      .vl-painel .vl-opts input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .vl-painel .vl-opts input[value="4"]:checked + span { background: var(--verde); border-color: var(--verde); color: #fff; font-weight: 700; box-shadow: inset 0 0 0 2px rgba(255,255,255,.55); }
+      .vl-painel .vl-opts input[value="3"]:checked + span { background: var(--verde); border-color: var(--verde); color: #fff; }
+      .vl-painel .vl-opts input[value="2"]:checked + span { background: var(--amar); border-color: var(--amar); color: #14191F; }
+      .vl-painel .vl-opts input[value="1"]:checked + span { background: var(--verm); border-color: var(--verm); color: #fff; }
+      .vl-painel .vp-pouco label { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; margin: 4px 0; cursor: pointer; }
+      .vl-painel .vp-lbl { display: block; font-weight: 600; font-size: 14px; margin: 8px 0 6px; }
+      .vl-painel textarea { width: 100%; min-height: 64px; font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 4px; background: var(--surface); color: var(--ink); box-sizing: border-box; }
+      .vl-painel .vl-cnt { font-size: 12px; color: var(--ink-faint); text-align: right; }
+      .vl-painel .vp-nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); }
+      .vl-painel .vp-nav button, .vl-painel .vl-send { padding: 9px 12px; border-radius: 4px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+      .vl-painel .vp-nav button[disabled] { opacity: .4; cursor: default; }
+      .vl-painel .vp-nav .prim, .vl-painel .vl-send { background: var(--ink); color: var(--surface); }
+      .vl-painel .vp-nav .vp-ver { border-color: var(--line-strong); font-weight: 500; }
+      .vl-painel .vp-mapa { border-top: 1px solid var(--line); padding: 0 14px; }
+      .vl-painel .vp-mapa summary { cursor: pointer; padding: 9px 0; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
+      .vl-painel .vp-mapa .vl-mapa { max-height: 34vh; overflow-y: auto; margin-bottom: 10px; }
+      .vl-painel.min .vp-corpo, .vl-painel.min .vp-nav, .vl-painel.min .vp-mapa { display: none; }
+      @media (min-width: 1100px) {
+        .vl-painel { top: 12px; right: 12px; bottom: 12px; width: 360px; border-radius: 10px; overflow: hidden; }
+        .vl-painel.min { bottom: auto; }
+        body.vl-trilha { padding-right: 384px; }
+      }
+      @media (max-width: 1099px) {
+        .vl-painel { left: 0; right: 0; bottom: 0; max-height: 58vh; border-radius: 12px 12px 0 0; padding-bottom: env(safe-area-inset-bottom); }
+        body.vl-trilha { padding-bottom: 58vh; }
+        body.vl-trilha.vl-min { padding-bottom: 64px; }
+        .vl-painel .vl-opts { grid-template-columns: 1fr 1fr; }
+        .vl-painel .vp-nav button { padding: 9px 8px; }
+      }
       @media (max-width: 600px) { #page-validar .vl-card { padding: 14px; } #page-validar .vl-opts span { padding: 7px 10px; } }
     </style>
     <div id="vl-root"></div>
@@ -4978,7 +5037,7 @@ countUp();
   };
 })();
 
-/* ---------- modo validação por especialistas (v0.9.27): ?validar ---------- */
+/* ---------- modo validação por especialistas: trilha pelo site (?validar) ---------- */
 (function () {
   const ATIVO = /[?&]validar\b/.test(location.search);
   if (!ATIVO) return;
@@ -4990,131 +5049,196 @@ countUp();
   const ESC = [["3", "Adequado"], ["2", "Parcialmente adequado"], ["1", "Inadequado"]];
   // pertinência em 4 pontos (IVC clássico: concordância = notas 3 e 4)
   const ESC_P = [["4", "Muito pertinente"], ["3", "Pertinente"], ["2", "Pouco pertinente"], ["1", "Não pertinente"]];
+  const VID = "Os vídeos práticos ajudam a entender os procedimentos do protocolo";
   const EST = [
     "As cinco dimensões cobrem, em conjunto, o que importa avaliar num agente conversacional usado no ensino",
     "Os ciclos (Ciclo 0 e triagem, Ciclo 1, calibração com um colega e Ciclo 2) são viáveis na escola no tempo estimado",
     "A escala de três níveis, a regra do comportamento predominante, o N/A, as médias e as faixas orientam bem a decisão sobre o agente",
     "Os instrumentos para imprimir são úteis para aplicar o protocolo"];
-  const ESTC = [["ce1", "Há sobreposição ou lacuna entre indicadores de dimensões diferentes? Se sim, quais?"],
-                ["ce2", "Falta algum indicador importante, ou algum indicador poderia sair?"],
-                ["ce3", "Comentários sobre a estrutura geral (ciclos, pontuação, instrumentos e a leitura opcional por um avaliador LLM)"]];
+  const ESTC = { ce1: "Há sobreposição ou lacuna entre indicadores de dimensões diferentes? Se sim, quais?",
+                 ce2: "Falta algum indicador importante, ou algum indicador poderia sair?",
+                 ce3: "Comentários sobre a estrutura geral (ciclos, pontuação, instrumentos e a leitura opcional por um avaliador LLM)" };
   const IND = []; DIMENSOES.forEach(d => d.indicadores.forEach(i => IND.push(i)));
   const k = cod => "i" + cod.replace(/\D/g, "");          // D2.3 -> i23
+  const curto = d => d.nome.split(" · ")[0];
 
-  let S = { passo: 0, notas: {}, clar: {}, pouco: {}, est: {}, txt: {}, cod: "" };
+  let S = { parada: -1, min: false, notas: {}, clar: {}, pouco: {}, est: {}, txt: {}, vid: "", cod: "" };
   try { const r = JSON.parse(localStorage.getItem(KEY) || "null"); if (r && r.notas) S = Object.assign(S, r); } catch (e) {}
+  if (typeof S.parada !== "number") S.parada = -1;
   if (!S.cod) S.cod = "V" + Math.random().toString(36).slice(2, 7).toUpperCase();
   const salvar = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
   salvar();
+
+  /* ---- alvos no site ---- */
+  const refCard = cod => [...document.querySelectorAll("#sec-ref details.ref-card")].find(x => (x.querySelector(".indcode") || {}).textContent === cod);
+  const refDim = j => document.querySelectorAll("#sec-ref .ref-dim")[j];
+
+  /* ---- as paradas da trilha ---- */
+  const P = [];
+  P.push({ t: "vid", rot: "Vídeos práticos", sec: "Início", pag: "inicio", alvo: () => document.querySelector("#page-inicio .videos-pr") });
+  DIMENSOES.forEach((d, j) => {
+    d.indicadores.forEach(ind => P.push({ t: "ind", d, ind, rot: `${ind.codigo} ${ind.nome}`, sec: curto(d), pag: "dimensoes", alvo: () => refCard(ind.codigo) }));
+    P.push({ t: "clar", d, j, rot: `Clareza da ${curto(d)}`, sec: curto(d), pag: "dimensoes", alvo: () => refDim(j) });
+  });
+  P.push({ t: "est", e: 0, rot: "As cinco dimensões juntas", sec: "Estrutura", pag: "dimensoes", alvo: () => document.getElementById("quadro"), com: ["ce1", "ce2"],
+           dica: "Ao lado está o quadro dos 18 indicadores. Clique em qualquer um para ver a pergunta e a rubrica." });
+  P.push({ t: "est", e: 1, rot: "Os ciclos e o tempo", sec: "Estrutura", pag: "aplicar", alvo: () => document.querySelector("#page-aplicar .web-box.minuto"),
+           dica: "Ao lado está o resumo da página Como aplicar, com o tempo de cada ciclo. As seções 3.1 a 3.4, logo abaixo, detalham cada um." });
+  P.push({ t: "est", e: 2, rot: "Pontuar e decidir", sec: "Estrutura", pag: "aplicar", alvo: () => document.getElementById("sec-3-5"),
+           dica: "Ao lado está a seção 3.5, com as médias, as faixas e a tabela de decisão." });
+  P.push({ t: "est", e: 3, rot: "Os instrumentos", sec: "Estrutura", pag: "instrumentos", alvo: () => document.querySelector("#page-instrumentos .web-box"), com: ["ce3"],
+           dica: "Ao lado está a página Instrumentos: bateria-modelo, mapa da bateria, ficha e questionários, cada um com botão para imprimir." });
+  P.push({ t: "fim", rot: "Enviar", sec: "Enviar", pag: "validar", alvo: () => document.getElementById("vl-enviar") });
+
+  const totalItens = IND.length + DIMENSOES.length + EST.length + 1;
+  const feita = p => p.t === "vid" ? !!S.vid : p.t === "ind" ? !!(S.notas[k(p.ind.codigo)] || {}).p : p.t === "clar" ? !!S.clar[p.j] : p.t === "est" ? !!S.est[p.e] : false;
+  const feitos = () => P.filter(feita).length;
 
   ICON_PATHS.validar = '<path d="M12 3l2.6 2 3.3-.2.9 3.2 2.7 1.9-1.2 3.1 1.2 3.1-2.7 1.9-.9 3.2-3.3-.2L12 23l-2.6-2-3.3.2-.9-3.2-2.7-1.9 1.2-3.1-1.2-3.1 2.7-1.9.9-3.2 3.3.2Z" transform="scale(.9) translate(1.3 -.6)"/><path d="m8.8 12.2 2.2 2.2 4.4-4.4"/>';
   PAGES.splice(1, 0, { id: "validar", label: "Validar" });
   buildTopNav();
   const navBtn = document.querySelector('#top-nav button[data-page="validar"]'); if (navBtn) navBtn.classList.add("nav-primary");
 
-  const PASSOS = ["Início"].concat(DIMENSOES.map(d => d.nome.split(" · ")[0]), ["Estrutura", "Enviar"]);
-  const totalItens = IND.length * CRIT.length + DIMENSOES.length + EST.length;
-  const feitos = () => IND.reduce((n, i) => n + CRIT.filter(c => (S.notas[k(i.codigo)] || {})[c[0]]).length, 0) + DIMENSOES.filter((_, j) => S.clar[j]).length + EST.filter((_, j) => S.est[j]).length;
-  const dimCompleta = d => d.indicadores.every(i => CRIT.every(c => (S.notas[k(i.codigo)] || {})[c[0]])) && !!S.clar[DIMENSOES.indexOf(d)];
-  const estCompleta = () => EST.every((_, j) => S.est[j]);
-
-  function opts(name, val, onAttr, esc) {
-    return `<div class="vl-opts">${(esc || ESC).map(([v, t]) => `<label><input type="radio" name="${name}" value="${v}" ${val === v ? "checked" : ""} ${onAttr}><span>${t} (${v})</span></label>`).join("")}</div>`;
+  function opts(name, val, attr, esc) {
+    return `<div class="vl-opts">${(esc || ESC).map(([v, t]) => `<label><input type="radio" name="${name}" value="${v}" ${val === v ? "checked" : ""} ${attr}><span>${t} (${v})</span></label>`).join("")}</div>`;
   }
   function campo(id, label, ph) {
     const v = S.txt[id] || "";
-    return `<label for="vl-${id}" style="display:block;font-weight:600;margin:10px 0 6px">${label}</label><textarea id="vl-${id}" maxlength="${MAXC}" data-t="${id}" placeholder="${ph || "Opcional"}">${esc(v)}</textarea><div class="vl-cnt"><span>${v.length}</span>/${MAXC}</div>`;
+    return `<label for="vp-${id}" class="vp-lbl">${label}</label><textarea id="vp-${id}" maxlength="${MAXC}" data-t="${id}" placeholder="${ph || "Opcional"}">${esc(v)}</textarea><div class="vl-cnt"><span>${v.length}</span>/${MAXC}</div>`;
   }
-  function cardInd(d, ind) {
-    const n = S.notas[k(ind.codigo)] || {};
-    return `<article class="vl-card" style="--c:var(--${d.id})" id="vl-${ind.codigo}">
-      <h3><span class="indcode">${ind.codigo}</span>${ind.nome}</h3>
-      <p class="def">${ind.def}</p>
-      <p class="vl-q">${ind.pergunta}</p>
-      <ol class="vl-niv">${[3, 2, 1].map(v => `<li class="n${v}"><b>${v}</b><span><strong>${["Inadequado", "Parcialmente adequado", "Adequado"][v - 1]}.</strong> ${ind.niveis[v - 1]}</span></li>`).join("")}</ol>
-      <details class="vl-more" open><summary>Como coletar, não confundir com e exemplo de conversa</summary>
-        <p class="vl-lbl"><b>Como coletar.</b> ${ind.coleta}</p>
-        ${ind.delimitacao ? `<p class="vl-lbl"><b>Não confundir com.</b> ${ind.delimitacao}</p>` : ""}
-        ${ind.exemplo ? `<div class="vl-ex">${ind.exemplo}</div>` : ""}
-      </details>
-      <div class="vl-rate"><span class="k">Sua avaliação de ${ind.codigo}</span>
-        ${CRIT.map(([c, t, h]) => `<fieldset><legend><b>${t}:</b> ${h}</legend>${opts(`vl_${k(ind.codigo)}_${c}`, n[c], `data-i="${k(ind.codigo)}" data-c="${c}"`, ESC_P)}</fieldset>`).join("")}
-      </div>
-    </article>`;
+
+  /* ---- página Validar: ponto de partida, mapa e envio ---- */
+  function mapaHTML(cls) {
+    let h = `<ol class="${cls}">`, sec = "";
+    P.forEach((p, i) => {
+      if (p.sec !== sec) { if (sec) h += `</ol></li>`; sec = p.sec; h += `<li class="vm-sec"><span>${sec}</span><ol>`; }
+      h += `<li><button type="button" data-ir="${i}" class="${i === S.parada ? "atual " : ""}${feita(p) ? "ok" : ""}"><span class="vm-n">${i + 1}</span><span class="vm-t">${p.rot}</span>${p.t !== "fim" ? `<span class="vm-dot" aria-label="${feita(p) ? "respondida" : "sem resposta"}"></span>` : ""}</button></li>`;
+    });
+    return h + `</ol></li></ol>`;
   }
   function tela() {
-    const p = S.passo, root = document.getElementById("vl-root");
+    const root = document.getElementById("vl-root"); if (!root) return;
     const pct = Math.round(100 * feitos() / totalItens);
+    const falta = P.filter(p => p.t !== "fim" && !feita(p));
     let h = `<h1 style="margin-bottom:6px">Validação por especialistas</h1>
-      <nav class="subnav" id="vl-subnav">${PASSOS.map((t, i) => {
-        const ok = i >= 1 && i <= 5 ? dimCompleta(DIMENSOES[i - 1]) : i === 6 ? estCompleta() : false;
-        return `<button type="button" data-p="${i}" class="${i === p ? "active" : ""}">${t}${i >= 1 && i <= 6 ? `<span class="dot ${ok ? "done" : ""}"></span>` : ""}</button>`; }).join("")}</nav>
-      <div class="vl-prog" aria-live="polite"><span>${feitos()} de ${totalItens} respostas</span><span class="bar"><i style="width:${pct}%"></i></span><span>${pct}%</span></div>`;
-    if (p === 0) {
-      h += `<div class="vl-intro">
-        <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. Nesta versão do site, cada indicador aparece com tudo o que o guia traz sobre ele, e a sua avaliação fica logo abaixo. Não é preciso abrir o PDF.</p>
-        <p><b>Como funciona:</b> (1) avalie a pertinência de cada um dos 18 indicadores e, ao final de cada dimensão, a clareza do conjunto, marcando os indicadores que ficaram pouco claros; (2) avalie a estrutura geral do protocolo; (3) clique em <b>Enviar</b>. O formulário do Tally abre com as suas notas e pede o consentimento, a identificação e o parecer final. A avaliação do guia como produto educacional (MALI) e a Ficha de Avaliação do Educimat são opcionais.</p>
-        <p><b>Escalas:</b> na pertinência, de Não pertinente (1) a Muito pertinente (4); na clareza e na estrutura, Adequado (3), Parcialmente adequado (2) ou Inadequado (1). Quando marcar 1 ou 2, conte no comentário da dimensão o que mudaria. Tempo estimado: 20 a 30 minutos no total.</p>
+      <div class="vl-prog" aria-live="polite"><span>${feitos()} de ${totalItens} respostas</span><span class="bar"><i style="width:${pct}%"></i></span><span>${pct}%</span></div>
+      <div class="vl-intro">
+        <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. A validação é uma <b>trilha pelo próprio site</b>, com ${P.length} paradas. Em cada parada, o site leva você ao trecho de que a pergunta trata (um vídeo, um indicador, a seção dos ciclos) e a pergunta aparece no painel ao lado; no celular, na parte de baixo da tela. Você lê, responde e segue para a próxima parada. Não é preciso abrir o PDF.</p>
+        <p><b>O que você avalia:</b> se os vídeos práticos ajudam; a pertinência de cada um dos 18 indicadores; ao fim de cada dimensão, a clareza do conjunto, marcando os indicadores que ficaram pouco claros; e a estrutura geral do protocolo, em quatro itens. Ao final, clique em <b>Enviar</b>: o formulário do Tally abre com as suas notas e pede o consentimento, a identificação e o parecer final. A avaliação do guia como produto educacional (MALI) e a Ficha de Avaliação do Educimat são opcionais.</p>
+        <p><b>Escalas:</b> na pertinência, de Não pertinente (1) a Muito pertinente (4); nos demais itens, Adequado (3), Parcialmente adequado (2) ou Inadequado (1). Quando marcar 1 ou 2, conte no comentário da dimensão o que mudaria. Tempo estimado: 20 a 30 minutos no total.</p>
+        <p>Você pode sair da trilha para navegar quando quiser: o painel continua aberto, e o botão <b>Ver o trecho</b> leva você de volta ao ponto da parada.</p>
         <p class="vl-priv">Suas respostas ficam salvas só neste navegador enquanto você responde; pode fechar e voltar depois pelo mesmo link. Nada é enviado até você clicar em Enviar, quando as notas e os comentários seguem para o formulário do Tally, junto com o código <b>${S.cod}</b>, que liga as duas partes.</p>
-      </div>`;
-    } else if (p >= 1 && p <= 5) {
-      const d = DIMENSOES[p - 1];
-      h += `<h2 class="vl-dimh" style="--c:var(--${d.id})">${icon("dim" + d.id.slice(1), 26)} ${d.nome}</h2><p>${d.desc}</p>`;
-      h += d.indicadores.map(ind => cardInd(d, ind)).join("");
-      const j = p - 1, pc = S.pouco[j] || [];
-      h += `<div class="vl-card vl-clar" style="--c:var(--${d.id})"><div class="vl-rate"><span class="k">Clareza da ${d.nome.split(" · ")[0]}</span>
-        <fieldset><legend><b>Clareza:</b> ${CLAR}</legend>${opts("vl_clar_" + j, S.clar[j], `data-cl="${j}"`)}</fieldset>
-        <fieldset class="vl-pouco"><legend>Algum indicador ficou pouco claro? Marque os que precisam de ajuste (opcional).</legend>
-        ${d.indicadores.map(ind => `<label><input type="checkbox" data-pc="${j}" value="${ind.codigo}" ${pc.includes(ind.codigo) ? "checked" : ""}><span><b>${ind.codigo}</b> ${ind.nome}</span></label>`).join("")}</fieldset></div></div>`;
-      h += campo("c" + d.id.slice(1), `Comentários e sugestões sobre a ${d.nome.split(" · ")[0]} (indique o código do indicador)`, "Ex.: 3.1 – a diferença entre os níveis 2 e 3 não está clara porque...");
-    } else if (p === 6) {
-      h += `<h2>Estrutura geral do protocolo</h2><p>Como as partes do ProMAC funcionam juntas: os ciclos de aplicação, a pontuação e a decisão, e os instrumentos. Se precisar, consulte as páginas <a href="#aplicar">Como aplicar</a> e <a href="#instrumentos">Instrumentos</a> e volte aqui: suas respostas ficam guardadas.</p>`;
-      h += `<div class="vl-card" style="--c:var(--ink-faint)">${EST.map((t, j) => `<fieldset><legend>${j + 1}. ${t}</legend>${opts("vl_est_" + j, S.est[j], `data-e="${j}"`)}</fieldset>`).join("")}</div>`;
-      h += ESTC.map(([id, t]) => campo(id, t)).join("");
-    } else {
-      const faltaD = DIMENSOES.filter(d => !dimCompleta(d)).map(d => d.nome.split(" · ")[0]);
-      const falta = faltaD.concat(estCompleta() ? [] : ["Estrutura"]);
-      h += `<h2>Enviar</h2>`;
-      h += falta.length ? `<p class="vl-falta">Ainda faltam respostas em: ${falta.join(", ")}. Você pode enviar assim mesmo, mas as notas que faltarem chegam em branco.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final (a MALI e a Ficha do Educimat são opcionais) e envia.</p>`;
-      h += `<p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
-        <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o Tally não abrir, copie o resumo abaixo e envie ao autor por e-mail.</p>
-        <details class="vl-more"><summary>Ver resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px" id="vl-resumo">${esc(resumo())}</pre></details>`;
-    }
-    h += `<div class="vl-nav">${p === 0 ? "<span></span>" : `<button type="button" id="vl-prev">← Voltar</button>`}${p < 7 ? `<button type="button" class="prim" id="vl-next">${p === 0 ? "Começar" : "Avançar"} →</button>` : ""}</div>`;
+        <p style="margin-bottom:0"><button type="button" class="vl-send" id="vl-comecar">${S.parada < 0 ? "Começar a trilha →" : `Retomar a trilha na parada ${S.parada + 1} →`}</button></p>
+      </div>
+      <h2>Mapa da trilha</h2><p>Clique numa parada para ir direto a ela. As bolinhas verdes mostram o que já foi respondido.</p>
+      ${mapaHTML("vl-mapa")}
+      <section id="vl-enviar" class="vl-env"><h2>Enviar</h2>
+      ${falta.length ? `<p class="vl-falta">Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}: ${falta.map(p => p.rot.split(" ")[0] === "Clareza" ? p.rot : p.rot.replace(/^(D\d\.\d) .*/, "$1")).join(", ")}. Você pode enviar assim mesmo, mas as notas que faltarem chegam em branco.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final (a MALI e a Ficha do Educimat são opcionais) e envia.</p>`}
+      <p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
+      <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o Tally não abrir, copie o resumo abaixo e envie ao autor por e-mail.</p>
+      <details class="vl-more"><summary>Ver resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px">${esc(resumo())}</pre></details></section>`;
     root.innerHTML = h;
-    root.querySelectorAll("#vl-subnav button").forEach(b => b.onclick = () => ir(+b.dataset.p));
-    const pv = root.querySelector("#vl-prev"), nx = root.querySelector("#vl-next");
-    if (pv) pv.onclick = () => ir(p - 1); if (nx) nx.onclick = () => ir(p + 1);
-    root.querySelectorAll("input[data-i]").forEach(r => r.onchange = () => { (S.notas[r.dataset.i] = S.notas[r.dataset.i] || {})[r.dataset.c] = r.value; salvar(); prog(); });
-    root.querySelectorAll("input[data-e]").forEach(r => r.onchange = () => { S.est[r.dataset.e] = r.value; salvar(); prog(); });
-    root.querySelectorAll("input[data-cl]").forEach(r => r.onchange = () => { S.clar[r.dataset.cl] = r.value; salvar(); prog(); });
-    root.querySelectorAll("input[data-pc]").forEach(r => r.onchange = () => { const j = r.dataset.pc; S.pouco[j] = [...root.querySelectorAll(`input[data-pc="${j}"]:checked`)].map(x => x.value); salvar(); });
-    root.querySelectorAll("textarea[data-t]").forEach(t => t.oninput = () => { S.txt[t.dataset.t] = t.value.slice(0, MAXC); t.nextElementSibling.firstElementChild.textContent = t.value.length; salvar(); });
-    const env = root.querySelector("#vl-send"); if (env) env.onclick = enviar;
-    root.querySelectorAll(".vl-ex .cv").forEach(box => {
-      if (!window.tocarConversa) return;
-      const b = document.createElement("button"); b.type = "button"; b.className = "rever"; b.textContent = "▶ ver a conversa acontecer";
-      b.onclick = () => window.tocarConversa(box); box.appendChild(b);
-    });
+    root.querySelector("#vl-comecar").onclick = () => irPara(Math.max(0, S.parada));
+    root.querySelector("#vl-send").onclick = enviar;
+    root.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => irPara(+b.dataset.ir));
   }
-  function prog() {
-    const pct = Math.round(100 * feitos() / totalItens), el = document.querySelector("#page-validar .vl-prog");
-    if (el) { el.firstElementChild.textContent = `${feitos()} de ${totalItens} respostas`; el.querySelector("i").style.width = pct + "%"; el.lastElementChild.textContent = pct + "%"; }
-    document.querySelectorAll("#vl-subnav button").forEach((b, i) => { const dot = b.querySelector(".dot"); if (dot) dot.classList.toggle("done", i <= 5 ? dimCompleta(DIMENSOES[i - 1]) : estCompleta()); });
+
+  /* ---- painel da trilha ---- */
+  const pn = document.createElement("aside");
+  pn.className = "vl-painel"; pn.id = "vl-painel"; pn.setAttribute("aria-label", "Trilha da validação"); pn.hidden = true;
+  document.body.appendChild(pn);
+  let aberto = null;   // ref-card aberto pela trilha
+
+  function corpo(p) {
+    if (p.t === "vid") return `<h3>Vídeos práticos</h3>
+      <p class="vp-dica">Ao lado estão os quatro vídeos práticos. Assista a pelo menos um deles: cada vídeo tem uma pausa para você decidir antes de ver a resposta.</p>
+      <fieldset><legend>${VID}</legend>${opts("vp_vid", S.vid, 'data-v="1"')}</fieldset>`;
+    if (p.t === "ind") { const n = S.notas[k(p.ind.codigo)] || {};
+      return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${p.ind.codigo}</span> ${p.ind.nome}</h3>
+      <p class="vp-dica">Ao lado está tudo o que o guia traz sobre este indicador: a pergunta norteadora, os três níveis, como coletar, o que não confundir e um exemplo.</p>
+      <fieldset><legend><b>Pertinência:</b> ${CRIT[0][2]}</legend>${opts("vp_" + k(p.ind.codigo), n.p, `data-i="${k(p.ind.codigo)}"`, ESC_P)}</fieldset>`; }
+    if (p.t === "clar") { const pc = S.pouco[p.j] || [];
+      return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${curto(p.d)}</span> Clareza da dimensão</h3>
+      <p class="vp-dica">Ao lado estão, juntos, os indicadores da ${p.d.nome.replace(" · ", ", ")}.</p>
+      <fieldset><legend><b>Clareza:</b> ${CLAR}</legend>${opts("vp_clar_" + p.j, S.clar[p.j], `data-cl="${p.j}"`)}</fieldset>
+      <fieldset class="vp-pouco"><legend>Algum indicador ficou pouco claro? Marque os que precisam de ajuste (opcional).</legend>
+      ${p.d.indicadores.map(ind => `<label><input type="checkbox" data-pc="${p.j}" value="${ind.codigo}" ${pc.includes(ind.codigo) ? "checked" : ""}><span><b>${ind.codigo}</b> ${ind.nome}</span></label>`).join("")}</fieldset>
+      ${campo("c" + p.d.id.slice(1), `Comentários e sugestões sobre a ${curto(p.d)} (indique o código do indicador)`, "Ex.: 3.1 – a diferença entre os níveis 2 e 3 não está clara porque...")}`; }
+    if (p.t === "est") return `<h3>Estrutura · ${p.rot}</h3><p class="vp-dica">${p.dica}</p>
+      <fieldset><legend>${EST[p.e]}</legend>${opts("vp_est_" + p.e, S.est[p.e], `data-e="${p.e}"`)}</fieldset>
+      ${(p.com || []).map(id => campo(id, ESTC[id])).join("")}`;
+    const falta = P.filter(q => q.t !== "fim" && !feita(q)).length;
+    return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}. O mapa mostra quais.` : "Tudo respondido."} Ao lado estão o mapa da trilha e o resumo das suas respostas.</p>
+      <p><button type="button" class="vl-send" data-enviar="1">Enviar e continuar no Tally →</button></p>`;
   }
-  function ir(p) { S.passo = Math.max(0, Math.min(7, p)); salvar(); tela(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  function painel() {
+    if (S.parada < 0) { pn.hidden = true; document.body.classList.remove("vl-trilha", "vl-min"); return; }
+    const i = S.parada, p = P[i], pct = Math.round(100 * feitos() / totalItens);
+    pn.hidden = false; document.body.classList.add("vl-trilha"); pn.classList.toggle("min", !!S.min); document.body.classList.toggle("vl-min", !!S.min);
+    pn.innerHTML = `<div class="vp-top">
+        <button type="button" class="vp-tog" aria-expanded="${!S.min}" aria-controls="vp-corpo" title="${S.min ? "Abrir" : "Recolher"} o painel"><span class="vp-k">Validação · parada ${i + 1} de ${P.length}</span><span class="vp-r">${p.sec}</span><span class="vp-ch" aria-hidden="true">${S.min ? "▴" : "▾"}</span></button>
+      </div>
+      <div class="vp-prog" title="${feitos()} de ${totalItens} respostas"><i style="width:${pct}%"></i></div>
+      <div class="vp-corpo" id="vp-corpo" aria-live="polite">${corpo(p)}</div>
+      <div class="vp-nav">
+        <button type="button" data-n="-1" ${i === 0 ? "disabled" : ""}>← Anterior</button>
+        <button type="button" class="vp-ver" data-ver="1">Ver o trecho</button>
+        ${i < P.length - 1 ? `<button type="button" class="prim" data-n="1">Próxima →</button>` : `<span></span>`}
+      </div>
+      <details class="vp-mapa"><summary>Mapa da trilha · ${feitos()} de ${totalItens} respondidas</summary>${mapaHTML("vl-mapa vp-m")}</details>`;
+    pn.querySelector(".vp-tog").onclick = () => { S.min = !S.min; salvar(); painel(); };
+    pn.querySelectorAll("[data-n]").forEach(b => b.onclick = () => irPara(i + +b.dataset.n));
+    pn.querySelector("[data-ver]").onclick = () => irPara(i);
+    pn.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => irPara(+b.dataset.ir));
+    const env = pn.querySelector("[data-enviar]"); if (env) env.onclick = enviar;
+    const at = () => { salvar(); atualiza(); };
+    pn.querySelectorAll("input[data-v]").forEach(r => r.onchange = () => { S.vid = r.value; at(); });
+    pn.querySelectorAll("input[data-i]").forEach(r => r.onchange = () => { (S.notas[r.dataset.i] = S.notas[r.dataset.i] || {}).p = r.value; at(); });
+    pn.querySelectorAll("input[data-e]").forEach(r => r.onchange = () => { S.est[r.dataset.e] = r.value; at(); });
+    pn.querySelectorAll("input[data-cl]").forEach(r => r.onchange = () => { S.clar[r.dataset.cl] = r.value; at(); });
+    pn.querySelectorAll("input[data-pc]").forEach(r => r.onchange = () => { const j = r.dataset.pc; S.pouco[j] = [...pn.querySelectorAll(`input[data-pc="${j}"]:checked`)].map(x => x.value); salvar(); });
+    pn.querySelectorAll("textarea[data-t]").forEach(t => t.oninput = () => { S.txt[t.dataset.t] = t.value.slice(0, MAXC); t.nextElementSibling.firstElementChild.textContent = t.value.length; salvar(); });
+  }
+  // atualiza contadores sem redesenhar o painel (não perde o foco)
+  function atualiza() {
+    const pct = Math.round(100 * feitos() / totalItens);
+    const b = pn.querySelector(".vp-prog i"); if (b) b.style.width = pct + "%";
+    const s = pn.querySelector(".vp-mapa summary"); if (s) s.textContent = `Mapa da trilha · ${feitos()} de ${totalItens} respondidas`;
+    pn.querySelectorAll(".vp-m [data-ir]").forEach(b => b.classList.toggle("ok", feita(P[+b.dataset.ir])));
+    if (currentPage === "validar") tela();
+  }
+  function irPara(i) {
+    S.parada = Math.max(0, Math.min(P.length - 1, i)); salvar();
+    const p = P[S.parada];
+    if (currentPage !== p.pag) { currentPage = p.pag; renderPage(); }
+    if (p.pag === "validar") tela();
+    document.querySelectorAll(".vl-alvo").forEach(x => x.classList.remove("vl-alvo"));
+    if (aberto && aberto.open && p.t !== "clar") aberto.open = false;
+    const el = p.alvo();
+    if (el) {
+      if (el.tagName === "DETAILS") { el.open = true; aberto = el; }
+      if (p.t === "clar") el.querySelectorAll("details.ref-card").forEach(x => x.open = false);
+      for (let d = el.parentElement && el.parentElement.closest("details"); d; d = d.parentElement && d.parentElement.closest("details")) d.open = true;
+      el.classList.add("vl-alvo");
+      setTimeout(() => el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "start" }), 80);
+    } else window.scrollTo({ top: 0, behavior: "smooth" });
+    painel();
+    const f = pn.querySelector(".vp-corpo h3"); if (f) { f.setAttribute("tabindex", "-1"); f.focus({ preventScroll: true }); }
+  }
+
   function campos() {
     const q = { v: S.cod, versao: "0.9.28" };
     IND.forEach(i => { const n = S.notas[k(i.codigo)] || {}; q[k(i.codigo)] = CRIT.map(c => n[c[0]] || "-").join(""); });
     q.cl = DIMENSOES.map((_, j) => S.clar[j] || "-").join("");
     q.pc = DIMENSOES.flatMap((_, j) => S.pouco[j] || []).join(" ");
     q.est = EST.map((_, j) => S.est[j] || "-").join("");
+    q.vid = S.vid || "-";
     ["c1", "c2", "c3", "c4", "c5", "ce1", "ce2", "ce3"].forEach(id => { q[id] = (S.txt[id] || "").trim(); });
     return q;
   }
   function resumo() {
     const q = campos();
-    const lin = [`Código: ${q.v}`, "Pertinência por indicador (1 a 4):"];
+    const lin = [`Código: ${q.v}`, `Vídeos práticos (1 a 3): ${q.vid}`, "Pertinência por indicador (1 a 4):"];
     IND.forEach(i => lin.push(`  ${i.codigo} ${i.nome}: ${q[k(i.codigo)]}`));
     lin.push(`Clareza por dimensão (D1 a D5): ${q.cl.split("").join(" ")}`);
     if (q.pc) lin.push(`Indicadores pouco claros: ${q.pc}`);
@@ -5127,9 +5251,10 @@ countUp();
     Object.entries(q).forEach(([a, b]) => { if (b) u.set(a, b); });
     window.open(TALLY + "?" + u.toString(), "_blank", "noopener");
   }
-  window.promacValidar = { campos, resumo };
+  window.promacValidar = { campos, resumo, irPara, P };
   document.addEventListener("click", e => { if (e.target.closest('#top-nav button[data-page="validar"]')) tela(); }, true);
   tela();
+  painel();
   goToPage("validar");
 })();
 </script>
@@ -5342,7 +5467,7 @@ countUp();
   const ir = (rot, alvo) => `<br><a class="en-ir" href="#${alvo}" data-en-ir>${rot} →</a>`;
   function menu() {
     const l = [];
-    if (VALIDAR) l.push(["Sou especialista: quero validar o ProMAC", () => { fala("Obrigado por participar da validação! Na página Validar você dá notas de pertinência e clareza aos 18 indicadores e à estrutura geral, e depois envia tudo pelo formulário. O que você marcar fica salvo neste navegador." + ir("Abrir a validação", "validar")); depois(); }, true]);
+    if (VALIDAR) l.push(["Sou especialista: quero validar o ProMAC", () => { fala("Obrigado por participar da validação! Na página Validar começa uma trilha pelo site: cada pergunta leva você ao trecho de que ela trata, como um vídeo ou um indicador, e você responde ali mesmo, no painel ao lado. No fim, envia tudo pelo formulário. O que você marcar fica salvo neste navegador." + ir("Abrir a validação", "validar")); depois(); }, true]);
     l.push(["É minha primeira vez", () => { fala("Então comece pelo caminho curto: confira as instruções do agente (Ciclo 0) e faça a triagem com os cartões vermelhos. Leva cerca de 1 hora." + ir("Abrir o caminho curto", "sec-3")); depois(); }]);
     l.push(["Quero avaliar meu agente agora", () => { fala("A ficha calcula os escores e as faixas e gera o relatório. As respostas ficam só no seu navegador." + ir("Abrir a ficha", "avaliar")); depois(); }]);
     l.push(["Tenho só 1 hora", () => { fala("Dá para fazer o Ciclo 0 e a triagem. Se o agente levar um cartão vermelho, você já sabe que ele ainda não está pronto." + ir("Ver a triagem e os cartões", "sec-3-1")); depois(); }]);
