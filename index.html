@@ -887,6 +887,7 @@
   .ref-level.rl-1::before { background: var(--verm); } .ref-level.rl-1::after { content: "1"; }
   .ref-level.rl-2::before { background: var(--amar); } .ref-level.rl-2::after { content: "2"; color: #14191F; }
   .ref-level.rl-3::before { background: var(--verde); } .ref-level.rl-3::after { content: "3"; }
+  @media (max-width: 700px) { .ref-level { flex-direction: column; align-items: flex-start; gap: 3px; } .ref-level b { flex-shrink: 1; } }
   .ref-level b, .quadro .q-levels div b { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; }
   .quadro .q-levels div { border-top: 6px solid !important; font-size: 14px; }
   .quadro .q-levels .l1 { border-top-color: var(--verm) !important; } .quadro .q-levels .l2 { border-top-color: var(--amar) !important; } .quadro .q-levels .l3 { border-top-color: var(--verde) !important; }
@@ -3133,6 +3134,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
       .vl-painel .vp-nav button, .vl-painel .vl-send { padding: 9px 12px; border-radius: 4px; border: 1px solid var(--ink); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
       .vl-painel .vp-nav button[disabled] { opacity: .4; cursor: default; }
       .vl-painel .vp-nav .prim, .vl-painel .vl-send { background: var(--ink); color: var(--surface); }
+      .vl-painel .vp-1falta { padding: 8px 12px; border-radius: 4px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; }
       .vl-painel .vp-nav .vp-ver { border-color: var(--line-strong); font-weight: 500; }
       .vl-painel .vp-mapa { border-top: 1px solid var(--line); padding: 0 14px; }
       .vl-painel .vp-mapa summary { cursor: pointer; padding: 9px 0; font-size: 13px; color: var(--ink-soft); font-weight: 600; }
@@ -5115,13 +5117,13 @@ countUp();
     P.push({ t: "clar", d, j, rot: `Clareza da ${curto(d)}`, sec: curto(d), pag: "dimensoes", alvo: () => refDim(j) });
   });
   P.push({ t: "est", e: 0, rot: "As cinco dimensões juntas", sec: "Estrutura", pag: "dimensoes", alvo: () => document.getElementById("quadro"), com: ["ce1", "ce2"],
-           dica: "Ao lado está o quadro dos 18 indicadores. Clique em qualquer um para ver a pergunta e a rubrica." });
+           dica: "O site abriu o quadro dos 18 indicadores. Clique em qualquer um para ver a pergunta e a rubrica." });
   P.push({ t: "est", e: 1, rot: "Os ciclos e o tempo", sec: "Estrutura", pag: "aplicar", alvo: () => document.querySelector("#page-aplicar .web-box.minuto"),
-           dica: "Ao lado está o resumo da página Como aplicar, com o tempo de cada ciclo. As seções 3.1 a 3.4, logo abaixo, detalham cada um." });
+           dica: "O site abriu o resumo da página Como aplicar, com o tempo de cada ciclo. As seções 3.1 a 3.4, logo abaixo, detalham cada um." });
   P.push({ t: "est", e: 2, rot: "Pontuar e decidir", sec: "Estrutura", pag: "aplicar", alvo: () => document.getElementById("sec-3-5"),
-           dica: "Ao lado está a seção 3.5, com as médias, as faixas e a tabela de decisão." });
+           dica: "O site abriu a seção 3.5, com as médias, as faixas e a tabela de decisão." });
   P.push({ t: "est", e: 3, rot: "Os instrumentos", sec: "Estrutura", pag: "instrumentos", alvo: () => document.querySelector("#page-instrumentos .web-box"), com: ["ce3"],
-           dica: "Ao lado está a página Instrumentos: bateria-modelo, mapa da bateria, ficha e questionários, cada um com botão para imprimir." });
+           dica: "O site abriu a página Instrumentos: bateria-modelo, mapa da bateria, ficha e questionários, cada um com botão para imprimir." });
   P.push({ t: "fim", rot: "Enviar", sec: "Enviar", pag: "validar", alvo: () => document.getElementById("vl-enviar") });
 
   const totalItens = IND.length + DIMENSOES.length + EST.length + 1;
@@ -5165,7 +5167,7 @@ countUp();
       <h2>Mapa da trilha</h2><p>Clique numa parada para ir direto a ela. As bolinhas verdes mostram o que já foi respondido.</p>
       ${mapaHTML("vl-mapa")}
       <section id="vl-enviar" class="vl-env"><h2>Enviar</h2>
-      ${falta.length ? `<p class="vl-falta">Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}: ${falta.map(p => p.rot.split(" ")[0] === "Clareza" ? p.rot : p.rot.replace(/^(D\d\.\d) .*/, "$1")).join(", ")}. Você pode enviar assim mesmo, mas as notas que faltarem chegam em branco.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
+      ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo: as que faltarem chegam em branco, sem problema.</p><details class="vl-more"><summary>Ver quais faltam</summary><p class="vl-falta">${falta.map(p => p.rot.split(" ")[0] === "Clareza" ? p.rot : p.rot.replace(/^(D\d\.\d) .*/, "$1")).join(", ")}</p></details>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
       <p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
       <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o Tally não abrir, copie o resumo abaixo e envie ao autor por e-mail.</p>
       <details class="vl-more"><summary>Ver resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px">${esc(resumo())}</pre></details></section>`;
@@ -5183,15 +5185,15 @@ countUp();
 
   function corpo(p) {
     if (p.t === "vid") return `<h3>Vídeos práticos</h3>
-      <p class="vp-dica">Ao lado estão os vídeos. Clique em uma miniatura e assista a pelo menos um dos quatro vídeos práticos (do segundo em diante): cada um tem uma pausa para você decidir antes de ver a resposta.</p>
+      <p class="vp-dica">O site abriu os vídeos. Clique em uma miniatura e assista a pelo menos um dos quatro vídeos práticos (do segundo em diante): cada um tem uma pausa para você decidir antes de ver a resposta.</p>
       <fieldset><legend>${VID}</legend>${opts("vp_vid", S.vid, 'data-v="1"')}</fieldset>`;
     if (p.t === "ind") { const n = S.notas[k(p.ind.codigo)] || {};
       return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${p.ind.codigo}</span> ${p.ind.nome}</h3>
-      <p class="vp-dica">Ao lado está tudo o que o guia traz sobre este indicador: a pergunta norteadora, os três níveis, como coletar, o que não confundir e um exemplo.</p>
+      <p class="vp-dica">O site abriu tudo o que o guia traz sobre este indicador: a pergunta norteadora, os três níveis, como coletar, o que não confundir e um exemplo.</p>
       <fieldset><legend><b>Pertinência:</b> ${CRIT[0][2]}</legend>${opts("vp_" + k(p.ind.codigo), n.p, `data-i="${k(p.ind.codigo)}"`, ESC_P)}</fieldset>`; }
     if (p.t === "clar") { const pc = S.pouco[p.j] || [];
       return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${curto(p.d)}</span> Clareza da dimensão</h3>
-      <p class="vp-dica">Ao lado estão, juntos, os indicadores da ${p.d.nome.replace(" · ", ", ")}.</p>
+      <p class="vp-dica">O site abriu, juntos, os indicadores da ${p.d.nome.replace(" · ", ", ")}.</p>
       <fieldset><legend><b>Clareza:</b> ${CLAR}</legend>${opts("vp_clar_" + p.j, S.clar[p.j], `data-cl="${p.j}"`)}</fieldset>
       <fieldset class="vp-pouco"><legend>Algum indicador ficou pouco claro? Marque os que precisam de ajuste (opcional).</legend>
       ${p.d.indicadores.map(ind => `<label><input type="checkbox" data-pc="${p.j}" value="${ind.codigo}" ${pc.includes(ind.codigo) ? "checked" : ""}><span><b>${ind.codigo}</b> ${ind.nome}</span></label>`).join("")}</fieldset>
@@ -5200,7 +5202,8 @@ countUp();
       <fieldset><legend>${EST[p.e]}</legend>${opts("vp_est_" + p.e, S.est[p.e], `data-e="${p.e}"`)}</fieldset>
       ${(p.com || []).map(id => campo(id, ESTC[id])).join("")}`;
     const falta = P.filter(q => q.t !== "fim" && !feita(q)).length;
-    return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}. O mapa mostra quais.` : "Tudo respondido."} Ao lado estão o mapa da trilha e o resumo das suas respostas.</p>
+    return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}. O mapa mostra quais.` : "Tudo respondido."} Você pode enviar agora mesmo; o que ficar em branco não impede o envio.</p>
+      ${falta ? `<p><button type="button" class="vp-1falta" data-ir1="1">Responder as que faltam</button></p>` : ""}
       <p><button type="button" class="vl-send" data-enviar="1">Enviar e continuar no Tally →</button></p>`;
   }
   function painel() {
@@ -5223,6 +5226,7 @@ countUp();
     pn.querySelector("[data-ver]").onclick = () => irPara(i);
     pn.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => irPara(+b.dataset.ir));
     const env = pn.querySelector("[data-enviar]"); if (env) env.onclick = enviar;
+    const f1 = pn.querySelector("[data-ir1]"); if (f1) f1.onclick = () => { const i = P.findIndex(q => q.t !== "fim" && !feita(q)); if (i >= 0) irPara(i); };
     const at = () => { salvar(); atualiza(); };
     pn.querySelectorAll("input[data-v]").forEach(r => r.onchange = () => { S.vid = r.value; at(); });
     pn.querySelectorAll("input[data-i]").forEach(r => r.onchange = () => { (S.notas[r.dataset.i] = S.notas[r.dataset.i] || {}).p = r.value; at(); });
