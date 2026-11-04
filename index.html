@@ -675,6 +675,25 @@
   .video-transc summary { cursor: pointer; font-weight: 600; color: var(--ink); }
   .video-transc ol { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 4px; }
   .video-transc .tc { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--mark); margin-right: 8px; font-variant-numeric: tabular-nums; }
+  .vthumbs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; max-width: 1100px; }
+  @media (max-width: 900px) { .vthumbs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .vthumbs { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; } .vthumb { flex: 0 0 44%; scroll-snap-align: start; } }
+  .vthumb { display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: var(--ink); font-size: 13px; line-height: 1.3; border-radius: var(--radius); }
+  .vthumb:focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; }
+  .vt-img { position: relative; display: block; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: #14191F; margin-bottom: 4px; }
+  .vt-img img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .25s; }
+  .vthumb:hover .vt-img img { transform: scale(1.04); }
+  .vt-play { position: absolute; left: 6px; bottom: 6px; width: 30px; height: 30px; border-radius: 50%; background: rgba(20,25,31,.78); }
+  .vt-play::after { content: ""; position: absolute; left: 11px; top: 8px; border-style: solid; border-width: 7px 0 7px 11px; border-color: transparent transparent transparent #fff; }
+  .vt-dur { position: absolute; right: 5px; bottom: 5px; font: 600 11px 'IBM Plex Mono', monospace; color: #fff; background: rgba(20,25,31,.8); padding: 1px 5px; border-radius: 4px; }
+  .vthumb b { font-weight: 700; }
+  .vt-s { color: var(--ink-soft); font-size: 12px; }
+  .vid-dlg { width: min(920px, 94vw); max-height: 92vh; padding: 18px 18px 14px; border: 0; border-radius: 12px; background: var(--surface); color: var(--ink); overflow: auto; }
+  .vid-dlg::backdrop { background: rgba(10,14,18,.72); }
+  .vid-dlg .video-demo { margin: 0; }
+  .vid-dlg figcaption { padding-right: 36px; }
+  .vid-x { position: absolute; right: 8px; top: 6px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: transparent; color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; }
+  .vid-x:hover, .vid-x:focus-visible { background: var(--line); }
   .videos-pr { margin: 1.6rem 0 1.4rem; }
   .videos-pr > h2 { margin: 0 0 .3rem; }
   .videos-pr > p { margin: 0 0 .6rem; max-width: 72ch; color: var(--ink-soft); }
@@ -1036,6 +1055,14 @@
     .cab-r { margin-left: auto; }
   }
   .capa a.hero-cta { text-decoration: none; }
+  .capa a.hero-pdf { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px; border-radius: 6px; padding: 10px 16px; color: #fff; text-decoration: none; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+  .capa a.hero-pdf::before { content: ""; width: 14px; height: 14px; background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1v9m-4-4 4 4 4-4M2 14h12' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 1v9m-4-4 4 4 4-4M2 14h12' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E") center / contain no-repeat; }
+  .capa a.hero-pdf span { font-weight: 400; opacity: .75; font-size: 13px; }
+  .capa a.hero-pdf:hover { background: rgba(255,255,255,.08); }
+  .capa .hero-val { background: var(--verde) !important; }
+  .capa .hero-cta.hero-sec { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+  body.modo-validar nav.topnav button[data-page="validar"]:not(.active) { background: var(--verde); box-shadow: none; }
+  body.modo-validar nav.topnav button[data-page="validar"]:not(.active), body.modo-validar nav.topnav button[data-page="validar"]:not(.active) .icn { color: #fff; }
   .hero-alt { display: inline-block; margin-top: 14px; color: #C9D0D7; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; cursor: pointer; }
   .hero-alt:hover { color: #fff; }
   h2.por-onde { font-size: 22px; margin: 6px 0 12px; }
@@ -1072,6 +1099,8 @@
   @keyframes enDig { 0%, 60%, 100% { opacity: .25; } 30% { opacity: 1; } }
   .en-leg { min-height: 3.3em; text-align: center; max-width: 36ch; color: #AEB7C1; font-size: 15px; margin: 0; }
   .en-leg b { display: block; font-family: 'Archivo', sans-serif; font-stretch: 85%; font-size: 18px; color: #E9EDF1; }
+  .en-val { margin-top: 4px; background: #1E8A5A; color: #fff; border: 0; border-radius: 6px; padding: 12px 22px; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 6px 18px rgba(30,138,90,.35); }
+  .en-val:hover { background: #24A06A; } .en-val:focus-visible { outline: 3px solid #FFD089; outline-offset: 3px; }
   .en-dica { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .06em; color: #AEB7C1; margin: 0; }
   .entrada.aberta .en-flor { opacity: 0; pointer-events: none; }
   .entrada.aberta .en-topo { visibility: hidden; }
@@ -1162,6 +1191,7 @@
       <p class="lede">Um guia para professores de Ciências da Natureza: leia as conversas do agente com a turma, siga a rubrica e decida, com critérios claros, se ele está pronto para a sala de aula.</p>
       <div class="hero-row">
                 <a class="hero-cta" href="#sec-3">Começar pelo caminho curto →</a>
+                <a class="hero-pdf" href="ProMAC_v0.9.31.pdf" download>Baixar o guia em PDF <span>(6,3 MB)</span></a>
       </div>
       <button class="hero-alt" type="button" onclick="goToPage('avaliar')">Já conhece o ProMAC? Abrir a ficha de avaliação</button>
     </div>
@@ -1183,7 +1213,12 @@
 <h2 class="por-onde" id="por-onde">Por onde seguir</h2>
 <nav class="bento" aria-labelledby="por-onde"><a class="bt" href="#avaliar"><span class="bt-k">Na tela</span><b>Avaliar um agente</b><span class="bt-p">Ficha com escores, faixas e relatório.</span></a><a class="bt" href="#dimensoes"><span class="bt-k">Consulta</span><b>Os 18 indicadores</b><span class="bt-p">Rubricas e exemplos de conversa.</span></a><a class="bt" href="#instrumentos"><span class="bt-k">Para imprimir</span><b>Instrumentos</b><span class="bt-p">Bateria, mapa, fichas e questionários.</span></a><a class="bt" href="#downloads"><span class="bt-k">PDF</span><b>Guia completo</b><span class="bt-p">Para ler e imprimir.</span></a></nav>
 
-<figure class="video-demo" id="video">
+<section class="videos-pr" aria-labelledby="videos-pr-h">
+<h2 id="videos-pr-h">Vídeos</h2>
+<p>Curtos e com legendas na imagem. Clique em uma miniatura para assistir.</p>
+<div class="vthumbs"><a class="vthumb" id="video" href="#video" data-vid="video-v"><span class="vt-img"><img src="video/ProMAC_demo_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min</span></span><b>O ProMAC em 1 minuto</b><span class="vt-s">Percurso pelo site</span></a><a class="vthumb" id="video-d31" href="#video-d31" data-vid="video-d31-v"><span class="vt-img"><img src="video/ProMAC_classificar_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 20 s</span></span><b>Classificar uma resposta</b><span class="vt-s">D3.1, com o GeneGênio</span></a><a class="vthumb" id="video-d53" href="#video-d53" data-vid="video-d53-v"><span class="vt-img"><img src="video/ProMAC_privacidade_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 15 s</span></span><b>Proteger os dados do estudante</b><span class="vt-s">D5.3, com a SophIA</span></a><a class="vthumb" id="video-ciclo0" href="#video-ciclo0" data-vid="video-ciclo0-v"><span class="vt-img"><img src="video/ProMAC_ciclo0_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 29 s</span></span><b>Ciclo 0 e triagem</b><span class="vt-s">Seção 3.1</span></a><a class="vthumb" id="video-decidir" href="#video-decidir" data-vid="video-decidir-v"><span class="vt-img"><img src="video/ProMAC_decidir_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 25 s</span></span><b>O vermelho vem antes da média</b><span class="vt-s">Seção 3.5</span></a></div>
+<div class="vid-store" hidden>
+<figure class="video-demo" id="video-v">
 <figcaption><b>Veja o ProMAC em 1 minuto.</b> Um percurso pelo site: o caminho curto, o quadro dos indicadores, a ficha e o resultado. Sem som, com legendas na imagem.</figcaption>
 <video controls preload="none" playsinline poster="video/ProMAC_demo_capa.jpg" aria-describedby="video-transc">
 <source src="video/ProMAC_demo.mp4" type="video/mp4">
@@ -1206,12 +1241,7 @@
 </ol>
 </details>
 </figure>
-
-<section class="videos-pr" aria-labelledby="videos-pr-h">
-<h2 id="videos-pr-h">Vídeos práticos</h2>
-<p>Vídeos curtos que mostram, passo a passo, os procedimentos do ProMAC com agentes de exemplo. Cada um traz uma pausa para você decidir antes de ver a resposta, trilha instrumental em volume baixo e legendas na imagem.</p>
-<div class="videos-pr-grid">
-<figure class="video-demo video-pr" id="video-d31">
+<figure class="video-demo video-pr" id="video-d31-v">
 <figcaption><b>Classificar uma resposta (1 min 20 s).</b> Indicador <a href="#ind-D3.1">D3.1 Mediação didática</a>, com o GeneGênio, agente fictício de Genética do 9º ano.</figcaption>
 <video controls preload="none" playsinline poster="video/ProMAC_classificar_capa.jpg" aria-describedby="video-d31-transc">
 <source src="video/ProMAC_classificar.mp4" type="video/mp4">
@@ -1236,7 +1266,7 @@
 </ol>
 </details>
 </figure>
-<figure class="video-demo video-pr" id="video-d53">
+<figure class="video-demo video-pr" id="video-d53-v">
 <figcaption><b>Proteger os dados do estudante (1 min 15 s).</b> Indicador <a href="#ind-D5.3">D5.3 Privacidade e proteção de dados</a>, com a SophIA, tutora de Design Educacional do Ifes/Cefor. Reconstituição ilustrativa baseada em Fávero e Silva (2026).</figcaption>
 <video controls preload="none" playsinline poster="video/ProMAC_privacidade_capa.jpg" aria-describedby="video-d53-transc">
 <source src="video/ProMAC_privacidade.mp4" type="video/mp4">
@@ -1259,7 +1289,7 @@
 </ol>
 </details>
 </figure>
-<figure class="video-demo video-pr" id="video-ciclo0">
+<figure class="video-demo video-pr" id="video-ciclo0-v">
 <figcaption><b>Antes da turma: Ciclo 0 e triagem (1 min 29 s).</b> O checklist das instruções e a triagem com o GeneGênio, até o ajuste para a versão v2 (<a href="#sec-3-1">seção 3.1</a>).</figcaption>
 <video controls preload="none" playsinline poster="video/ProMAC_ciclo0_capa.jpg" aria-describedby="video-ciclo0-transc">
 <source src="video/ProMAC_ciclo0.mp4" type="video/mp4">
@@ -1283,7 +1313,7 @@
 </ol>
 </details>
 </figure>
-<figure class="video-demo video-pr" id="video-decidir">
+<figure class="video-demo video-pr" id="video-decidir-v">
 <figcaption><b>Decidir: o vermelho vem antes da média (1 min 25 s).</b> Por que um indicador em vermelho impede o uso mesmo com escore geral em Parcialmente adequado (<a href="#sec-3-5">seção 3.5</a>).</figcaption>
 <video controls preload="none" playsinline poster="video/ProMAC_decidir_capa.jpg" aria-describedby="video-decidir-transc">
 <source src="video/ProMAC_decidir.mp4" type="video/mp4">
@@ -1311,6 +1341,7 @@
 </figure>
 </div>
 </section>
+<dialog class="vid-dlg" id="vid-dlg" aria-label="Vídeo"><button type="button" class="vid-x" aria-label="Fechar o vídeo">×</button><div class="vid-slot"></div></dialog>
 
 <details class="disclosure">
 <summary><span>Conheça o ProMAC em 5 minutos</span><span class="dchev">›</span></summary>
@@ -5154,7 +5185,7 @@ countUp();
 
   function corpo(p) {
     if (p.t === "vid") return `<h3>Vídeos práticos</h3>
-      <p class="vp-dica">Ao lado estão os quatro vídeos práticos. Assista a pelo menos um deles: cada vídeo tem uma pausa para você decidir antes de ver a resposta.</p>
+      <p class="vp-dica">Ao lado estão os vídeos. Clique em uma miniatura e assista a pelo menos um dos quatro vídeos práticos (do segundo em diante): cada um tem uma pausa para você decidir antes de ver a resposta.</p>
       <fieldset><legend>${VID}</legend>${opts("vp_vid", S.vid, 'data-v="1"')}</fieldset>`;
     if (p.t === "ind") { const n = S.notas[k(p.ind.codigo)] || {};
       return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${p.ind.codigo}</span> ${p.ind.nome}</h3>
@@ -5257,6 +5288,11 @@ countUp();
   window.promacValidar = { campos, resumo, irPara, P };
   document.addEventListener("click", e => { if (e.target.closest('#top-nav button[data-page="validar"]')) tela(); }, true);
   tela();
+  // quem chega pelo link de validação começa direto na página Validar, sem a flor
+  document.body.classList.add("modo-validar");
+  const cta = document.querySelector(".capa .hero-cta");
+  if (cta) { const v = document.createElement("a"); v.className = "hero-cta hero-val"; v.href = "#validar"; v.textContent = "Começar a validação →"; cta.before(v); cta.classList.add("hero-sec"); }
+  if (!location.hash) { currentPage = "validar"; renderPage(); tela(); }
   painel();
   goToPage("validar");
 })();
@@ -5435,6 +5471,12 @@ countUp();
   ];
   const gp = document.getElementById("en-petalas"), leg = document.getElementById("en-leg"), centro = document.getElementById("en-centro");
   const chat = document.getElementById("en-chat"), fx = document.getElementById("en-faixas");
+  if (VALIDAR) {
+    leg.innerHTML = "<b>Validação por especialistas</b>Obrigado por participar! A validação começa no botão abaixo. Se quiser, antes explore a flor: cada pétala é uma dimensão.";
+    const dica = ov.querySelector(".en-dica");
+    if (dica) { const bv = document.createElement("button"); bv.type = "button"; bv.className = "en-val"; bv.textContent = "Começar a validação →"; bv.onclick = () => { fechar(); goToPage("validar"); }; dica.replaceWith(bv); }
+    centro.setAttribute("aria-label", "Abrir a conversa de apresentação do ProMAC");
+  }
   const LEG0 = leg.innerHTML;
   D.forEach((d, i) => {
     const a = i * 72, cx = 105 + 52 * Math.sin(rad(a)), cy = 105 - 52 * Math.cos(rad(a));
@@ -5523,7 +5565,7 @@ countUp();
     setTimeout(() => { ov.hidden = true; }, REDUZ ? 0 : 450);
   }
   window.abrirEntradaFlor = mostrar;
-  document.getElementById("en-site").onclick = () => { fechar(); goToPage("inicio"); };
+  document.getElementById("en-site").onclick = () => { fechar(); goToPage(VALIDAR ? "validar" : "inicio"); };
   document.getElementById("en-pular").addEventListener("click", e => { e.preventDefault(); fechar(); const c = document.getElementById("conteudo"); if (c) { c.tabIndex = -1; c.focus({ preventScroll: true }); } });
   ov.addEventListener("click", e => { if (e.target.closest("[data-en-ir]")) fechar(); });
   ov.addEventListener("keydown", e => {
@@ -5561,6 +5603,42 @@ countUp();
     box.innerHTML = `<span class="k">A flor do agente</span><svg viewBox="0 16 210 162" role="img" aria-label="Flor do agente. ${desc}">${pet}<circle cx="105" cy="105" r="17" fill="#fff" stroke="#14191F" stroke-width=".6"/><g transform="translate(95 96.5) scale(0.42)" fill="none" stroke="#14191F" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H23l-9 8v-8h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z"/></g></svg><p><b>${ag.replace(/</g, "&lt;")}</b> · cada pétala tem a cor da faixa e a média da dimensão: verde Adequado, âmbar Parcialmente adequado, vermelho Inadequado, cinza sem nota.</p>`;
   };
   if (document.getElementById("page-avaliar").classList.contains("active")) renderResults();
+})();
+
+/* ---------- vídeos: miniaturas que abrem em janela ---------- */
+(function miniaturasVideo() {
+  const dlg = document.getElementById("vid-dlg"); if (!dlg || !dlg.showModal) return;
+  document.body.appendChild(dlg);
+  const slot = dlg.querySelector(".vid-slot"), store = document.querySelector(".vid-store");
+  let fig = null, volta = null;
+  function abrir(id) {
+    const f = document.getElementById(id + "-v"); if (!f) return false;
+    if (dlg.open) fechar();
+    volta = document.getElementById(id); fig = f; slot.appendChild(f);
+    dlg.setAttribute("aria-label", (f.querySelector("figcaption b") || {}).textContent || "Vídeo");
+    dlg.showModal();
+    const v = f.querySelector("video"); if (v) { v.focus(); const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); }
+    return true;
+  }
+  function fechar() {
+    if (fig) { const v = fig.querySelector("video"); if (v) v.pause(); store.appendChild(fig); fig = null; }
+    if (dlg.open) dlg.close();
+  }
+  dlg.addEventListener("close", () => { if (fig) fechar(); if (volta) volta.focus({ preventScroll: true }); });
+  dlg.querySelector(".vid-x").onclick = fechar;
+  dlg.addEventListener("click", e => { if (e.target === dlg) fechar(); else if (e.target.closest("figcaption a")) fechar(); });
+  document.addEventListener("click", e => {
+    const a = e.target.closest && e.target.closest('a[href^="#video"]'); if (!a) return;
+    if (a.closest(".vid-dlg")) return;
+    const id = a.getAttribute("href").slice(1);
+    if (!document.getElementById(id + "-v")) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    abrir(id);
+  }, true);
+  const deHash = () => { const h = location.hash.slice(1); if (/^video(-[\w]+)?$/.test(h)) abrir(h); };
+  addEventListener("hashchange", deHash);
+  if (document.readyState === "complete") setTimeout(deHash, 350); else addEventListener("load", () => setTimeout(deHash, 350));
+  window.promacVideo = { abrir, fechar };
 })();
 </script>
 </body>
