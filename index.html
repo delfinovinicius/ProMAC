@@ -682,6 +682,8 @@
   a.ref-t:focus-visible { outline: 2px solid var(--c, var(--ink)); outline-offset: 1px; border-radius: 2px; }
   tr.flash, .cart.flash { animation: flashRef 1.6s ease-out; }
   @keyframes flashRef { 0% { box-shadow: 0 0 0 3px var(--amar); } 100% { box-shadow: 0 0 0 3px transparent; } }
+  .vl-pouco label { display: flex; gap: 8px; align-items: flex-start; margin: 4px 0; font-size: 14px; cursor: pointer; }
+  .vl-pouco input { margin-top: 3px; }
   .web-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin: 0.9rem 0; }
   .web-nums p.num { margin: 0; padding: 12px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: 13px; }
   .web-nums .num-fonte { display: block; margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
@@ -4480,7 +4482,9 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
     pop.style.left = (x + scrollX) + "px"; pop.style.top = (y + scrollY) + "px";
   }
   function fecha(j) { clearTimeout(tFecha); tFecha = setTimeout(() => { pop.hidden = true; if (alvo) alvo.removeAttribute("aria-describedby"); alvo = null; }, j ? 0 : 180); }
-  const SEL = "a.chipd, a.ref-t, a[href^='#sec-']";
+  // etiquetas coloridas, menções no texto (D4.2, B13, Ciclo 0...) e links de seção
+  const MARCAR_MENCOES = true;
+  const SEL = MARCAR_MENCOES ? "a.chipd, a.ref-t, a[href^='#sec-']" : "a.chipd";
   const temHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
   const perto = (el, s) => el && el.closest && el.closest(s);
   document.addEventListener("mouseover", e => { if (!temHover) return; const a = perto(e.target, SEL); if (a && !perto(a, "#chip-pop") && a !== alvo) abre(a); else if (a || perto(e.target, "#chip-pop")) clearTimeout(tFecha); });
@@ -4501,7 +4505,7 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
     setTimeout(() => { el.scrollIntoView({ behavior: REDUCE_MOTION ? "auto" : "smooth", block: "center" }); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); }, 60);
   }, true);
 
-  const roda = () => document.querySelectorAll(".page").forEach(marca);
+  const roda = () => { if (MARCAR_MENCOES) document.querySelectorAll(".page").forEach(marca); };
   if (document.readyState === "complete") setTimeout(roda, 300); else addEventListener("load", () => setTimeout(roda, 300));
 })();
 
@@ -4829,25 +4833,23 @@ countUp();
   const ATIVO = /[?&]validar\b/.test(location.search);
   if (!ATIVO) return;
   const TALLY = "https://tally.so/r/PRp64d";
-  const KEY = "promac_validar_v2";
+  const KEY = "promac_validar_v3";
   const MAXC = 600;
-  const CRIT = [["p", "Pertinência", "o indicador importa para avaliar um agente usado no ensino"],
-                ["c", "Clareza", "a pergunta norteadora e a rubrica distinguem bem os três níveis"]];
+  const CRIT = [["p", "Pertinência", "o indicador importa para avaliar um agente usado no ensino"]];
+  const CLAR = "As perguntas norteadoras, as rubricas e as orientações (Como coletar, Não confundir com e exemplos) distinguem bem os três níveis e permitem aplicar os indicadores desta dimensão sem dúvida";
   const ESC = [["3", "Adequado"], ["2", "Parcialmente adequado"], ["1", "Inadequado"]];
   const EST = [
     "As cinco dimensões cobrem, em conjunto, o que importa avaliar num agente conversacional usado no ensino",
-    "Os ciclos estão bem delimitados e são viáveis na escola: Ciclo 0 e triagem com cartões, bateria simulada do Ciclo 1, calibração com um colega e Ciclo 2 com estudantes (com os cuidados com os dados)",
+    "Os ciclos estão bem delimitados e são viáveis na escola, inclusive no tempo estimado: Ciclo 0 e triagem com cartões (cerca de 1 hora), bateria simulada do Ciclo 1 (3 a 4 horas), calibração com um colega e Ciclo 2 com estudantes (com os cuidados com os dados)",
     "A escala de três níveis, a regra do comportamento predominante, o N/A, as médias e as faixas orientam bem a decisão sobre o agente",
-    "Aplicabilidade: com o que o guia traz (Como coletar, Não confundir com, exemplos), os indicadores podem ser aplicados sem dúvida, em agentes de diferentes plataformas",
-    "Os instrumentos para imprimir são úteis, e a leitura opcional por um avaliador LLM está bem delimitada como apoio, sem substituir o professor",
-    "O tempo estimado (cerca de 1 hora para o Ciclo 0 e a triagem; 3 a 4 horas para um Ciclo 1) é realista"];
+    "Os instrumentos para imprimir são úteis, e a leitura opcional por um avaliador LLM está bem delimitada como apoio, sem substituir o professor"];
   const ESTC = [["ce1", "Há sobreposição ou lacuna entre indicadores de dimensões diferentes? Se sim, quais?"],
                 ["ce2", "Falta algum indicador importante, ou algum indicador poderia sair?"],
                 ["ce3", "Comentários sobre a estrutura geral (Ciclo 0, triagem, ciclos, pontuação, instrumentos, aplicabilidade)"]];
   const IND = []; DIMENSOES.forEach(d => d.indicadores.forEach(i => IND.push(i)));
   const k = cod => "i" + cod.replace(/\D/g, "");          // D2.3 -> i23
 
-  let S = { passo: 0, notas: {}, est: {}, txt: {}, cod: "" };
+  let S = { passo: 0, notas: {}, clar: {}, pouco: {}, est: {}, txt: {}, cod: "" };
   try { const r = JSON.parse(localStorage.getItem(KEY) || "null"); if (r && r.notas) S = Object.assign(S, r); } catch (e) {}
   if (!S.cod) S.cod = "V" + Math.random().toString(36).slice(2, 7).toUpperCase();
   const salvar = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -4859,9 +4861,9 @@ countUp();
   const navBtn = document.querySelector('#top-nav button[data-page="validar"]'); if (navBtn) navBtn.classList.add("nav-primary");
 
   const PASSOS = ["Início"].concat(DIMENSOES.map(d => d.nome.split(" · ")[0]), ["Estrutura", "Enviar"]);
-  const totalItens = IND.length * CRIT.length + EST.length;
-  const feitos = () => IND.reduce((n, i) => n + CRIT.filter(c => (S.notas[k(i.codigo)] || {})[c[0]]).length, 0) + EST.filter((_, j) => S.est[j]).length;
-  const dimCompleta = d => d.indicadores.every(i => CRIT.every(c => (S.notas[k(i.codigo)] || {})[c[0]]));
+  const totalItens = IND.length * CRIT.length + DIMENSOES.length + EST.length;
+  const feitos = () => IND.reduce((n, i) => n + CRIT.filter(c => (S.notas[k(i.codigo)] || {})[c[0]]).length, 0) + DIMENSOES.filter((_, j) => S.clar[j]).length + EST.filter((_, j) => S.est[j]).length;
+  const dimCompleta = d => d.indicadores.every(i => CRIT.every(c => (S.notas[k(i.codigo)] || {})[c[0]])) && !!S.clar[DIMENSOES.indexOf(d)];
   const estCompleta = () => EST.every((_, j) => S.est[j]);
 
   function opts(name, val, onAttr) {
@@ -4899,14 +4901,19 @@ countUp();
     if (p === 0) {
       h += `<div class="vl-intro">
         <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. Nesta versão do site, cada indicador aparece com tudo o que o guia traz sobre ele, e a sua avaliação fica logo abaixo. Não é preciso abrir o PDF.</p>
-        <p><b>Como funciona:</b> (1) avalie os 18 indicadores, uma dimensão por vez, em pertinência e clareza; (2) avalie a estrutura geral do protocolo; (3) clique em <b>Enviar</b>. O formulário do Tally abre com as suas notas e pede o consentimento, a identificação e o parecer final. A avaliação do guia como produto educacional (MALI) e a Ficha de Avaliação do Educimat são opcionais.</p>
-        <p><b>Escala:</b> Adequado (3), Parcialmente adequado (2) ou Inadequado (1). Quando marcar 2 ou 1, conte no comentário da dimensão o que mudaria. Tempo estimado: 30 a 40 minutos no total.</p>
+        <p><b>Como funciona:</b> (1) avalie a pertinência de cada um dos 18 indicadores e, ao final de cada dimensão, a clareza do conjunto, marcando os indicadores que ficaram pouco claros; (2) avalie a estrutura geral do protocolo; (3) clique em <b>Enviar</b>. O formulário do Tally abre com as suas notas e pede o consentimento, a identificação e o parecer final. A avaliação do guia como produto educacional (MALI) e a Ficha de Avaliação do Educimat são opcionais.</p>
+        <p><b>Escala:</b> Adequado (3), Parcialmente adequado (2) ou Inadequado (1). Quando marcar 2 ou 1, conte no comentário da dimensão o que mudaria. Tempo estimado: 20 a 30 minutos no total.</p>
         <p class="vl-priv">Suas respostas ficam salvas só neste navegador enquanto você responde; pode fechar e voltar depois pelo mesmo link. Nada é enviado até você clicar em Enviar, quando as notas e os comentários seguem para o formulário do Tally, junto com o código <b>${S.cod}</b>, que liga as duas partes.</p>
       </div>`;
     } else if (p >= 1 && p <= 5) {
       const d = DIMENSOES[p - 1];
       h += `<h2 class="vl-dimh" style="--c:var(--${d.id})">${icon("dim" + d.id.slice(1), 26)} ${d.nome}</h2><p>${d.desc}</p>`;
       h += d.indicadores.map(ind => cardInd(d, ind)).join("");
+      const j = p - 1, pc = S.pouco[j] || [];
+      h += `<div class="vl-card vl-clar" style="--c:var(--${d.id})"><div class="vl-rate"><span class="k">Clareza da ${d.nome.split(" · ")[0]}</span>
+        <fieldset><legend><b>Clareza:</b> ${CLAR}</legend>${opts("vl_clar_" + j, S.clar[j], `data-cl="${j}"`)}</fieldset>
+        <fieldset class="vl-pouco"><legend>Algum indicador ficou pouco claro? Marque os que precisam de ajuste (opcional).</legend>
+        ${d.indicadores.map(ind => `<label><input type="checkbox" data-pc="${j}" value="${ind.codigo}" ${pc.includes(ind.codigo) ? "checked" : ""}><span><b>${ind.codigo}</b> ${ind.nome}</span></label>`).join("")}</fieldset></div></div>`;
       h += campo("c" + d.id.slice(1), `Comentários e sugestões sobre a ${d.nome.split(" · ")[0]} (indique o código do indicador)`, "Ex.: 3.1 – a diferença entre os níveis 2 e 3 não está clara porque...");
     } else if (p === 6) {
       h += `<h2>Estrutura geral do protocolo</h2><p>Como as partes do ProMAC funcionam juntas: os ciclos de aplicação, a pontuação e a decisão, e os instrumentos. Se precisar, consulte as páginas <a href="#aplicar">Como aplicar</a> e <a href="#instrumentos">Instrumentos</a> e volte aqui: suas respostas ficam guardadas.</p>`;
@@ -4928,6 +4935,8 @@ countUp();
     if (pv) pv.onclick = () => ir(p - 1); if (nx) nx.onclick = () => ir(p + 1);
     root.querySelectorAll("input[data-i]").forEach(r => r.onchange = () => { (S.notas[r.dataset.i] = S.notas[r.dataset.i] || {})[r.dataset.c] = r.value; salvar(); prog(); });
     root.querySelectorAll("input[data-e]").forEach(r => r.onchange = () => { S.est[r.dataset.e] = r.value; salvar(); prog(); });
+    root.querySelectorAll("input[data-cl]").forEach(r => r.onchange = () => { S.clar[r.dataset.cl] = r.value; salvar(); prog(); });
+    root.querySelectorAll("input[data-pc]").forEach(r => r.onchange = () => { const j = r.dataset.pc; S.pouco[j] = [...root.querySelectorAll(`input[data-pc="${j}"]:checked`)].map(x => x.value); salvar(); });
     root.querySelectorAll("textarea[data-t]").forEach(t => t.oninput = () => { S.txt[t.dataset.t] = t.value.slice(0, MAXC); t.nextElementSibling.firstElementChild.textContent = t.value.length; salvar(); });
     const env = root.querySelector("#vl-send"); if (env) env.onclick = enviar;
     root.querySelectorAll(".vl-ex .cv").forEach(box => {
@@ -4945,14 +4954,18 @@ countUp();
   function campos() {
     const q = { v: S.cod, versao: "0.9.28" };
     IND.forEach(i => { const n = S.notas[k(i.codigo)] || {}; q[k(i.codigo)] = CRIT.map(c => n[c[0]] || "-").join(""); });
+    q.cl = DIMENSOES.map((_, j) => S.clar[j] || "-").join("");
+    q.pc = DIMENSOES.flatMap((_, j) => S.pouco[j] || []).join(" ");
     q.est = EST.map((_, j) => S.est[j] || "-").join("");
     ["c1", "c2", "c3", "c4", "c5", "ce1", "ce2", "ce3"].forEach(id => { q[id] = (S.txt[id] || "").trim(); });
     return q;
   }
   function resumo() {
     const q = campos();
-    const lin = [`Código: ${q.v}`, "Notas por indicador (pertinência, clareza):"];
-    IND.forEach(i => lin.push(`  ${i.codigo} ${i.nome}: ${q[k(i.codigo)].split("").join(" · ")}`));
+    const lin = [`Código: ${q.v}`, "Pertinência por indicador:"];
+    IND.forEach(i => lin.push(`  ${i.codigo} ${i.nome}: ${q[k(i.codigo)]}`));
+    lin.push(`Clareza por dimensão (D1 a D5): ${q.cl.split("").join(" ")}`);
+    if (q.pc) lin.push(`Indicadores pouco claros: ${q.pc}`);
     lin.push(`Estrutura (itens 1 a ${EST.length}): ${q.est.split("").join(" ")}`);
     [["c1", "D1"], ["c2", "D2"], ["c3", "D3"], ["c4", "D4"], ["c5", "D5"], ["ce1", "Sobreposição ou lacuna"], ["ce2", "Indicador faltando ou sobrando"], ["ce3", "Estrutura"]].forEach(([id, t]) => { if (q[id]) lin.push(`${t}: ${q[id]}`); });
     return lin.join("\n");
