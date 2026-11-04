@@ -1016,6 +1016,8 @@
   .mais-btn { background: transparent; color: #C9D0D7; border: 0; font: inherit; font-size: 14px; padding: 10px 10px 11px; cursor: pointer; white-space: nowrap; }
   .mais-btn:hover { color: #fff; background: rgba(255,255,255,.08); }
   .mais-btn.active { color: #fff; box-shadow: inset 0 -4px 0 var(--amar); }
+  @media (max-width: 440px) { .mais-btn, .cab-in > nav.topnav button { padding-left: 7px; padding-right: 7px; } .cab-in > nav.topnav button.nav-primary:not(.active) { padding: 6px 9px; } }
+  @media (max-width: 640px) { #top-nav .mais-btn .mais-l { display: inline-block; max-width: 5em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; } }
   .mais-btn:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
   .mais-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 90; background: #1B222B; border: 1px solid rgba(255,255,255,.14); border-radius: 10px; padding: 6px; min-width: 220px; box-shadow: 0 12px 30px rgba(0,0,0,.35); display: none; }
   .mais-pop.on { display: block; }
@@ -1118,7 +1120,7 @@
 <body>
 
 <div class="entrada" id="entrada" role="dialog" aria-modal="true" aria-label="Entrada do ProMAC" hidden>
-  <div class="en-topo"><a class="en-pular" href="#inicio" id="en-pular">Pular para o conteúdo</a><span class="en-ver">V0.9.28</span></div>
+  <div class="en-topo"><a class="en-pular" href="#inicio" id="en-pular">Pular para o conteúdo</a><span class="en-ver">V0.9.31</span></div>
   <div class="en-palco">
     <div class="en-flor">
       <p class="en-marca">ProMAC</p>
@@ -1146,7 +1148,7 @@
 <header class="cab">
   <div class="cab-in">
     <a class="logo" href="#inicio" onclick="goToPage('inicio');return false;" aria-label="ProMAC, página inicial"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>ProMAC</a>
-    <span class="logo-v">v0.9.28 · em validação</span>
+    <span class="logo-v">v0.9.31 · em validação</span>
     <nav class="topnav" id="top-nav" aria-label="Páginas"></nav>
     <span class="cab-r"><button class="tema-btn" id="aa-btn" type="button" aria-expanded="false" aria-controls="aa-painel" title="Tamanho do texto, ouvir e modo escuro">Leitura</button></span>
     <div class="aa-painel" id="aa-painel" role="group" aria-label="Ajustes de leitura" hidden><p class="aa-t">Ajustes de leitura</p><div class="aa-acoes"><button class="tema-btn" id="ouvir-btn" type="button" hidden aria-pressed="false" title="Ouvir o texto selecionado ou a seção que está na tela">Ouvir</button><button class="tema-btn" id="tema-btn" type="button" onclick="trocarTema()">Modo escuro</button></div><div class="aa-l"><span id="aa-tam-l">Tamanho do texto</span><div class="aa-seg" role="radiogroup" aria-labelledby="aa-tam-l"><button type="button" role="radio" data-t="0">A</button><button type="button" role="radio" data-t="1" style="font-size:16px">A</button><button type="button" role="radio" data-t="2" style="font-size:19px">A</button></div></div><label class="aa-c"><input type="checkbox" id="aa-ent"> Entrelinha maior</label><label class="aa-c"><input type="checkbox" id="aa-fac"> Leitura facilitada <small>(mais espaço entre letras e palavras, linhas mais curtas; pensada para dislexia)</small></label><p class="aa-n">Fica salvo só neste navegador.</p></div>
@@ -3010,8 +3012,8 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
         <span class="dl-corner"></span>
         <span class="card-icon" data-icon="fundamentacao"></span>
         <h3>Guia completo em PDF</h3>
-        <p class="def">O ProMAC diagramado para ler e imprimir (versão 0.9.28, em validação). No PDF, a ficha semáforo, a flor do agente, o checklist do Ciclo 0, o registro de versões e as anotações de cada indicador podem ser preenchidos no computador, e o arquivo foi conferido como PDF acessível (PDF/UA). A versão final terá ISBN e DOI.</p>
-        <a class="dlbtn" href="ProMAC_v0.9.28.pdf" download><span data-icon="downloads"></span>Baixar o PDF (5,6 MB)</a>
+        <p class="def">O ProMAC diagramado para ler e imprimir (versão 0.9.31, em validação). No PDF, a ficha semáforo, a flor do agente, o checklist do Ciclo 0, o registro de versões e as anotações de cada indicador podem ser preenchidos no computador, e o arquivo foi conferido como PDF acessível (PDF/UA). A versão final terá ISBN e DOI.</p>
+        <a class="dlbtn" href="ProMAC_v0.9.31.pdf" download><span data-icon="downloads"></span>Baixar o PDF (6,3 MB)</a>
       </div>
     </div>
   </section>
@@ -3138,8 +3140,9 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 </div>
 </details>
     <details class="disclosure" id="novidades">
-      <summary><span>Novidades da versão 0.9.28</span><span class="dchev">›</span></summary>
+      <summary><span>Novidades da versão 0.9.31</span><span class="dchev">›</span></summary>
       <div class="dbody">
+        <p><b>0.9.31 (novembro de 2026).</b> Vídeos práticos com pausa para decidir: classificar uma resposta (D3.1), proteger os dados do estudante (D5.3, com a SophIA), Ciclo 0 e triagem e “o vermelho vem antes da média” (3.5). Validação por especialistas em formato de trilha pelo site. Cartão colorido ao passar o mouse sobre todas as menções a indicadores, dimensões, ciclos e cartões. Nova seção “Autoria e colaboração”, com Leonardo Braga Guimarães como colaborador. Rubricas de D1.1, D2.2, D4.1 e D4.2 começando por “O agente”; “conversa” no lugar de “sessão”; nova redação do nível 2 da D5.2; citações da seção 1.2 conferidas; Fávero e Silva (2026) em Para saber mais; revisão de linguagem em vários trechos.</p>
         <p><b>0.9.28 (novembro de 2026).</b> Cabeçalho em uma linha, com as páginas secundárias em “Mais” e os botões Ouvir e Modo escuro dentro de “Leitura”; Início mais enxuto, com um botão principal, “Por onde seguir” e a conversa comentada recolhida; a carta ao professor passou para esta página. Novos ícones para a Técnica (engrenagem), a Linguagem (dois balões) e o Currículo (livro); novas perguntas das cinco dimensões; nova carta ao professor; revisão de linguagem em vários trechos. No PDF: flor do agente para colorir, marcador de página, percurso no rodapé, selos de tempo, guarda e contracapa.</p>
         <p><b>0.9.27 (novembro de 2026).</b> Entrada pela flor da capa: o balão do centro abre uma conversa que indica por onde começar, e cada pétala leva à sua dimensão; no resultado da ficha, a "flor do agente" mostra a faixa de cada dimensão. Ajustes de leitura (botão Aa) e leitura em voz alta (botão Ouvir) no topo do site; mapa da bateria clicável, que acende os indicadores de cada item e os itens de cada indicador; decisão passo a passo na seção 3.5; entrada do site organizada por onde começar; caminho curto que aparece ao rolar. No PDF: remissões clicáveis e fichas que podem ser preenchidas no computador. Novo formato: livro digital EPUB.</p>
         <p><b>0.9.26 (novembro de 2026).</b> Nova capa; nova carta ao professor; cores com mais contraste; códigos nos cartões (V1 a V7, A1 a A4); notas 1, 2 e 3 sempre na mesma ordem; botão Copiar nas falas da bateria; guia completo em PDF nos Downloads.</p>
@@ -3182,8 +3185,8 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
     </details>
 
     <details class="disclosure">
-      <summary><span>Ficha do produto (versão 0.9.28)</span><span class="dchev">›</span></summary>
-      <div class="dbody"><p><b>Guia em PDF e site: onde está cada parte.</b> Os dois têm a mesma versão (0.9.28) e a mesma numeração de seções.</p>
+      <summary><span>Ficha do produto (versão 0.9.31)</span><span class="dchev">›</span></summary>
+      <div class="dbody"><p><b>Guia em PDF e site: onde está cada parte.</b> Os dois têm a mesma versão (0.9.31) e a mesma numeração de seções.</p>
       <div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>No guia em PDF</th><th>No site</th></tr></thead><tbody>
       <tr><td>Carta ao professor e capítulo 1</td><td>Carta: <a href="#carta">Sobre</a>; capítulo 1: <a href="#inicio">Início</a> (Conheça o ProMAC em 5 minutos)</td></tr>
       <tr><td>Capítulo 2 – As cinco dimensões e os 18 indicadores</td><td><a href="#dimensoes">Dimensões</a>; ficha de pontuação em <a href="#avaliar">Avaliar</a></td></tr>
@@ -3262,7 +3265,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 </tr>
 <tr class="odd">
 <td>Versão</td>
-<td>0.9.28, novembro de 2026</td>
+<td>0.9.31, novembro de 2026</td>
 </tr>
 </tbody>
 </table></div>
@@ -4384,7 +4387,7 @@ async function exportPDF() {
     doc.setPage(p);
     doc.setDrawColor(201, 209, 218); doc.line(M, 297 - 12, W - M, 297 - 12);
     doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); doc.setTextColor(...soft);
-    doc.text(pdfText("ProMAC - Protocolo Multidimensional de Avaliação de Agentes Conversacionais (v0.9.28)"), M, 297 - 7.5);
+    doc.text(pdfText("ProMAC - Protocolo Multidimensional de Avaliação de Agentes Conversacionais (v0.9.31)"), M, 297 - 7.5);
     doc.text(p + "/" + pages, W - M, 297 - 7.5, { align: "right" });
   }
 
@@ -5227,7 +5230,7 @@ countUp();
   }
 
   function campos() {
-    const q = { v: S.cod, versao: "0.9.28" };
+    const q = { v: S.cod, versao: "0.9.31" };
     IND.forEach(i => { const n = S.notas[k(i.codigo)] || {}; q[k(i.codigo)] = CRIT.map(c => n[c[0]] || "-").join(""); });
     q.cl = DIMENSOES.map((_, j) => S.clar[j] || "-").join("");
     q.pc = DIMENSOES.flatMap((_, j) => S.pouco[j] || []).join(" ");
