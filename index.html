@@ -4953,19 +4953,19 @@ countUp();
   const TALLY = "https://tally.so/r/PRp64d";
   const KEY = "promac_validar_v4";
   const MAXC = 600;
-  const CRIT = [["p", "Pertinência", "o indicador importa para avaliar um agente usado no ensino"]];
-  const CLAR = "As perguntas norteadoras, as rubricas e as orientações (Como coletar, Não confundir com e exemplos) distinguem bem os três níveis e permitem aplicar os indicadores desta dimensão sem dúvida";
+  const CRIT = [["p", "Pertinência", "este indicador é importante para decidir se um agente pode ser usado com estudantes"]];
+  const CLAR = "um professor consegue aplicar os indicadores desta dimensão sem ajuda, distinguindo os três níveis";
   const ESC = [["3", "Adequado"], ["2", "Parcialmente adequado"], ["1", "Inadequado"]];
   // pertinência em 4 pontos (IVC clássico: concordância = notas 3 e 4)
   const ESC_P = [["4", "Muito pertinente"], ["3", "Pertinente"], ["2", "Pouco pertinente"], ["1", "Não pertinente"]];
   const EST = [
     "As cinco dimensões cobrem, em conjunto, o que importa avaliar num agente conversacional usado no ensino",
-    "Os ciclos estão bem delimitados e são viáveis na escola, inclusive no tempo estimado: Ciclo 0 e triagem com cartões (cerca de 1 hora), bateria simulada do Ciclo 1 (3 a 4 horas), calibração com um colega e Ciclo 2 com estudantes (com os cuidados com os dados)",
+    "Os ciclos (Ciclo 0 e triagem, Ciclo 1, calibração com um colega e Ciclo 2) são viáveis na escola no tempo estimado",
     "A escala de três níveis, a regra do comportamento predominante, o N/A, as médias e as faixas orientam bem a decisão sobre o agente",
-    "Os instrumentos para imprimir são úteis, e a leitura opcional por um avaliador LLM está bem delimitada como apoio, sem substituir o professor"];
+    "Os instrumentos para imprimir são úteis para aplicar o protocolo"];
   const ESTC = [["ce1", "Há sobreposição ou lacuna entre indicadores de dimensões diferentes? Se sim, quais?"],
                 ["ce2", "Falta algum indicador importante, ou algum indicador poderia sair?"],
-                ["ce3", "Comentários sobre a estrutura geral (Ciclo 0, triagem, ciclos, pontuação, instrumentos, aplicabilidade)"]];
+                ["ce3", "Comentários sobre a estrutura geral (ciclos, pontuação, instrumentos e a leitura opcional por um avaliador LLM)"]];
   const IND = []; DIMENSOES.forEach(d => d.indicadores.forEach(i => IND.push(i)));
   const k = cod => "i" + cod.replace(/\D/g, "");          // D2.3 -> i23
 
