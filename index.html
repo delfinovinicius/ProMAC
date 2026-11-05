@@ -3142,6 +3142,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 
   <!-- ================= DOWNLOADS ================= -->
   <section class="page prose" id="page-downloads">
+    <p><b>Sem internet na sala?</b> Depois da primeira visita, o site continua funcionando neste navegador mesmo sem conexão: as páginas, a ficha, a busca e as figuras ficam guardadas. Só os vídeos precisam de internet. Para ter tudo em papel, use os arquivos abaixo.</p>
     <p>Nem toda escola tem conectividade estável em sala. O que já pode ser exportado a partir deste protótipo:</p>
     <div class="dl-grid">
       <div class="dl-card">
@@ -5799,6 +5800,11 @@ countUp();
   window.promacVideo = { abrir, fechar };
 })();
 </script>
+<script>
+/* Funcionar sem internet depois da primeira visita (somente no endereço publicado, com https) */
+try { if ("serviceWorker" in navigator && location.protocol === "https:" && /github\.io$/.test(location.hostname)) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {})); } catch (e) {}
+</script>
+
 <dialog class="busca-dlg" id="busca-dlg" aria-labelledby="busca-t">
   <form method="dialog" class="busca-top"><label id="busca-t" for="busca-in">Buscar no ProMAC</label><button class="busca-x" aria-label="Fechar a busca">×</button></form>
   <input id="busca-in" type="search" autocomplete="off" placeholder="Ex.: mediação, D4.1, B08, cartão vermelho, LGPD" aria-describedby="busca-dica" aria-controls="busca-res">
