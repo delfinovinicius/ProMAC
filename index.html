@@ -1095,6 +1095,14 @@
   .bento .bt:hover .bt-seta { transform: translate(4px, -50%); }
   @media (max-width: 640px) { .bento { grid-template-columns: 1fr !important; } }
   #page-inicio .por-onde { margin-top: 2.4rem; }
+  .copiar-falas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .copiar-fala { font: 600 12px/1 'IBM Plex Mono', monospace; padding: 6px 9px; border-radius: 4px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .copiar-fala::before { content: "⧉ "; }
+  .copiar-fala:hover { border-color: var(--accent); color: var(--accent); }
+  .copiar-fala.ok { border-color: var(--good, #1E8A5A); color: var(--good, #1E8A5A); }
+  .copiar-fala.ok::before { content: ""; }
+  @media print { .copiar-falas { display: none !important; } }
+
 
   h2.por-onde { font-size: 22px; margin: 6px 0 12px; }
   .bento { grid-template-columns: repeat(4, 1fr); }
@@ -4647,20 +4655,7 @@ function mountStaticIcons() {
 }
 buildTopNav();
 (function melhoriasV26() {
-  const b51 = document.getElementById("sec-5-1");
-  const tb = b51 && b51.closest("section").querySelector("table");
-  if (tb) tb.querySelectorAll("tbody tr").forEach(tr => {
-    const td = tr.cells[2]; if (!td || !td.textContent.trim()) return;
-    const item = tr.cells[0].textContent.replace("▲", "").trim();
-    const bt = document.createElement("button"); bt.type = "button"; bt.className = "copiar-fala"; bt.textContent = "Copiar";
-    bt.setAttribute("aria-label", "Copiar a fala do " + item);
-    bt.onclick = () => {
-      const txt = td.firstChild && td.firstChild.nodeType === 3 ? td.firstChild.textContent : td.textContent.replace("Copiar", "");
-      const limpo = txt.split(" / ")[0].trim().replace(/^[“"]|[”"]$/g, "");
-      if (navigator.clipboard) navigator.clipboard.writeText(limpo).then(() => { bt.textContent = "Copiado"; setTimeout(() => bt.textContent = "Copiar", 1500); }, () => {});
-    };
-    td.appendChild(bt);
-  });
+  /* botões de copiar as falas: ver copiarFalas(), no fim do arquivo */
   const mapa = document.querySelector("table.mapa");
   if (mapa) {
     const heads = [...mapa.querySelectorAll("thead th")].map(th => th.textContent.trim());
@@ -5699,5 +5694,38 @@ countUp();
   window.promacVideo = { abrir, fechar };
 })();
 </script>
+<script>
+/* Botão "Copiar" nas falas da bateria e dos itens extras: cola direto no agente */
+(function copiarFalas() {
+  const copiar = async (txt, b) => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(txt); ok = true; } catch (e) {
+      const t = document.createElement("textarea"); t.value = txt; t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select();
+      try { ok = document.execCommand("copy"); } catch (e2) {} t.remove();
+    }
+    const orig = b.dataset.rot; b.textContent = ok ? "Copiado ✓" : "Selecione e copie"; b.classList.toggle("ok", ok);
+    setTimeout(() => { b.textContent = orig; b.classList.remove("ok"); }, 1800);
+  };
+  document.querySelectorAll("table").forEach(tb => {
+    const ths = [...tb.querySelectorAll("thead th")];
+    const col = ths.findIndex(th => /^Fala/.test(th.textContent.trim()));
+    if (col < 0) return;
+    tb.querySelectorAll("tbody tr").forEach(tr => {
+      const td = tr.children[col]; if (!td) return;
+      const falas = [...td.textContent.matchAll(/“([^”]+)”/g)].map(m => m[1].trim()).filter(Boolean);
+      if (!falas.length) return;
+      const box = document.createElement("div"); box.className = "copiar-falas";
+      falas.forEach((f, i) => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "copiar-fala";
+        b.dataset.rot = falas.length > 1 ? `Copiar fala ${i + 1}` : "Copiar fala"; b.textContent = b.dataset.rot;
+        b.setAttribute("aria-label", `Copiar a fala: ${f}`);
+        b.onclick = () => copiar(f, b); box.appendChild(b);
+      });
+      td.appendChild(box);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
