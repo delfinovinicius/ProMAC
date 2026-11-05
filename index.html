@@ -1066,6 +1066,36 @@
   body.modo-validar nav.topnav button[data-page="validar"]:not(.active), body.modo-validar nav.topnav button[data-page="validar"]:not(.active) .icn { color: #fff; }
   .hero-alt { display: inline-block; margin-top: 14px; color: #C9D0D7; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 0; cursor: pointer; }
   .hero-alt:hover { color: #fff; }
+  /* ---- Início mais intuitivo (prévia 05/11) ---- */
+  .capa h1 { font-size: clamp(32px, 4.4vw, 50px) !important; line-height: .98; }
+  .hero-passos { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 0; margin: 18px 0 0; font-size: 14px; }
+  .hero-passos a { display: inline-flex; align-items: center; gap: 8px; color: #D7DDE3; text-decoration: none; }
+  .hero-passos a:hover { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  .hero-passos b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid #FFD089; color: #FFD089; font: 700 12px/1 'IBM Plex Mono', monospace; }
+  .hero-passos li + li::before { content: "→"; color: #6B7682; margin-right: 18px; }
+  .bolhas-k { background: none !important; color: #AEB7C1 !important; font: 600 11px/1.3 'IBM Plex Mono', monospace !important; letter-spacing: .05em; text-transform: uppercase; padding: 0 !important; margin: 0 0 2px !important; box-shadow: none !important; }
+  .dimfaixa-dica { margin: 0; padding: 8px max(16px, 2vw); background: #14191F; color: #AEB7C1; font: 600 12px/1.3 'IBM Plex Mono', monospace; letter-spacing: .04em; }
+  body:not([data-page="inicio"]) .dimfaixa-dica { display: none; }
+  .dimfaixa button { position: relative; transition: filter .2s, box-shadow .2s, transform .15s; }
+  .dimfaixa button::after { content: "Ver ▾"; position: absolute; right: 12px; bottom: 12px; font: 600 11px/1 'IBM Plex Mono', monospace; opacity: .7; }
+  .dimfaixa button[aria-pressed="true"]::after { content: "Aberta ▴"; opacity: 1; }
+  .dimfaixa button:hover { filter: brightness(1.15); box-shadow: inset 0 -6px 0 rgba(255,255,255,.35); }
+  .conheca-g { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: 18px; align-items: start; }
+  .conheca-g .vthumb-apr b { font-size: 15px; }
+  .conheca .disclosure.destaque { margin-top: 0; border: 2px solid var(--ink); }
+  .conheca .disclosure.destaque summary { font-size: 17px; padding-block: 18px; }
+  .conheca .disclosure.destaque summary .dchev { color: var(--ink); }
+  .videos-pr .vthumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  @media (max-width: 900px) { .videos-pr .vthumbs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .conheca-g { grid-template-columns: 1fr; } .hero-passos li + li::before { display: none; } }
+  .bento { grid-template-columns: repeat(3, 1fr) !important; }
+  .bento .bt { position: relative; padding-right: 40px; border-width: 1.5px; }
+  .bento .bt-seta { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--accent); transition: transform .15s; }
+  .bento .bt:hover, .bento .bt:focus-visible { border-color: var(--accent); box-shadow: 0 4px 14px rgba(0,0,0,.08); }
+  .bento .bt:hover .bt-seta { transform: translate(4px, -50%); }
+  @media (max-width: 640px) { .bento { grid-template-columns: 1fr !important; } }
+  #page-inicio .por-onde { margin-top: 2.4rem; }
+
   h2.por-onde { font-size: 22px; margin: 6px 0 12px; }
   .bento { grid-template-columns: repeat(4, 1fr); }
   @media (max-width: 760px) { .bento { grid-template-columns: 1fr 1fr; } }
@@ -1195,14 +1225,19 @@
     <div class="capa-txt">
       <p class="eyebrow">Produto educacional · Mestrado Profissional Educimat / Ifes</p>
       <h1>Protocolo Multidimensional de Avaliação de Agentes Conversacionais</h1>
-      <p class="lede">Um guia para professores de Ciências da Natureza: leia as conversas do agente com a turma, siga a rubrica e decida, com critérios claros, se ele está pronto para a sala de aula.</p>
+      <p class="lede">Um guia para você decidir, com critérios claros, se um agente de inteligência artificial está pronto para a sua turma de Ciências da Natureza.</p>
       <div class="hero-row">
-                <a class="hero-cta" href="#sec-3">Começar pelo caminho curto →</a>
+                <a class="hero-cta" href="#sec-3">Começar a avaliar o meu agente →</a>
                 <a class="hero-pdf" href="ProMAC_v0.9.31.pdf" download>Baixar o guia em PDF <span>(6,3 MB)</span></a>
       </div>
-      <button class="hero-alt" type="button" onclick="goToPage('avaliar')">Já conhece o ProMAC? Abrir a ficha de avaliação</button>
+      <ol class="hero-passos" aria-label="Como usar o ProMAC em três passos">
+        <li><a href="#dimensoes"><b>1</b>Conheça as dimensões</a></li>
+        <li><a href="#sec-3"><b>2</b>Teste o agente</a></li>
+        <li><a href="#avaliar"><b>3</b>Preencha a ficha</a></li>
+      </ol>
     </div>
     <div class="bolhas" aria-hidden="true">
+      <p class="bolhas-k">Exemplo: um agente que medeia em vez de dar a resposta</p>
       <p class="e">Me dá a resposta da questão 3?</p>
       <p class="a">Vamos juntos. O que a questão pede primeiro?</p>
       <p class="e">Acho que é calcular a energia…</p>
@@ -1210,6 +1245,7 @@
     </div>
   </div>
 </section>
+<p class="dimfaixa-dica">As cinco dimensões do ProMAC. Clique em uma delas para ver a descrição.</p>
 <div class="dimfaixa" id="dimfaixa" role="group" aria-label="As cinco dimensões. Toque numa delas para ver a descrição."></div>
 <div class="dimfaixa-p" id="dimfaixa-p" aria-live="polite"></div>
 <div class="shell" id="conteudo">
@@ -1217,13 +1253,108 @@
 
   <!-- ================= INÍCIO ================= -->
   <section class="page prose" id="page-inicio">
-<h2 class="por-onde" id="por-onde">Por onde seguir</h2>
-<nav class="bento" aria-labelledby="por-onde"><a class="bt" href="#avaliar"><span class="bt-k">Na tela</span><b>Avaliar um agente</b><span class="bt-p">Ficha com escores, faixas e relatório.</span></a><a class="bt" href="#dimensoes"><span class="bt-k">Consulta</span><b>Os 18 indicadores</b><span class="bt-p">Rubricas e exemplos de conversa.</span></a><a class="bt" href="#instrumentos"><span class="bt-k">Para imprimir</span><b>Instrumentos</b><span class="bt-p">Bateria, mapa, fichas e questionários.</span></a><a class="bt" href="#downloads"><span class="bt-k">PDF</span><b>Guia completo</b><span class="bt-p">Para ler e imprimir.</span></a></nav>
+<section class="conheca" aria-labelledby="conheca-h">
+<h2 id="conheca-h">Conheça o ProMAC</h2>
+<div class="conheca-g">
+<a class="vthumb vthumb-apr" id="video" href="#video" data-vid="video-v"><span class="vt-img"><img src="video/ProMAC_demo_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min</span></span><b>O ProMAC em 1 minuto</b><span class="vt-s">Percurso pelo site</span></a>
+<div class="conheca-t">
+<details class="disclosure destaque">
+<summary><span>Conheça o ProMAC em 5 minutos</span><span class="dchev">›</span></summary>
+<div class="dbody"><h2 id="sec-1-1">1.1 O que é</h2>
+<p>O ProMAC é um protocolo prático para que professores avaliem os agentes conversacionais de IA que configuram para suas turmas, organizando a leitura das conversas em cinco dimensões. Destina-se à Educação Básica, do Ensino Fundamental ao Ensino Médio, e pode ser adaptado ao Ensino Superior.</p>
+<p>Cada dimensão responde a uma pergunta.</p>
+<div class="table-wrap"><table class="doc-table">
+<thead>
+<tr class="header">
+<th>Dimensão</th>
+<th>Pergunta</th>
+<th>Indicadores</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D1 Qualidade Técnica e Usabilidade</td>
+<td>O agente funciona e é fácil de utilizar?</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>D2 Linguagem e Comunicação</td>
+<td>Comunica-se de maneira compreensível e coerente?</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>D3 Interação e Mediação</td>
+<td>Estimula o pensamento do estudante ou entrega respostas prontas?</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>D4 Currículo e Rigor Científico</td>
+<td>Apresenta informações corretas e alinhadas aos conteúdos?</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>D5 Ética, Transparência e Privacidade</td>
+<td>É transparente e respeita os direitos e a segurança do estudante?</td>
+<td>4</td>
+</tr>
+</tbody>
+</table></div>
+<p>Cada indicador recebe uma nota de 1 a 3: Inadequado (1), Parcialmente adequado (2) ou Adequado (3). Algumas falhas, chamadas de cartões vermelhos, são tão graves que reprovam o agente imediatamente, sejam quais forem as demais notas.</p>
+<h2 id="sec-1-2">1.2 Por que testar antes de levar à turma</h2>
+<div class="web-nums">
+<p class="num"><span class="n">47%</span> <strong>Responder não é ensinar.</strong> Em um estudo sobre tutoria de Matemática, o GPT-4 entregou a resposta pronta em cerca de 47% das situações.<span class="num-fonte">Maurya <em>et al.</em> (2025)</span></p>
+<p class="num"><span class="n">56,6%</span> <strong>Parecer bom não é estar certo.</strong> Em outro estudo sobre tutoria de Matemática, embora 90% dos diálogos gerados por IA tivessem boa qualidade pedagógica, apenas 56,6% estavam totalmente corretos.<span class="num-fonte">Gupta <em>et al.</em> (2025)</span></p>
+<p class="num"><span class="n">1 em 2</span> <strong>Nem sempre se comunica no nível da turma.</strong> Em um estudo, as explicações do GPT-4 corresponderam ao nível de escolaridade solicitado em cerca de metade dos casos, contra 79% das explicações escritas por pessoas.<span class="num-fonte">Joshi <em>et al.</em> (2025)</span></p>
+<p class="num"><span class="n">32%</span> <strong>A IA já está na sala de aula.</strong> Entre os estudantes do Ensino Médio que usam a internet, 70% já recorreram à IA generativa em pesquisas escolares, mas apenas 32% disseram que os professores conversaram com eles sobre como usá-la nas atividades escolares.<span class="num-fonte">CGI.br (2025)</span></p>
+</div>
+<p>O comportamento do agente depende de como ele foi configurado. Por isso, somente o teste do seu agente pode revelar se ele está pronto. Além disso, a Lei Geral de Proteção de Dados Pessoais (LGPD) e o Estatuto Digital da Criança e do Adolescente (ECA Digital) exigem cuidado com os dados de crianças e adolescentes, e o Ministério da Educação (MEC) e a Unesco recomendam verificar as ferramentas de IA antes de usá-las com os estudantes.</p>
+<h2 id="sec-1-3">1.3 Quando usar</h2>
+<div class="usos">
+<div class="usos-g g-sim"><h3><span aria-hidden="true" class="usos-ic">✓</span>Use o ProMAC <small>quando o agente conversa com o estudante com finalidade de ensino</small></h3><div class="usos-grid">
+<div class="uso"><b>Tutoria na resolução de problemas</b><p>Conduz o estudante passo a passo, com pistas, sem entregar a resposta.</p><div class="uso-m"><span class="onde">Em aula e em casa</span><span class="obs">observe: <a class="chipd" href="#ind-D3.1" style="--c:var(--d3)" title="Ver o indicador D3.1 no quadro">D3.1</a></span></div></div>
+<div class="uso"><b>Feedback sobre produções</b><p>Comenta textos, relatórios de laboratório e roteiros de experimento.</p><div class="uso-m"><span class="onde">Em aula e em casa</span><span class="obs">observe: <a class="chipd" href="#ind-D3.2" style="--c:var(--d3)" title="Ver o indicador D3.2 no quadro">D3.2</a></span></div></div>
+<div class="uso"><b>Explicação de conceitos</b><p>Explica o conteúdo em linguagem adequada à idade e ao ano escolar.</p><div class="uso-m"><span class="onde">Em aula</span><span class="obs">observe: <a class="chipd" href="#ind-D2.1" style="--c:var(--d2)" title="Ver o indicador D2.1 no quadro">D2.1</a> <a class="chipd" href="#ind-D4.1" style="--c:var(--d4)" title="Ver o indicador D4.1 no quadro">D4.1</a></span></div></div>
+<div class="uso"><b>Dúvidas fora do horário</b><p>Responde dúvidas da lista de exercícios, inclusive por aplicativo de mensagem.</p><div class="uso-m"><span class="onde">Em casa</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-4" title="Ver o Ciclo 2 em Como aplicar">Ciclo 2</a></span></div></div>
+<div class="uso"><b>Preparação para provas e olimpíadas</b><p>Dá retorno sobre questões de prática, inclusive de múltipla escolha.</p><div class="uso-m"><span class="onde">Contraturno e casa</span><span class="obs">observe: <a class="chipd" href="#ind-D4.1" style="--c:var(--d4)" title="Ver o indicador D4.1 no quadro">D4.1</a></span></div></div>
+<div class="uso"><b>Temas sensíveis</b><p>Trata conteúdos com dimensão ética, cultural ou religiosa.</p><div class="uso-m"><span class="onde">Em aula</span><span class="obs">observe: <a class="chipd" href="#ind-D4.4" style="--c:var(--d4)" title="Ver o indicador D4.4 no quadro">D4.4</a> <a class="chipd" href="#ind-D5.4" style="--c:var(--d5)" title="Ver o indicador D5.4 no quadro">D5.4</a></span></div></div>
+<div class="uso"><b>Revisão humana antes do uso</b><p>O professor confere as respostas do agente antes de liberá-lo para a turma.</p><div class="uso-m"><span class="onde">Antes de usar</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-2" title="Ver os Ciclos 1 e 2 em Como aplicar">Ciclos 1 e 2</a></span></div></div>
+<div class="uso"><b>Pensar, conversar, compartilhar</b><p>O estudante prepara a ideia sozinho, conversa com o agente e depois apresenta à turma.</p><div class="uso-m"><span class="onde">Na aula</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-4" title="Ver o Ciclo 2 em Como aplicar">Ciclo 2</a></span></div></div>
+</div></div><div class="usos-g g-aj"><h3><span aria-hidden="true" class="usos-ic">~</span>Use com ajustes <small>quando o protocolo serve, mas alguns critérios precisam de adaptação</small></h3><div class="usos-grid">
+<div class="uso"><b>Prática de outra língua</b><p>Conversa por texto ou voz para praticar inglês ou espanhol.</p><div class="uso-m"><span class="obs">Ajustar os exemplos da D2</span></div></div>
+<div class="uso"><b>Organização dos estudos</b><p>Ajuda a planejar, acompanhar e refletir sobre como o estudante estuda.</p><div class="uso-m"><span class="obs">Ajustar a D3.1</span></div></div>
+<div class="uso"><b>Apoio ao professor</b><p>Ajuda no planejamento ou simula um estudante para o professor treinar.</p><div class="uso-m"><span class="obs">Quem conversa é o professor</span></div></div>
+</div></div><div class="usos-g g-nao"><h3><span aria-hidden="true" class="usos-ic">×</span>Fora do ProMAC <small>quando não há mediação pedagógica com o estudante</small></h3><div class="usos-grid">
+<div class="uso"><b>Família e Educação Infantil</b><p>Orienta pais nas tarefas ou conversa com crianças pequenas.</p><div class="uso-m"><span class="obs">Fora do escopo atual</span></div></div>
+<div class="uso"><b>Serviços da escola</b><p>Informa sobre biblioteca, matrícula ou calendário.</p><div class="uso-m"><span class="obs">Sem finalidade de ensino</span></div></div>
+<div class="uso"><b>Gestão escolar</b><p>Apoia comunicados e tarefas administrativas.</p><div class="uso-m"><span class="obs">Sem finalidade de ensino</span></div></div>
+</div></div></div>
+<p class="fonte">Fonte: elaborado pelos autores (2026).</p>
+<p>O ProMAC avalia o agente, nunca o estudante. Mais precisamente, observa o que o agente faz com o estudante na conversa, e não a tecnologia por trás dele, porque o mesmo modelo de IA pode se tornar um bom ou um mau agente, conforme as instruções e o material que recebe. Também não avalia a infraestrutura, a atividade como um todo, os chatbots de uso geral sem configuração pedagógica nem a comparação entre modelos de IA.</p>
+<p>O protocolo foi pensado para conversas por texto. Se os estudantes enviarem fotos do caderno ou áudios, teste também esses formatos com o item extra E14 (página <a href="#extras">Itens extras</a>) e registre à parte o que o agente compreendeu. Os exemplos provêm das Ciências da Natureza, mas o protocolo pode ser adaptado ao Ensino Superior. Para isso, substitua as falas da bateria de testes (as mensagens simuladas do Ciclo 1) por falas sobre o conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
+<h2 id="sec-1-4">1.4 Como usar este site</h2>
+<div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>Se você quer…</th><th>Vá para…</th></tr></thead><tbody><tr><td>Ver o caminho mais curto</td><td><a href="#sec-3">Início de Como aplicar</a></td></tr><tr><td>Saber o que reprova o agente imediatamente</td><td><a href="#sec-3-1">3.1 Antes de começar</a> (cartões)</td></tr><tr><td>Entender o que cada indicador observa</td><td><a href="#dimensoes">Dimensões</a></td></tr><tr><td>Testar o agente antes de levá-lo à turma</td><td><a href="#sec-3-2">3.2 Ciclo 1</a> e <a href="#sec-5-1">5.1 Bateria-modelo</a></td></tr><tr><td>Pontuar com a ficha que faz as contas</td><td><a href="#avaliar">Ficha de avaliação</a></td></tr><tr><td>Acompanhar o agente durante as aulas</td><td><a href="#sec-3-4">3.4 Ciclo 2</a> e <a href="#sec-5-4">5.4 a 5.6</a></td></tr><tr><td>Pontuar e decidir o que fazer</td><td><a href="#sec-3-5">3.5 Pontuar e decidir</a></td></tr><tr><td>Comparar as notas de dois avaliadores</td><td><a href="#comparar">Comparar</a></td></tr><tr><td>Aprofundar um indicador em amarelo</td><td><a href="#extras">Itens extras</a></td></tr></tbody></table></div>
+<details class="disclosure fontes"><summary><span>Fontes desta seção</span><span class="dchev">›</span></summary><div class="dbody">
+<ul>
+<li><strong>47% de respostas entregues:</strong> Maurya <em>et al.</em> (2025).</li>
+<li><strong>90% com boa qualidade pedagógica e 56,6% totalmente corretos:</strong> Gupta <em>et al.</em> (2025).</li>
+<li><strong>Ajuste ao nível de escolaridade em cerca de metade dos casos:</strong> Joshi <em>et al.</em> (2025).</li>
+<li><strong>70% dos estudantes do Ensino Médio usam IA generativa e 32% receberam orientação dos professores:</strong> CGI.br (2025).</li>
+<li><strong>Proteção de dados de crianças e adolescentes:</strong> LGPD (Brasil, 2018) e ECA Digital (Brasil, 2025).</li>
+<li><strong>Verificar as ferramentas de IA antes do uso:</strong> MEC (Brasil, 2026) e Unesco (2023).</li>
+</ul>
+<p>As referências completas estão em <a href="#referencias">Sobre, Referências</a>.</p>
+</div></details>
+<hr/>
+</div>
+</details>
+</div>
+</div>
+</section>
 
 <section class="videos-pr" aria-labelledby="videos-pr-h">
-<h2 id="videos-pr-h">Vídeos</h2>
-<p>Curtos e com legendas na imagem. Clique em uma miniatura para assistir.</p>
-<div class="vthumbs"><a class="vthumb" id="video" href="#video" data-vid="video-v"><span class="vt-img"><img src="video/ProMAC_demo_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min</span></span><b>O ProMAC em 1 minuto</b><span class="vt-s">Percurso pelo site</span></a><a class="vthumb" id="video-d31" href="#video-d31" data-vid="video-d31-v"><span class="vt-img"><img src="video/ProMAC_classificar_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 20 s</span></span><b>Classificar uma resposta</b><span class="vt-s">D3.1, com o GeneGênio</span></a><a class="vthumb" id="video-d53" href="#video-d53" data-vid="video-d53-v"><span class="vt-img"><img src="video/ProMAC_privacidade_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 15 s</span></span><b>Proteger os dados do estudante</b><span class="vt-s">D5.3, com a SophIA</span></a><a class="vthumb" id="video-ciclo0" href="#video-ciclo0" data-vid="video-ciclo0-v"><span class="vt-img"><img src="video/ProMAC_ciclo0_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 29 s</span></span><b>Ciclo 0 e triagem</b><span class="vt-s">Seção 3.1</span></a><a class="vthumb" id="video-decidir" href="#video-decidir" data-vid="video-decidir-v"><span class="vt-img"><img src="video/ProMAC_decidir_capa.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 25 s</span></span><b>O vermelho vem antes da média</b><span class="vt-s">Seção 3.5</span></a></div>
+<h2 id="videos-pr-h">Veja na prática</h2>
+<p>Quatro vídeos curtos, com legendas na imagem. Cada um faz uma pausa para que você decida antes de ver a resposta.</p>
+<div class="vthumbs"><a class="vthumb" id="video-d31" href="#video-d31" data-vid="video-d31-v"><span class="vt-img"><img src="video/ProMAC_classificar_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 20 s</span></span><b>Classificar uma resposta</b><span class="vt-s">D3.1, com o GeneGênio</span></a><a class="vthumb" id="video-d53" href="#video-d53" data-vid="video-d53-v"><span class="vt-img"><img src="video/ProMAC_privacidade_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 15 s</span></span><b>Proteger os dados do estudante</b><span class="vt-s">D5.3, com a SophIA</span></a><a class="vthumb" id="video-ciclo0" href="#video-ciclo0" data-vid="video-ciclo0-v"><span class="vt-img"><img src="video/ProMAC_ciclo0_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 29 s</span></span><b>Ciclo 0 e triagem</b><span class="vt-s">Seção 3.1</span></a><a class="vthumb" id="video-decidir" href="#video-decidir" data-vid="video-decidir-v"><span class="vt-img"><img src="video/ProMAC_decidir_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 25 s</span></span><b>O vermelho vem antes da média</b><span class="vt-s">Seção 3.5</span></a></div>
 <div class="vid-store" hidden>
 <figure class="video-demo" id="video-v">
 <figcaption><b>Veja o ProMAC em 1 minuto.</b> Um percurso pelo site: o caminho curto, o quadro dos indicadores, a ficha e o resultado. Sem som, com legendas na imagem.</figcaption>
@@ -1350,95 +1481,8 @@
 </section>
 <dialog class="vid-dlg" id="vid-dlg" aria-label="Vídeo"><button type="button" class="vid-x" aria-label="Fechar o vídeo">×</button><div class="vid-slot"></div></dialog>
 
-<details class="disclosure">
-<summary><span>Conheça o ProMAC em 5 minutos</span><span class="dchev">›</span></summary>
-<div class="dbody"><h2 id="sec-1-1">1.1 O que é</h2>
-<p>O ProMAC é um protocolo prático para que professores avaliem os agentes conversacionais de IA que configuram para suas turmas, organizando a leitura das conversas em cinco dimensões. Destina-se à Educação Básica, do Ensino Fundamental ao Ensino Médio, e pode ser adaptado ao Ensino Superior.</p>
-<p>Cada dimensão responde a uma pergunta.</p>
-<div class="table-wrap"><table class="doc-table">
-<thead>
-<tr class="header">
-<th>Dimensão</th>
-<th>Pergunta</th>
-<th>Indicadores</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>D1 Qualidade Técnica e Usabilidade</td>
-<td>O agente funciona e é fácil de utilizar?</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>D2 Linguagem e Comunicação</td>
-<td>Comunica-se de maneira compreensível e coerente?</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td>D3 Interação e Mediação</td>
-<td>Estimula o pensamento do estudante ou entrega respostas prontas?</td>
-<td>4</td>
-</tr>
-<tr class="even">
-<td>D4 Currículo e Rigor Científico</td>
-<td>Apresenta informações corretas e alinhadas aos conteúdos?</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td>D5 Ética, Transparência e Privacidade</td>
-<td>É transparente e respeita os direitos e a segurança do estudante?</td>
-<td>4</td>
-</tr>
-</tbody>
-</table></div>
-<p>Cada indicador recebe uma nota de 1 a 3: Inadequado (1), Parcialmente adequado (2) ou Adequado (3). Algumas falhas, chamadas de cartões vermelhos, são tão graves que reprovam o agente imediatamente, sejam quais forem as demais notas.</p>
-<h2 id="sec-1-2">1.2 Por que testar antes de levar à turma</h2>
-<div class="web-nums">
-<p class="num"><span class="n">47%</span> <strong>Responder não é ensinar.</strong> Em um estudo sobre tutoria de Matemática, o GPT-4 entregou a resposta pronta em cerca de 47% das situações.<span class="num-fonte">Maurya <em>et al.</em> (2025)</span></p>
-<p class="num"><span class="n">56,6%</span> <strong>Parecer bom não é estar certo.</strong> Em outro estudo sobre tutoria de Matemática, embora 90% dos diálogos gerados por IA tivessem boa qualidade pedagógica, apenas 56,6% estavam totalmente corretos.<span class="num-fonte">Gupta <em>et al.</em> (2025)</span></p>
-<p class="num"><span class="n">1 em 2</span> <strong>Nem sempre se comunica no nível da turma.</strong> Em um estudo, as explicações do GPT-4 corresponderam ao nível de escolaridade solicitado em cerca de metade dos casos, contra 79% das explicações escritas por pessoas.<span class="num-fonte">Joshi <em>et al.</em> (2025)</span></p>
-<p class="num"><span class="n">32%</span> <strong>A IA já está na sala de aula.</strong> Entre os estudantes do Ensino Médio que usam a internet, 70% já recorreram à IA generativa em pesquisas escolares, mas apenas 32% disseram que os professores conversaram com eles sobre como usá-la nas atividades escolares.<span class="num-fonte">CGI.br (2025)</span></p>
-</div>
-<p>O comportamento do agente depende de como ele foi configurado. Por isso, somente o teste do seu agente pode revelar se ele está pronto. Além disso, a Lei Geral de Proteção de Dados Pessoais (LGPD) e o Estatuto Digital da Criança e do Adolescente (ECA Digital) exigem cuidado com os dados de crianças e adolescentes, e o Ministério da Educação (MEC) e a Unesco recomendam verificar as ferramentas de IA antes de usá-las com os estudantes.</p>
-<h2 id="sec-1-3">1.3 Quando usar</h2>
-<div class="usos">
-<div class="usos-g g-sim"><h3><span aria-hidden="true" class="usos-ic">✓</span>Use o ProMAC <small>quando o agente conversa com o estudante com finalidade de ensino</small></h3><div class="usos-grid">
-<div class="uso"><b>Tutoria na resolução de problemas</b><p>Conduz o estudante passo a passo, com pistas, sem entregar a resposta.</p><div class="uso-m"><span class="onde">Em aula e em casa</span><span class="obs">observe: <a class="chipd" href="#ind-D3.1" style="--c:var(--d3)" title="Ver o indicador D3.1 no quadro">D3.1</a></span></div></div>
-<div class="uso"><b>Feedback sobre produções</b><p>Comenta textos, relatórios de laboratório e roteiros de experimento.</p><div class="uso-m"><span class="onde">Em aula e em casa</span><span class="obs">observe: <a class="chipd" href="#ind-D3.2" style="--c:var(--d3)" title="Ver o indicador D3.2 no quadro">D3.2</a></span></div></div>
-<div class="uso"><b>Explicação de conceitos</b><p>Explica o conteúdo em linguagem adequada à idade e ao ano escolar.</p><div class="uso-m"><span class="onde">Em aula</span><span class="obs">observe: <a class="chipd" href="#ind-D2.1" style="--c:var(--d2)" title="Ver o indicador D2.1 no quadro">D2.1</a> <a class="chipd" href="#ind-D4.1" style="--c:var(--d4)" title="Ver o indicador D4.1 no quadro">D4.1</a></span></div></div>
-<div class="uso"><b>Dúvidas fora do horário</b><p>Responde dúvidas da lista de exercícios, inclusive por aplicativo de mensagem.</p><div class="uso-m"><span class="onde">Em casa</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-4" title="Ver o Ciclo 2 em Como aplicar">Ciclo 2</a></span></div></div>
-<div class="uso"><b>Preparação para provas e olimpíadas</b><p>Dá retorno sobre questões de prática, inclusive de múltipla escolha.</p><div class="uso-m"><span class="onde">Contraturno e casa</span><span class="obs">observe: <a class="chipd" href="#ind-D4.1" style="--c:var(--d4)" title="Ver o indicador D4.1 no quadro">D4.1</a></span></div></div>
-<div class="uso"><b>Temas sensíveis</b><p>Trata conteúdos com dimensão ética, cultural ou religiosa.</p><div class="uso-m"><span class="onde">Em aula</span><span class="obs">observe: <a class="chipd" href="#ind-D4.4" style="--c:var(--d4)" title="Ver o indicador D4.4 no quadro">D4.4</a> <a class="chipd" href="#ind-D5.4" style="--c:var(--d5)" title="Ver o indicador D5.4 no quadro">D5.4</a></span></div></div>
-<div class="uso"><b>Revisão humana antes do uso</b><p>O professor confere as respostas do agente antes de liberá-lo para a turma.</p><div class="uso-m"><span class="onde">Antes de usar</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-2" title="Ver os Ciclos 1 e 2 em Como aplicar">Ciclos 1 e 2</a></span></div></div>
-<div class="uso"><b>Pensar, conversar, compartilhar</b><p>O estudante prepara a ideia sozinho, conversa com o agente e depois apresenta à turma.</p><div class="uso-m"><span class="onde">Na aula</span><span class="obs">observe: <a class="chipd chip-c" href="#sec-3-4" title="Ver o Ciclo 2 em Como aplicar">Ciclo 2</a></span></div></div>
-</div></div><div class="usos-g g-aj"><h3><span aria-hidden="true" class="usos-ic">~</span>Use com ajustes <small>quando o protocolo serve, mas alguns critérios precisam de adaptação</small></h3><div class="usos-grid">
-<div class="uso"><b>Prática de outra língua</b><p>Conversa por texto ou voz para praticar inglês ou espanhol.</p><div class="uso-m"><span class="obs">Ajustar os exemplos da D2</span></div></div>
-<div class="uso"><b>Organização dos estudos</b><p>Ajuda a planejar, acompanhar e refletir sobre como o estudante estuda.</p><div class="uso-m"><span class="obs">Ajustar a D3.1</span></div></div>
-<div class="uso"><b>Apoio ao professor</b><p>Ajuda no planejamento ou simula um estudante para o professor treinar.</p><div class="uso-m"><span class="obs">Quem conversa é o professor</span></div></div>
-</div></div><div class="usos-g g-nao"><h3><span aria-hidden="true" class="usos-ic">×</span>Fora do ProMAC <small>quando não há mediação pedagógica com o estudante</small></h3><div class="usos-grid">
-<div class="uso"><b>Família e Educação Infantil</b><p>Orienta pais nas tarefas ou conversa com crianças pequenas.</p><div class="uso-m"><span class="obs">Fora do escopo atual</span></div></div>
-<div class="uso"><b>Serviços da escola</b><p>Informa sobre biblioteca, matrícula ou calendário.</p><div class="uso-m"><span class="obs">Sem finalidade de ensino</span></div></div>
-<div class="uso"><b>Gestão escolar</b><p>Apoia comunicados e tarefas administrativas.</p><div class="uso-m"><span class="obs">Sem finalidade de ensino</span></div></div>
-</div></div></div>
-<p class="fonte">Fonte: elaborado pelos autores (2026).</p>
-<p>O ProMAC avalia o agente, nunca o estudante. Mais precisamente, observa o que o agente faz com o estudante na conversa, e não a tecnologia por trás dele, porque o mesmo modelo de IA pode se tornar um bom ou um mau agente, conforme as instruções e o material que recebe. Também não avalia a infraestrutura, a atividade como um todo, os chatbots de uso geral sem configuração pedagógica nem a comparação entre modelos de IA.</p>
-<p>O protocolo foi pensado para conversas por texto. Se os estudantes enviarem fotos do caderno ou áudios, teste também esses formatos com o item extra E14 (página <a href="#extras">Itens extras</a>) e registre à parte o que o agente compreendeu. Os exemplos provêm das Ciências da Natureza, mas o protocolo pode ser adaptado ao Ensino Superior. Para isso, substitua as falas da bateria de testes (as mensagens simuladas do Ciclo 1) por falas sobre o conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
-<h2 id="sec-1-4">1.4 Como usar este site</h2>
-<div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>Se você quer…</th><th>Vá para…</th></tr></thead><tbody><tr><td>Ver o caminho mais curto</td><td><a href="#sec-3">Início de Como aplicar</a></td></tr><tr><td>Saber o que reprova o agente imediatamente</td><td><a href="#sec-3-1">3.1 Antes de começar</a> (cartões)</td></tr><tr><td>Entender o que cada indicador observa</td><td><a href="#dimensoes">Dimensões</a></td></tr><tr><td>Testar o agente antes de levá-lo à turma</td><td><a href="#sec-3-2">3.2 Ciclo 1</a> e <a href="#sec-5-1">5.1 Bateria-modelo</a></td></tr><tr><td>Pontuar com a ficha que faz as contas</td><td><a href="#avaliar">Avaliar</a></td></tr><tr><td>Acompanhar o agente durante as aulas</td><td><a href="#sec-3-4">3.4 Ciclo 2</a> e <a href="#sec-5-4">5.4 a 5.6</a></td></tr><tr><td>Pontuar e decidir o que fazer</td><td><a href="#sec-3-5">3.5 Pontuar e decidir</a></td></tr><tr><td>Comparar as notas de dois avaliadores</td><td><a href="#comparar">Comparar</a></td></tr><tr><td>Aprofundar um indicador em amarelo</td><td><a href="#extras">Itens extras</a></td></tr></tbody></table></div>
-<details class="disclosure fontes"><summary><span>Fontes desta seção</span><span class="dchev">›</span></summary><div class="dbody">
-<ul>
-<li><strong>47% de respostas entregues:</strong> Maurya <em>et al.</em> (2025).</li>
-<li><strong>90% com boa qualidade pedagógica e 56,6% totalmente corretos:</strong> Gupta <em>et al.</em> (2025).</li>
-<li><strong>Ajuste ao nível de escolaridade em cerca de metade dos casos:</strong> Joshi <em>et al.</em> (2025).</li>
-<li><strong>70% dos estudantes do Ensino Médio usam IA generativa e 32% receberam orientação dos professores:</strong> CGI.br (2025).</li>
-<li><strong>Proteção de dados de crianças e adolescentes:</strong> LGPD (Brasil, 2018) e ECA Digital (Brasil, 2025).</li>
-<li><strong>Verificar as ferramentas de IA antes do uso:</strong> MEC (Brasil, 2026) e Unesco (2023).</li>
-</ul>
-<p>As referências completas estão em <a href="#referencias">Sobre, Referências</a>.</p>
-</div></details>
-<hr/>
-</div>
-</details>
+
+
 <details class="disclosure conversa-com">
 <summary><span>Ver uma conversa comentada, troca a troca</span><span class="dchev">›</span></summary>
 <div class="dbody">
@@ -1467,6 +1511,8 @@
 </section>
 </div>
 </details>
+<h2 class="por-onde" id="por-onde">Por onde seguir</h2>
+<nav class="bento" aria-labelledby="por-onde"><a class="bt" href="#avaliar"><span class="bt-k">Na tela</span><b>Avaliar um agente</b><span class="bt-p">Ficha com escores, faixas e relatório.</span><span class="bt-seta" aria-hidden="true">→</span></a><a class="bt" href="#dimensoes"><span class="bt-k">Consulta</span><b>Os 18 indicadores</b><span class="bt-p">Rubricas e exemplos de conversa.</span><span class="bt-seta" aria-hidden="true">→</span></a><a class="bt" href="#instrumentos"><span class="bt-k">Para imprimir</span><b>Instrumentos</b><span class="bt-p">Bateria, mapa, fichas e questionários.</span><span class="bt-seta" aria-hidden="true">→</span></a></nav>
   </section>
 
 
@@ -1752,12 +1798,12 @@
 </blockquote>
 <h2 id="sec-3-2">3.2 Ciclo 1 – Bateria de testes simulados</h2>
 <p>Faça o Ciclo 1 antes de liberar o agente para a turma, de preferência com um colega.</p>
-<p><strong>Antes de começar, tenha em mãos:</strong> acesso de editor ao agente, as instruções e a base de conhecimento atuais, o plano da atividade, a bateria (seção <a href="#sec-5-1">5.1</a>) e a ficha da página <a href="#avaliar">Avaliar</a> aberta (ou a ficha semáforo impressa, seção <a href="#sec-5-3">5.3</a>).  <strong>Se tiver só uma tarde:</strong> triagem, B01, B04, B12, B13 e B14; o resto fica para a rodada seguinte.</p>
+<p><strong>Antes de começar, tenha em mãos:</strong> acesso de editor ao agente, as instruções e a base de conhecimento atuais, o plano da atividade, a bateria (seção <a href="#sec-5-1">5.1</a>) e a <a href="#avaliar">Ficha de avaliação</a> aberta (ou a ficha semáforo impressa, seção <a href="#sec-5-3">5.3</a>).  <strong>Se tiver só uma tarde:</strong> triagem, B01, B04, B12, B13 e B14; o resto fica para a rodada seguinte.</p>
 <ol type="1">
 <li><strong>Prepare a bateria.</strong> Copie a bateria-modelo (seção <a href="#sec-5-1">5.1</a>). As falas já vêm com exemplos de Ciências: troque só o que quiser.</li>
 <li><strong>Registre a versão.</strong> Anote as instruções, a base de conhecimento e a plataforma (seção <a href="#sec-5-7">5.7</a>).</li>
 <li><strong>Aplique.</strong> Converse com o agente no papel do estudante. Abra uma conversa nova para cada bloco e salve o histórico. Se a conta tiver memória entre conversas, use o chat temporário ou desligue a memória durante o Ciclo 1; caso contrário, o agente se lembrará das conversas anteriores, o que compromete o B13.</li>
-<li><strong>Pontue.</strong> Leia as conversas com os quadros da página <a href="#dimensoes">Dimensões</a> e marque as notas na ficha da página <a href="#avaliar">Avaliar</a>, que faz as contas.</li>
+<li><strong>Pontue.</strong> Leia as conversas com os quadros da página <a href="#dimensoes">Dimensões</a> e marque as notas na <a href="#avaliar">Ficha de avaliação</a>, que faz as contas.</li>
 <li><strong>Ajuste.</strong> Se algum indicador ficou em vermelho, mude as instruções ou a base de conhecimento e registre o que mudou.</li>
 <li><strong>Reaplique.</strong> Refaça a triagem e a bateria básica, porque um ajuste pode piorar outro indicador. Recorra aos itens extras apenas nos indicadores em que houver dúvida.</li>
 <li><strong>Encerre</strong> quando nenhum indicador aplicável ficar em Inadequado (vermelho) e não houver cartão vermelho pendente. Essa rodada é a linha de base do agente.</li>
@@ -1908,7 +1954,7 @@
 </div></details>
 <hr/>
 
-<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>pegue a bateria em <a href="#instrumentos">Instrumentos</a> e pontue na ficha de <a href="#avaliar">Avaliar</a>.</p></div>
+<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>pegue a bateria em <a href="#instrumentos">Instrumentos</a> e pontue na <a href="#avaliar">Ficha de avaliação</a>.</p></div>
   </section>
 
   <!-- ================= AVALIAR ================= -->
@@ -2369,7 +2415,7 @@
 <li><strong>Quem interpreta não pontua.</strong> Se houver um colega, um faz o papel do estudante e o outro pontua a transcrição sem saber qual é o agente.</li>
 </ul>
 
-<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>registre o resultado na ficha de <a href="#avaliar">Avaliar</a> e feche a rodada com a ficha-resumo (seção <a href="#sec-5-8">5.8</a>).</p></div>
+<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>registre o resultado na <a href="#avaliar">Ficha de avaliação</a> e feche a rodada com a ficha-resumo (seção <a href="#sec-5-8">5.8</a>).</p></div>
   </section>
 
   <!-- ================= INSTRUMENTOS ================= -->
@@ -2382,7 +2428,7 @@
 <li>fechar a avaliação com a ficha-resumo.</li>
 </ul>
 </div>
-<p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a ficha da página <a href="#avaliar">Avaliar</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
+<p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
 <section aria-labelledby="sec-5-1" class="instr"><h2 id="sec-5-1">5.1 Bateria-modelo do Ciclo 1</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
 <p>As falas já vêm com exemplos de Ciências e Biologia: adapte apenas o que julgar necessário. Abra uma conversa nova para cada bloco e anote o tempo de resposta e as falhas técnicas em todos eles. ▲ = item da triagem. O que cada item mostra está no mapa (seção <a href="#sec-5-2">5.2</a>).</p>
 <div class="table-wrap"><table class="doc-table instr-table">
@@ -2535,7 +2581,7 @@
 <p class="fonte">● o item alimenta o indicador · ○ D1.1: anote o tempo de resposta e as falhas em todos os itens · ▲ item da triagem · passe o dedo para o lado para ver todos os indicadores.</p>
 <p class="fonte">Fonte: elaborado pelos autores (2026).</p>
 </section><section aria-labelledby="sec-5-3" class="instr"><h2 id="sec-5-3">5.3 Ficha semáforo</h2>
-<p>Na tela, use a ficha da página <a href="#avaliar">Avaliar</a>: ela registra as notas, calcula os escores e as faixas e gera o relatório em PDF e a planilha. A ficha semáforo é a versão em papel, para quem prefere anotar à mão durante o teste. Para cada amarelo, vermelho ou N/A, anote a evidência: a conversa (por exemplo, conversa 3), o turno e o trecho entre aspas que justifica a nota.</p><p><a class="dlbtn" href="img/fig4_semaforo.webp" rel="noopener" target="_blank">Abrir a ficha semáforo para imprimir</a></p>
+<p>Na tela, use a <a href="#avaliar">Ficha de avaliação</a>: ela registra as notas, calcula os escores e as faixas e gera o relatório em PDF e a planilha. A ficha semáforo é a versão em papel, para quem prefere anotar à mão durante o teste. Para cada amarelo, vermelho ou N/A, anote a evidência: a conversa (por exemplo, conversa 3), o turno e o trecho entre aspas que justifica a nota.</p><p><a class="dlbtn" href="img/fig4_semaforo.webp" rel="noopener" target="_blank">Abrir a ficha semáforo para imprimir</a></p>
 </section><section aria-labelledby="sec-5-4" class="instr"><h2 id="sec-5-4">5.4 Questionário do professor</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
 <p>Responda ao fim de cada rodada, pensando no comportamento do agente durante as aulas. Marque uma opção por item.</p>
 <p>Escala: 1 = Não · 2 = Em parte · 3 = Sim · NO = Não observei</p>
@@ -3002,7 +3048,7 @@ Depois do CSV, escreva uma lista curta dos itens marcados [REVISAR], com o motiv
 SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 [colar aqui]</code></pre>
 </div>
-<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>depois de conversar com o agente, pontue na ficha de <a href="#avaliar">Avaliar</a>. Se um indicador ficar em amarelo, veja os <a href="#extras">Itens extras</a>.</p></div>
+<div class="web-box proximo"><span class="box-k">Próximo passo</span><p>depois de conversar com o agente, pontue na <a href="#avaliar">Ficha de avaliação</a>. Se um indicador ficar em amarelo, veja os <a href="#extras">Itens extras</a>.</p></div>
   </section>
 
   <!-- ================= EXEMPLO ================= -->
@@ -3228,7 +3274,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
       <div class="dbody"><p><b>Guia em PDF e site: onde está cada parte.</b> Os dois têm a mesma versão (0.9.31) e a mesma numeração de seções.</p>
       <div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>No guia em PDF</th><th>No site</th></tr></thead><tbody>
       <tr><td>Carta ao professor e capítulo 1</td><td>Carta: <a href="#carta">Sobre</a>; capítulo 1: <a href="#inicio">Início</a> (Conheça o ProMAC em 5 minutos)</td></tr>
-      <tr><td>Capítulo 2 – As cinco dimensões e os 18 indicadores</td><td><a href="#dimensoes">Dimensões</a>; ficha de pontuação em <a href="#avaliar">Avaliar</a></td></tr>
+      <tr><td>Capítulo 2 – As cinco dimensões e os 18 indicadores</td><td><a href="#dimensoes">Dimensões</a>; ficha de pontuação em <a href="#avaliar">Ficha de avaliação</a></td></tr>
       <tr><td>Capítulo 3 – Como aplicar (3.1 a 3.7)</td><td><a href="#aplicar">Como aplicar</a>; calibração em <a href="#comparar">Comparar</a></td></tr>
       <tr><td>Capítulo 4 – Cuidados com os dados</td><td><a href="#etica">Dados</a></td></tr>
       <tr><td>Capítulo 5 – Instrumentos (5.1 a 5.9)</td><td><a href="#instrumentos">Instrumentos</a>, com o prompt do avaliador LLM no fim</td></tr>
@@ -3511,7 +3557,7 @@ const DIMENSOES = [
  {
   "id": "d3",
   "nome": "D3 · Interação e Mediação",
-  "curto": "D3 Interação",
+  "curto": "D3 Mediação",
   "desc": "Esta dimensão olha o papel pedagógico do agente. Um agente educacional não deve funcionar como fonte de respostas prontas, mas como mediador: alguém que pede ao estudante que pense, justifique, revise e esclareça o que quer saber, em um clima em que errar é parte do caminho.",
   "exemplo": "",
   "indicadores": [
@@ -3747,7 +3793,7 @@ const PAGES = [
   { id: "inicio", label: "Início" },
   { id: "dimensoes", label: "Dimensões" },
   { id: "aplicar", label: "Como aplicar" },
-  { id: "avaliar", label: "Avaliar" },
+  { id: "avaliar", label: "Ficha de avaliação" },
   { id: "comparar", label: "Comparar" },
   { id: "instrumentos", label: "Instrumentos" },
   { id: "fundamentacao", label: "Para saber mais" },
@@ -3777,7 +3823,7 @@ function buildTopNav() {
   const temValidar = PAGES.some(p => p.id === "validar");
   const estreito = window.innerWidth <= 640;
   const princ = estreito ? (temValidar ? ["inicio", "validar", "dimensoes", "avaliar"] : ["inicio", "dimensoes", "aplicar", "avaliar"])
-                         : ["inicio", "validar", "dimensoes", "aplicar", "avaliar", "instrumentos"];
+                         : ["inicio", "validar", "dimensoes", "aplicar", "avaliar"];
   const wrap = document.createElement("span"); wrap.className = "mais-wrap";
   const mb = document.createElement("button"); mb.type = "button"; mb.className = "mais-btn"; mb.setAttribute("aria-expanded", "false"); mb.setAttribute("aria-controls", "mais-pop");
   mb.innerHTML = '<span class="mais-l">Mais</span> <span aria-hidden="true">▾</span>';
@@ -3785,7 +3831,7 @@ function buildTopNav() {
   const fecha = () => { pop.classList.remove("on"); mb.setAttribute("aria-expanded", "false"); };
   PAGES.forEach(p => {
     const btn = document.createElement("button");
-    btn.innerHTML = `${icon(p.id, 15)}<span>${p.label}</span>`;
+    btn.innerHTML = `${icon(p.id, 15)}<span>${estreito && p.id === "avaliar" ? "Ficha" : p.label}</span>`;
     btn.dataset.page = p.id;
     if (p.id === "avaliar") btn.classList.add("nav-primary");
     if (princ.includes(p.id)) { btn.onclick = () => goToPage(p.id); nav.appendChild(btn); }
