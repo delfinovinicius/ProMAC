@@ -5173,7 +5173,8 @@ countUp();
       <section id="vl-enviar" class="vl-env" ${S.parada === P.length - 1 ? "" : "hidden"}><h2>Enviar</h2>
       ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo: as que faltarem chegam em branco, sem problema.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
       <p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
-      <p class="vl-priv">Se o formulário não abrir, envie ao autor por e-mail o seu código de validação: <b>${S.cod}</b>.</p></section>`;
+      <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o formulário não abrir, copie o resumo abaixo e envie-o ao autor por e-mail.</p>
+      <details class="vl-more"><summary>Ver o resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px">${esc(resumo())}</pre></details></section>`;
     root.innerHTML = h;
     root.querySelector("#vl-comecar").onclick = () => irPara(Math.max(0, S.parada));
     root.querySelector("#vl-send").onclick = enviar;
