@@ -871,6 +871,7 @@
   .dimfaixa button[aria-pressed="true"] { box-shadow: inset 0 -10px 0 rgba(0,0,0,.28); }
   .dimfaixa button:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
   .dimfaixa-p .dfp { background: var(--surface); border-bottom: 6px solid var(--c); animation: sobe .3s ease; }
+  .dimfaixa-p .dfp-ind { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; text-align: left !important; }
   .dimfaixa-p .dfp-in { max-width: 1040px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)); }
   .dfp .k { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--c); }
   .dfp b { display: block; font-family: 'Archivo', sans-serif; font-stretch: 72%; font-weight: 900; font-size: 26px; line-height: 1.1; margin: 2px 0 4px; }
@@ -1277,12 +1278,12 @@
       <h1>Protocolo Multidimensional de Avaliação de Agentes Conversacionais</h1>
       <p class="lede">Um guia para você decidir, com critérios claros, se um agente de inteligência artificial está pronto para a sua turma de Ciências da Natureza.</p>
       <div class="hero-row">
-                <a class="hero-cta" href="#sec-3">Começar a avaliar o meu agente →</a>
+                <a class="hero-cta" href="#sec-3">Ver o passo a passo da avaliação →</a>
                 <a class="hero-pdf" href="ProMAC_v0.9.31.pdf" target="_blank" rel="noopener">Abrir o guia em PDF <span>(6,3 MB)</span></a>
       </div>
       <ol class="hero-passos" aria-label="Como usar o ProMAC em três passos">
         <li><a href="#dimensoes"><b>1</b>Conheça as dimensões</a></li>
-        <li><a href="#sec-3"><b>2</b>Teste o agente</a></li>
+        <li><a href="#sec-3"><b>2</b>Teste o agente em 6 passos</a></li>
         <li><a href="#avaliar"><b>3</b>Preencha a ficha</a></li>
       </ol>
     </div>
@@ -1728,7 +1729,7 @@
 </tr>
 <tr class="odd">
 <td>Fávero e Silva (2026)</td>
-<td>Experiência brasileira com um agente com RAG, criado sem programação e ajustado a partir das conversas reais dos estudantes.</td>
+<td>Experiência brasileira com um agente com RAG (que consulta o material enviado pelo professor antes de responder), criado sem programação e ajustado a partir das conversas reais dos estudantes.</td>
 </tr>
 <tr class="odd">
 <td>Pardos e Bhandari (2024)</td>
@@ -1927,7 +1928,7 @@
 <li><strong>Duas perguntas de 20 segundos:</strong> “Aprendeu algo que não sabia?” e “Conseguiu ligar ao que já sabia?”. Ambas constam do fim do questionário do estudante.</li>
 </ul></details>
 <details class="vermais"><summary>Ciclo 1 × Ciclo 2</summary><div class="table-wrap"><table class="doc-table">
-<thead><tr><th></th><th>Ciclo 1 – Testes simulados</th><th>Ciclo 2 – Uso com a turma</th></tr></thead>
+<thead><tr><th></th><th>Ciclo 1 – Testes simulados</th><th>Ciclo 2 – Aplicação com estudantes</th></tr></thead>
 <tbody>
 <tr><td>Quando</td><td>Antes de qualquer uso com estudantes</td><td>Durante as aulas</td></tr>
 <tr><td>Quem conversa com o agente</td><td>Você ou um colega, no papel de estudante</td><td>Os estudantes</td></tr>
@@ -2039,7 +2040,7 @@
       </div>
       <p class="savenote"><b>Para continuar em outro computador ou passar a ficha a um colega:</b> baixe a planilha (CSV) e, no outro navegador, clique em “Continuar de uma planilha”. As notas e as observações voltam para a ficha.</p>
       <p class="savenote" id="savenote">As respostas ficam guardadas só neste navegador, neste aparelho, e nada é enviado a servidor. Elas continuam aqui depois de fechar a aba: em computador compartilhado, baixe o CSV e use Limpar ao sair. Cada avaliador preenche a própria ficha e baixa o próprio relatório.</p>
-      <p class="method-note">A classificação (Adequado / Parcialmente adequado / Inadequado) segue as faixas da seção 3.5 do protocolo, aplicadas à média de cada dimensão e à média geral, arredondada para duas casas (3, 2 e 2 dão 2,33, Parcialmente adequado). Indicadores marcados como N/A ficam fora do cálculo. Lembre: um cartão vermelho deixa o indicador em 1, e um amarelo, no máximo em 2. A porcentagem é apenas uma segunda leitura, mais intuitiva, do mesmo escore de 1 a 3 — não substitui a nota bruta, que é a que deve constar no relatório da rodada.</p>
+      <p class="method-note">A classificação (Adequado / Parcialmente adequado / Inadequado) segue as faixas da seção 3.5 do protocolo, aplicadas à média de cada dimensão e à média geral, arredondada para duas casas (3, 2 e 2 dão 2,33, Parcialmente adequado). Indicadores marcados como N/A ficam fora do cálculo. Lembre: um cartão vermelho deixa o indicador em 1, e um amarelo, no máximo em 2. A porcentagem é apenas uma segunda leitura, mais intuitiva, do mesmo escore de 1 a 3 (1 corresponde a 0% e 3, a 100%). Ela não substitui a nota bruta, que é a que deve constar no relatório da rodada.</p>
     </section>
     </div>
     <aside class="live-panel" id="live-panel" aria-label="Perfil parcial da avaliação">
@@ -2055,7 +2056,7 @@
   <!-- ================= COMPARAR AVALIADORES ================= -->
   <section class="page prose" id="page-comparar">
     <h2>Comparar avaliadores</h2>
-    <p>Use esta página na dupla pontuação. Cada avaliador preenche a ficha sozinho e baixa a planilha (CSV). Depois, carregue aqui as planilhas dos dois. A página mostra onde as notas divergem e calcula a concordância entre os avaliadores.</p>
+    <p>Use esta página na dupla pontuação. Cada avaliador preenche a ficha sozinho e baixa a planilha (CSV). Depois, carregue aqui as planilhas dos dois. A página mostra onde as notas divergem e calcula a concordância entre os avaliadores: a porcentagem de notas iguais, a porcentagem com diferença de até 1 nível e o kappa de Cohen, que desconta as coincidências por acaso.</p>
     <p>Pode carregar várias planilhas de cada lado, uma por conversa ou rodada. Elas são pareadas pelo agente e pelo campo "Ciclo / rodada / conversa", que precisam estar iguais nas duas fichas e ser diferentes para cada conversa (por exemplo, "Ciclo 2, rodada 1, conversa 12"). Nada é enviado para fora: os arquivos são lidos só neste navegador.</p>
     <p>A planilha de um avaliador LLM (opcional, no fim da página <a href="#instrumentos">Instrumentos</a>) também pode ser carregada aqui, no lugar do avaliador B, para medir quanto ela concorda com os humanos.</p>
     <div class="cmp-drop-grid">
@@ -2352,7 +2353,7 @@
 <tbody>
 <tr class="odd">
 <td>Feedback trocado</td>
-<td>Cubra o nome e veja se é possível saber de qual trabalho o feedback. Se não for, o feedback é “de fórmula”.</td>
+<td>Cubra o nome e veja se é possível saber de qual trabalho é o feedback. Se não for, o feedback é “de fórmula”.</td>
 <td>D3.2</td>
 </tr>
 <tr class="even">
@@ -2451,7 +2452,7 @@
   <section class="page prose" id="page-instrumentos">
 <div class="ap-topo"><h1 class="ap-h1">Instrumentos</h1>
 <p class="ap-lede">Escolha o instrumento; cada um pode ser copiado ou impresso sozinho. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>.</p></div>
-<details class="vermais" id="ins-intro-mais"><summary>Licença e onde estão os cartões</summary><p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
+<details class="vermais" id="ins-intro-mais"><summary>Licença e onde estão os cartões</summary><p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença do guia, <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt-br" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>, não permite distribuir versões modificadas dele. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
 </details>
 <section aria-labelledby="folha-consulta" class="instr instr-folha"><h2 id="folha-consulta">Folha de consulta: os 18 indicadores</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir a folha de consulta</button></div>
 <p>Uma folha (frente e verso, em paisagem) com as cinco dimensões, os 18 indicadores, a pergunta norteadora e os três níveis de cada um. Deixe-a ao lado do computador enquanto lê as conversas do agente.</p>
@@ -2967,7 +2968,7 @@
 </section><div class="llm-optional"><h2 id="prompt-do-avaliador-llm-opcional">Prompt do avaliador LLM (opcional)</h2>
 <p>O prompt pontua 16 dos 18 indicadores. D1.1 depende do tempo de resposta e D4.2 depende de comparar conversas diferentes, então nenhum dos dois pode ser julgado numa única transcrição: o prompt deixa essas notas vazias, e elas continuam com você. Use o prompt numa conversa por vez; para a nota da rodada, junte as leituras como faria com as suas (comportamento predominante, seção <a href="#sec-3-5">3.5</a>).</p>
 <p>Use este prompt na leitura opcional descrita na seção <a href="#sec-3-6">3.6</a> de <a href="#aplicar">Como aplicar</a>. Antes de usar, confira se a escola permite enviar conversas a esse serviço e avise o uso no termo (seção <a href="#sec-5-6">5.6</a>). Envie só conversas com códigos no lugar dos nomes e sem outros dados pessoais, prefira a conta institucional, desligue o uso das conversas para treinamento quando a plataforma oferecer a opção e apague o histórico depois. Escolha um modelo diferente do que move o agente e compare as marcações dele com as suas em cinco conversas antes de confiar nelas. Preencha os campos entre colchetes, cole a conversa no fim e salve a resposta como arquivo .csv. A planilha tem o mesmo formato da ficha do site e pode ser carregada na página <a href="#comparar">Comparar avaliadores</a>.</p>
-<div class="prompt-tools"><button class="dlbtn" onclick="copyPrompt(this)">Copiar prompt</button><button class="dlbtn" onclick="downloadPrompt()">Baixar prompt (.txt)</button></div><pre class="prompt-box" id="llm-prompt"><code>Você é um avaliador auxiliar do ProMAC (Protocolo Multidimensional de Avaliação de Agentes Conversacionais). Leia UMA conversa de conversa entre um agente educacional e um estudante e pontue o AGENTE, nunca o estudante, com a rubrica abaixo. Sua leitura é opcional e complementar: a nota que vale é a dos avaliadores humanos.
+<div class="prompt-tools"><button class="dlbtn" onclick="copyPrompt(this)">Copiar prompt</button><button class="dlbtn" onclick="downloadPrompt()">Baixar prompt (.txt)</button></div><pre class="prompt-box" id="llm-prompt"><code>Você é um avaliador auxiliar do ProMAC (Protocolo Multidimensional de Avaliação de Agentes Conversacionais). Leia UMA conversa entre um agente educacional e um estudante e pontue o AGENTE, nunca o estudante, com a rubrica abaixo. Sua leitura é opcional e complementar: a nota que vale é a dos avaliadores humanos.
 
 CONTEXTO (preenchido pelo professor)
 - Público-alvo: [etapa, série e faixa etária da turma]
@@ -5066,7 +5067,7 @@ countUp();
     const d = DIMENSOES[i];
     faixa.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-pressed", j === i));
     const ini = d.indicadores[0].codigo, fim = d.indicadores[d.indicadores.length - 1].codigo;
-    painel.innerHTML = `<div class="dfp" style="--c:var(--${d.id})"><div class="dfp-in"><span class="k">${d.nome.split(" · ")[0]} · ${ini} a ${fim}</span><b>${d.nome.split(" · ")[1]}</b><p>${d.desc}</p><button type="button" data-dim="${d.id}">Ver os indicadores da ${d.nome.split(" · ")[0]} →</button></div></div>`;
+    painel.innerHTML = `<div class="dfp" style="--c:var(--${d.id})"><div class="dfp-in"><span class="k">${d.nome.split(" · ")[0]} · ${ini} a ${fim}</span><b>${d.nome.split(" · ")[1]}</b><p class="dfp-ind">${d.indicadores.map(i => `<a class="chipd" href="#ind-${i.codigo}" style="--c:var(--${d.id})">${i.codigo} ${i.nome}</a>`).join(" ")}</p><button type="button" data-dim="${d.id}">Ver os indicadores da ${d.nome.split(" · ")[0]} →</button></div></div>`;
     painel.querySelector("button").onclick = () => { qFilter = d.id; qSel = d.indicadores[0].codigo; goToPage("dimensoes"); };
   }
   faixa.querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => abreDim(i)));
@@ -5300,7 +5301,7 @@ countUp();
 
   function corpo(p) {
     if (p.t === "vid") return `<h3>Vídeos práticos</h3>
-      <p class="vp-dica">O site abriu os vídeos. Assista a pelo menos um dos quatro vídeos práticos, que são as quatro últimas miniaturas. Cada um faz uma pausa para que você decida antes de ver a resposta.</p>
+      <p class="vp-dica">O site abriu os vídeos. Assista a pelo menos um dos vídeos práticos, em “Veja na prática”. Cada um faz uma pausa para que você decida antes de ver a resposta.</p>
       <fieldset><legend>${VID}</legend>${opts("vp_vid", S.vid, 'data-v="1"')}</fieldset>`;
     if (p.t === "ind") { const n = S.notas[k(p.ind.codigo)] || {};
       return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${p.ind.codigo}</span> ${p.ind.nome}</h3>
