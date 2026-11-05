@@ -1278,7 +1278,7 @@
       <p class="lede">Um guia para você decidir, com critérios claros, se um agente de inteligência artificial está pronto para a sua turma de Ciências da Natureza.</p>
       <div class="hero-row">
                 <a class="hero-cta" href="#sec-3">Começar a avaliar o meu agente →</a>
-                <a class="hero-pdf" href="ProMAC_v0.9.31.pdf" download>Baixar o guia em PDF <span>(6,3 MB)</span></a>
+                <a class="hero-pdf" href="ProMAC_v0.9.31.pdf" target="_blank" rel="noopener">Abrir o guia em PDF <span>(6,3 MB)</span></a>
       </div>
       <ol class="hero-passos" aria-label="Como usar o ProMAC em três passos">
         <li><a href="#dimensoes"><b>1</b>Conheça as dimensões</a></li>
@@ -3164,7 +3164,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
         <span class="card-icon" data-icon="fundamentacao"></span>
         <h3>Guia completo em PDF</h3>
         <p class="def">O ProMAC diagramado para ler e imprimir (versão 0.9.31, em validação). No PDF, a ficha semáforo, a flor do agente, o checklist do Ciclo 0, o registro de versões e as anotações de cada indicador podem ser preenchidos no computador, e o arquivo foi conferido como PDF acessível (PDF/UA). A versão final terá ISBN e DOI.</p>
-        <a class="dlbtn" href="ProMAC_v0.9.31.pdf" download><span data-icon="downloads"></span>Baixar o PDF (6,3 MB)</a>
+        <a class="dlbtn" href="ProMAC_v0.9.31.pdf" target="_blank" rel="noopener"><span data-icon="downloads"></span>Abrir o PDF (6,3 MB)</a>
       </div>
     </div>
   </section>
@@ -5627,7 +5627,7 @@ countUp();
     bv.textContent = VALIDAR ? "Começar a validação →" : "Entrar no ProMAC →";
     bv.onclick = () => { fechar(); goToPage(VALIDAR ? "validar" : "inicio"); };
     box.append(bv);
-    if (pdf) { const a = document.createElement("a"); a.className = "en-pdf"; a.href = pdf.getAttribute("href"); a.setAttribute("download", ""); a.innerHTML = pdf.innerHTML; box.append(a); }
+    if (pdf) { const a = document.createElement("a"); a.className = "en-pdf"; a.href = pdf.getAttribute("href"); a.target = "_blank"; a.rel = "noopener"; a.innerHTML = pdf.innerHTML; box.append(a); }
     if (dica) dica.replaceWith(box);
     ov.querySelector(".en-pular").hidden = true;
   }
