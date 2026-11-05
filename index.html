@@ -2043,7 +2043,10 @@
         <button onclick="clearDraft()"><span data-icon="clear"></span>Limpar</button>
         <button class="dl-primary" onclick="exportPDF()"><span data-icon="print"></span>Baixar relatório (PDF)</button>
         <button onclick="exportCSV()"><span data-icon="downloads"></span>Baixar planilha (CSV)</button>
+        <button onclick="document.getElementById('f-retomar').click()"><span data-icon="clear"></span>Continuar de uma planilha</button>
+        <input type="file" id="f-retomar" accept=".csv,text/csv" hidden onchange="retomarFicha(this)">
       </div>
+      <p class="savenote"><b>Para continuar em outro computador ou passar a ficha a um colega:</b> baixe a planilha (CSV) e, no outro navegador, clique em “Continuar de uma planilha”. As notas e as observações voltam para a ficha.</p>
       <p class="savenote" id="savenote">As respostas ficam guardadas só neste navegador, neste aparelho, e nada é enviado a servidor. Elas continuam aqui depois de fechar a aba: em computador compartilhado, baixe o CSV e use Limpar ao sair. Cada avaliador preenche a própria ficha e baixa o próprio relatório.</p>
       <p class="method-note">A classificação (Adequado / Parcialmente adequado / Inadequado) segue as faixas da seção 3.5 do protocolo, aplicadas à média de cada dimensão e à média geral, arredondada para duas casas (3, 2 e 2 dão 2,33, Parcialmente adequado). Indicadores marcados como N/A ficam fora do cálculo. Lembre: um cartão vermelho deixa o indicador em 1, e um amarelo, no máximo em 2. A porcentagem é apenas uma segunda leitura, mais intuitiva, do mesmo escore de 1 a 3 — não substitui a nota bruta, que é a que deve constar no relatório da rodada.</p>
     </section>
@@ -4340,6 +4343,41 @@ function blobFallback(filename, blob) {
   };
 }
 
+
+/* Retomar a ficha a partir da planilha CSV baixada do próprio ProMAC */
+function retomarFicha(inp) {
+  const f = inp.files && inp.files[0]; if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    try {
+      const rows = parseCSV(String(rd.result));
+      const porCod = {}; allIndicadores().forEach(i => porCod[i.codigo] = i);
+      const st = { meta: {}, scores: {}, obs: {} }; let n = 0;
+      rows.forEach(r => {
+        const ind = porCod[(r.codigo || "").trim()]; if (!ind) return;
+        if (!st.meta.avaliador && r.avaliador) st.meta = { avaliador: r.avaliador, agente: r.agente || "", ciclo: r.ciclo_rodada || "" };
+        const nota = (r.nota || "").trim().toUpperCase();
+        if (nota === "N/A") st.scores[ind.id] = "na"; else if (/^[123]$/.test(nota)) st.scores[ind.id] = nota;
+        if (r.observacoes) st.obs[ind.id] = r.observacoes;
+        n++;
+      });
+      if (!n) { alert("Este arquivo não parece uma planilha baixada da ficha do ProMAC."); return; }
+      const atual = collectState();
+      if ((Object.keys(atual.scores).length || Object.keys(atual.obs).length) && !confirm("A ficha deste navegador já tem respostas. Substituí-las pelas da planilha?")) return;
+      allIndicadores().forEach(i => {
+        document.querySelectorAll(`input[name="score_${i.id}"]`).forEach(x => x.checked = false);
+        const t = document.querySelector(`textarea[data-obs="${i.id}"]`); if (t) t.value = "";
+      });
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(st)); } catch (e) {}
+      loadDraft();
+      allIndicadores().forEach(i => { if (!st.scores[i.id]) onScore(i.id); });
+      if (typeof renderResults === "function") renderResults();
+      const sn = document.getElementById("savenote"); if (sn) sn.textContent = `Ficha retomada da planilha “${f.name}”: ${Object.keys(st.scores).length} notas carregadas. As respostas continuam guardadas só neste navegador.`;
+    } catch (e) { alert("Não foi possível ler a planilha."); }
+    finally { inp.value = ""; }
+  };
+  rd.readAsText(f, "utf-8");
+}
 /* CSV: one row per indicator, semicolon-separated (opens directly in Excel pt-BR and Google Planilhas) */
 function exportCSV() {
   const st = collectState();
