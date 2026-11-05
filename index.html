@@ -1095,6 +1095,23 @@
   .bento .bt:hover .bt-seta { transform: translate(4px, -50%); }
   @media (max-width: 640px) { .bento { grid-template-columns: 1fr !important; } }
   #page-inicio .por-onde { margin-top: 2.4rem; }
+  .cf-folha { display: none; }
+  @page paisagem { size: A4 landscape; margin: 8mm 9mm; }
+  @media print {
+    body.print-solo .instr-folha.print-alvo > p, body.print-solo .instr-folha.print-alvo > h2 { display: none !important; }
+    body.print-solo .print-alvo .cf-folha { display: block; page: paisagem; font: 7.2pt/1.25 'IBM Plex Sans', Arial, sans-serif; color: #000; }
+    .cf-cab { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1.5pt solid #000; padding-bottom: 2pt; margin-bottom: 3pt; font-size: 8pt; }
+    .cf-t { width: 100%; border-collapse: collapse; margin: 0 0 3pt; table-layout: fixed; break-inside: avoid; }
+    .cf-t th, .cf-t td { border: .5pt solid #999; padding: 1.6pt 3pt; vertical-align: top; text-align: left !important; hyphens: auto; }
+    .cf-t th { font-weight: 700; background: #f2f2f2; }
+    .cf-t th:first-child, .cf-t td:first-child { width: 28%; }
+    .cf-t .cf-d { background: var(--c); color: #fff; font-size: 8pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .cf-rod { max-width: none !important; margin: 2pt 0 0 !important; font-size: 7pt !important; text-align: left !important; }
+    body.print-solo .print-alvo .cf-folha, body.print-solo .print-alvo .cf-folha * { color: #000 !important; opacity: 1 !important; }
+    body.print-solo .print-alvo .cf-folha .cf-d { color: #fff !important; }
+    body.print-solo { background: #fff !important; }
+  }
+
   .busca-btn { display: inline-flex; align-items: center; gap: 6px; margin-right: 6px; }
   @media (max-width: 640px) { .busca-btn .busca-l { display: none; } }
   .busca-dlg { width: min(640px, calc(100vw - 24px)); max-height: min(80vh, 640px); padding: 0; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--surface); color: var(--ink); margin: 8vh auto auto; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
@@ -2474,6 +2491,10 @@
 </ul>
 </div>
 <p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
+<section aria-labelledby="folha-consulta" class="instr instr-folha"><h2 id="folha-consulta">Folha de consulta: os 18 indicadores</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir a folha de consulta</button></div>
+<p>Uma folha (frente e verso, em paisagem) com as cinco dimensões, os 18 indicadores, a pergunta norteadora e os três níveis de cada um. Deixe-a ao lado do computador enquanto lê as conversas do agente.</p>
+<div class="cf-folha" id="cf-folha"></div>
+</section>
 <section aria-labelledby="sec-5-1" class="instr"><h2 id="sec-5-1">5.1 Bateria-modelo do Ciclo 1</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
 <p>As falas já vêm com exemplos de Ciências e Biologia: adapte apenas o que julgar necessário. Abra uma conversa nova para cada bloco e anote o tempo de resposta e as falhas técnicas em todos eles. ▲ = item da triagem. O que cada item mostra está no mapa (seção <a href="#sec-5-2">5.2</a>).</p>
 <div class="table-wrap"><table class="doc-table instr-table">
@@ -4344,6 +4365,18 @@ function blobFallback(filename, blob) {
 }
 
 
+
+/* Folha de consulta para imprimir: 18 indicadores e três níveis */
+(function folhaConsulta() {
+  const el = document.getElementById("cf-folha"); if (!el) return;
+  const esc = t => (t || "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  el.innerHTML = `<div class="cf-cab"><b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b><span>Folha de consulta · 1 Inadequado · 2 Parcialmente adequado · 3 Adequado · N/A com justificativa</span></div>` +
+    DIMENSOES.map(d => `<table class="cf-t" style="--c:var(--${d.id})"><thead><tr><th class="cf-d" colspan="4">${esc(d.nome.replace(" · ", " – "))}</th></tr>
+      <tr><th>Indicador e pergunta norteadora</th><th>1 Inadequado</th><th>2 Parcialmente adequado</th><th>3 Adequado</th></tr></thead><tbody>` +
+      d.indicadores.map(i => `<tr><td><b>${i.codigo} ${esc(i.nome)}</b><br>${esc(i.pergunta)}</td>${i.niveis.map(n => `<td>${esc(n)}</td>`).join("")}</tr>`).join("") +
+      `</tbody></table>`).join("") +
+    `<p class="cf-rod">Cartão vermelho: o indicador vai direto para 1. Cartão amarelo: o indicador fica, no máximo, em 2. Guia completo: delfinovinicius.github.io/ProMAC</p>`;
+})();
 /* Retomar a ficha a partir da planilha CSV baixada do próprio ProMAC */
 function retomarFicha(inp) {
   const f = inp.files && inp.files[0]; if (!f) return;
@@ -4800,7 +4833,7 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
   // marca as menções em texto corrido
   const RX = /\b(Ciclos 1 e 2|Ciclo [0-2]|D[1-5]\.[1-4]|D[1-5]|[BE](?:0[1-9]|1\d|2\d)|[VA][1-7])\b/g;
   const RX1 = new RegExp(RX.source);
-  const PULA = "a, button, script, style, summary, label, input, textarea, select, code, h1, h2, h3, .cart-k, .indcode, .cv, .bolhas, #q-board, #q-detail, #live-panel, table.mapa, .tile, .fx-k, .p-step, .en-faixas, .dimfaixa, #chip-pop, .flor-agente, .sumgrid, .profile-grid, .ref-level, .levels, svg";
+  const PULA = "a, button, script, style, summary, label, input, textarea, select, code, h1, h2, h3, .cart-k, .indcode, .cv, .bolhas, #q-board, #q-detail, #live-panel, table.mapa, .tile, .fx-k, .p-step, .en-faixas, .dimfaixa, #chip-pop, .flor-agente, .sumgrid, .profile-grid, .ref-level, .levels, .cf-folha, svg";
   function marca(raiz) {
     const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, { acceptNode: n => (!n.nodeValue.trim() || !RX1.test(n.nodeValue) || n.parentElement.closest(PULA)) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
     const nos = []; let n; while ((n = w.nextNode())) nos.push(n);
