@@ -816,7 +816,7 @@
   .prose h3 { font-size: 17px; }
   .prose p, .prose ul { font-size: 15.5px; }
   /* Texto corrido justificado, com hifenização em português (lang="pt-BR"); especificidade zero para não sobrepor alinhamentos já definidos */
-  :where(.prose, .dbody, .q-detail, .ref-dim, .dim-head) :where(p, li, blockquote):not(.fonte):not(.cap), .card p.def { text-align: justify; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3; }
+  :where(.prose, .dbody, .q-detail, .ref-dim, .dim-head, #conteudo, .vl-painel) :where(p, li, dd, blockquote):not(.fonte):not(.cap), .card p.def { text-align: justify; -webkit-hyphens: auto; hyphens: auto; hyphenate-limit-chars: 7 3 3; }
   /* cartões estreitos: alinhados à esquerda para evitar espaços largos entre palavras */
   :where(.uso, .cart, .web-nums) :where(p, li) { text-align: left; }
   .card .def { font-size: 15px; }
