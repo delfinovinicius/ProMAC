@@ -1029,6 +1029,8 @@
   /* ---------- 0.9.28: cabeçalho em uma linha e Início enxuto ---------- */
   .cab { position: relative; z-index: 80; }
   .cab-in { flex-wrap: nowrap; padding-bottom: 12px; }
+  .site-atual-w { display: none; }
+  @media (min-width: 1440px) { .site-atual-w { display: inline; } }
   .logo-v { font: 500 11px/1 'IBM Plex Mono', monospace; color: #9AA6B2; letter-spacing: .02em; white-space: nowrap; margin-right: auto; }
   .cab-in > nav.topnav { flex: 0 1 auto; margin: 0; padding: 0; max-width: none; flex-wrap: nowrap; overflow: visible; -webkit-mask-image: none; mask-image: none; }
   .cab-r { flex-wrap: nowrap; }
@@ -1049,6 +1051,7 @@
   .aa-acoes { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
   .aa-painel .aa-acoes .tema-btn { color: #14191F; border: 1px solid #C9D0D7; background: #fff; }
   .aa-painel .aa-acoes .tema-btn[aria-pressed="true"] { background: #14191F; color: #fff; }
+  @media (max-width: 1180px) { .logo-v { display: none; } nav.topnav button .icn { display: none; } }
   @media (max-width: 860px) {
     .cab-in { flex-wrap: wrap; }
     .cab-in > nav.topnav { order: 3; flex-basis: 100%; gap: 0; }
@@ -1273,7 +1276,7 @@
 <header class="cab">
   <div class="cab-in">
     <a class="logo" href="#inicio" onclick="goToPage('inicio');return false;" aria-label="ProMAC, página inicial"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>ProMAC</a>
-    <span class="logo-v">v0.9.31 · em validação</span>
+    <span class="logo-v">v0.9.31 · em validação<span class="site-atual-w"> · atualizado <span class="site-atual" data-curto="1"></span></span></span>
     <nav class="topnav" id="top-nav" aria-label="Páginas"></nav>
     <span class="cab-r"><button class="tema-btn busca-btn" id="busca-btn" type="button" aria-haspopup="dialog" title="Buscar no ProMAC (atalho: /)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span class="busca-l">Buscar</span></button><button class="tema-btn" id="aa-btn" type="button" aria-expanded="false" aria-controls="aa-painel" title="Tamanho do texto, ouvir e modo escuro">Leitura</button></span>
     <div class="aa-painel" id="aa-painel" role="group" aria-label="Ajustes de leitura" hidden><p class="aa-t">Ajustes de leitura</p><div class="aa-acoes"><button class="tema-btn" id="ouvir-btn" type="button" hidden aria-pressed="false" title="Ouvir o texto selecionado ou a seção que está na tela">Ouvir</button><button class="tema-btn" id="tema-btn" type="button" onclick="trocarTema()">Modo escuro</button></div><div class="aa-l"><span id="aa-tam-l">Tamanho do texto</span><div class="aa-seg" role="radiogroup" aria-labelledby="aa-tam-l"><button type="button" role="radio" data-t="0">A</button><button type="button" role="radio" data-t="1" style="font-size:16px">A</button><button type="button" role="radio" data-t="2" style="font-size:19px">A</button></div></div><label class="aa-c"><input type="checkbox" id="aa-ent"> Entrelinha maior</label><label class="aa-c"><input type="checkbox" id="aa-fac"> Leitura facilitada <small>(mais espaço entre letras e palavras, linhas mais curtas; pensada para dislexia)</small></label><p class="aa-n">Fica salvo só neste navegador.</p></div>
@@ -3385,6 +3388,10 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 <tr class="odd">
 <td>Versão web</td>
 <td>https://delfinovinicius.github.io/ProMAC/. Os dados digitados ficam só no navegador do professor e não são enviados a servidor (conferido no código em 31/10/2026); o site só carrega fontes e uma biblioteca de PDF de servidores externos. Em computador compartilhado, apague os dados da ficha ao sair. Link estável com DOI no EduCAPES após o depósito.</td>
+</tr>
+<tr class="odd">
+<td>Última atualização do site</td>
+<td><span class="site-atual">—</span>. O número da versão acompanha o PDF; a data muda a cada publicação do site.</td>
 </tr>
 <tr class="even">
 <td>Licença</td>
@@ -6144,6 +6151,17 @@ ul.dl-lista li.ok summary{color:var(--ink-faint);text-decoration:line-through}
   const rest=[];for(let e=h2;e;e=e.nextElementSibling)rest.push(e);const g4=grupo(rest);
   pg.querySelectorAll(':scope > hr').forEach(h=>h.remove());
   abasPagina(pg,'saber',[{el:g1,rot:'Bases teóricas',desc:'Vygotsky, Bakhtin e Grice nas dimensões'},{el:g2,rot:'Leituras para aprofundar',desc:'12 estudos e por que ler cada um'},{el:g3,rot:'Agentes que agem sozinhos',desc:'Três perguntas para o que vem pela frente'},{el:g4,rot:'Os 18 em um relance',desc:'O que cada indicador observa'}],0);
+})();
+</script>
+<script>
+(function(){ // data e horário da última publicação (cabeçalho Last-Modified do GitHub Pages)
+  function pinta(d){ if(!d||isNaN(d)) return; const f=n=>String(n).padStart(2,"0");
+    const t=f(d.getDate())+"/"+f(d.getMonth()+1)+"/"+d.getFullYear()+", "+f(d.getHours())+"h"+f(d.getMinutes());
+    const c=f(d.getDate())+"/"+f(d.getMonth()+1)+" "+f(d.getHours())+"h"+f(d.getMinutes());
+    document.querySelectorAll(".site-atual").forEach(e=>{e.textContent=e.dataset.curto?c:t; if(e.dataset.curto) e.title="Site atualizado em "+t;}); }
+  fetch(location.pathname.replace(/[^/]*$/,"")+"index.html",{method:"HEAD",cache:"no-store"})
+    .then(r=>{const h=r.headers.get("last-modified"); if(h) pinta(new Date(h)); else document.querySelectorAll(".site-atual-w").forEach(e=>e.remove());})
+    .catch(()=>document.querySelectorAll(".site-atual-w").forEach(e=>e.remove()));
 })();
 </script>
 </body>
