@@ -1758,13 +1758,13 @@
 <div class="q-top">
 <div>
 <h2>ProMAC / 18 indicadores</h2>
-<p class="q-sub">Clique num indicador para ver a pergunta e a rubrica. Os quadros completos, com coleta, delimitação e exemplos, estão logo abaixo.</p>
+<p class="q-sub">Toque em um indicador para ver a pergunta e os três níveis. Os quadros completos estão logo abaixo.</p>
 </div>
 <div aria-label="Filtrar por dimensão" class="q-filters" id="q-filters" role="group"></div>
 </div>
 <div class="q-board" id="q-board"></div>
 <div aria-live="polite" class="q-detail" id="q-detail"></div>
-<p class="q-legend">Se você já começou uma ficha em Avaliar, as notas aparecem pintadas no quadro.</p>
+<p class="q-legend">Se você já começou a Ficha de avaliação, as notas aparecem pintadas no quadro.</p>
 </section>
 <details class="disclosure como-ler">
 <summary><span>Como ler os quadros</span><span class="dchev">›</span></summary>
@@ -2078,14 +2078,7 @@
 
   <!-- ================= ÉTICA ================= -->
   <section class="page prose" id="page-etica">
-<div class="web-box minuto"><span class="box-k">5 min de leitura</span>
-<p><strong>Em 1 minuto.</strong> Nesta página você vai:</p>
-<ul>
-<li>saber o que avisar a estudantes e responsáveis antes do uso;</li>
-<li>pseudonimizar as conversas na coleta;</li>
-<li>anonimizar na divulgação e descartar no prazo.</li>
-</ul>
-</div>
+<div class="ap-topo"><h1 class="ap-h1">Dados dos estudantes</h1><p class="ap-lede">Uma lista para marcar antes, durante e depois do uso com a turma. Toque no título de um item para ver como fazer.</p></div>
 <p>As conversas entre estudantes e agente e os registros de uso da plataforma são dados pessoais, nos termos da Lei Geral de Proteção de Dados Pessoais (Brasil, 2018). Quando os usuários são crianças e adolescentes, os cuidados aumentam, e aplica-se também o Estatuto Digital da Criança e do Adolescente, o ECA Digital (Brasil, 2025). As orientações abaixo se estendem aos dois ciclos, mas pesam sobretudo no Ciclo 2.</p>
 <p><strong>Antes de começar</strong></p>
 <ul>
@@ -2456,15 +2449,10 @@
 
   <!-- ================= INSTRUMENTOS ================= -->
   <section class="page prose" id="page-instrumentos">
-<div class="web-box minuto"><span class="box-k">só o que precisar</span>
-<p><strong>Em 1 minuto.</strong> Nesta página você vai:</p>
-<ul>
-<li>copiar ou imprimir só o instrumento de que precisar, com o botão de cada um;</li>
-<li>trocar as falas da bateria pelas do seu conteúdo, se quiser;</li>
-<li>fechar a avaliação com a ficha-resumo.</li>
-</ul>
-</div>
-<p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
+<div class="ap-topo"><h1 class="ap-h1">Instrumentos</h1>
+<p class="ap-lede">Escolha o instrumento; cada um pode ser copiado ou impresso sozinho. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>.</p></div>
+<details class="vermais" id="ins-intro-mais"><summary>Licença e onde estão os cartões</summary><p>Todos os instrumentos podem ser copiados e adaptados para uso na sua escola, mas a licença não permite distribuir versões modificadas do guia. Para pontuar na tela, use a <a href="#avaliar">Ficha de avaliação</a>, que faz os cálculos. Os cartões e o checklist do Ciclo 0 estão na seção <a href="#sec-3-1">3.1</a>. Cada instrumento abaixo tem um botão para imprimir só ele.</p>
+</details>
 <section aria-labelledby="folha-consulta" class="instr instr-folha"><h2 id="folha-consulta">Folha de consulta: os 18 indicadores</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir a folha de consulta</button></div>
 <p>Uma folha (frente e verso, em paisagem) com as cinco dimensões, os 18 indicadores, a pergunta norteadora e os três níveis de cada um. Deixe-a ao lado do computador enquanto lê as conversas do agente.</p>
 <div class="cf-folha" id="cf-folha"></div>
@@ -3131,7 +3119,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
         <span class="card-icon" data-icon="avaliar"></span>
         <h3>Avaliação em andamento</h3>
         <p class="def">Notas, observações e resultado da rodada atual, como relatório em PDF ou planilha CSV.</p>
-        <button class="dlbtn" onclick="goToPage('avaliar')"><span data-icon="avaliar"></span>Ir para Avaliar</button>
+        <button class="dlbtn" onclick="goToPage('avaliar')"><span data-icon="avaliar"></span>Ir para a Ficha de avaliação</button>
       </div>
       <div class="dl-card">
         <span class="dl-corner"></span>
@@ -3287,7 +3275,7 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
     </div>
 
 
-    <details class="disclosure" id="autores" open>
+    <details class="disclosure" id="autores">
       <summary><span>Autoria e colaboração</span><span class="dchev">›</span></summary>
       <div class="dbody autores">
         <article class="autor"><img src="img/autores/vinicius.webp" alt="Foto de Vinícius Delfino Silva" width="96" height="96" loading="lazy"><div><h3>Vinícius Delfino Silva <span>· mestrando</span></h3><p>Mestrando em Educação em Ciências e Matemática pelo Programa Educimat do Instituto Federal do Espírito Santo (Ifes), especialista em Informática na Educação (2018) e licenciado em Letras Português (2017), ambos pelo Ifes. Atua como professor efetivo de Língua Portuguesa na Secretaria da Educação do Espírito Santo e na Prefeitura Municipal de Vila Velha. É desenvolvedor do agente conversacional personalizado "GeneGênio", produção técnica premiada com o segundo lugar no VIII Concefor, e do MOOC "Gemini Notebook: Primeiros Passos", ofertado na plataforma de cursos abertos do Ifes. Tem interesse em temas relacionados à cultura digital, ao design de experiências de aprendizagem mediadas por inteligência artificial e à inovação pedagógica em contextos educacionais presenciais e online. Foi vencedor da VII Olimpíada de Língua Portuguesa (2021), na categoria Relato de Prática – Documentário.</p></div></article>
@@ -4049,7 +4037,7 @@ function buildDims() {
           <span class="txt"><b>N/A</b> — não se aplica a este agente ou a esta amostra (justifique nas observações)</span>
         </label>`;
       html += `</div>`;
-      html += `${ind.exemplo ? `<div class="ex-box"><span class="lbl">Exemplo</span><span>${ind.exemplo}</span></div>` : ""}`;
+      html += `${ind.exemplo ? `<details class="meta ex-det"><summary>Ver exemplo de conversa</summary><div class="ex-box"><span class="lbl">Exemplo</span><span>${ind.exemplo}</span></div></details>` : ""}`;
       html += `<details class="meta"><summary>Como coletar${ind.delimitacao ? " e o que não confundir" : ""}</summary>
         <div class="metabox">
           <p><span class="lbl">Como coletar</span>${ind.coleta}</p>
@@ -4812,6 +4800,7 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
   function marca(raiz) {
     const w = document.createTreeWalker(raiz, NodeFilter.SHOW_TEXT, { acceptNode: n => (!n.nodeValue.trim() || !RX1.test(n.nodeValue) || n.parentElement.closest(PULA)) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
     const nos = []; let n; while ((n = w.nextNode())) nos.push(n);
+    const vistos = new Set();
     nos.forEach(t => {
       RX.lastIndex = 0;
       const tr = t.parentElement.closest("tr");
@@ -4823,6 +4812,7 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
         if (/^[VA]\d$/.test(m[1]) && !/cart|sinal|vermelh|amarel|V\d|A\d/i.test(s)) continue;
         f.append(s.slice(i, m.index));
         const a = document.createElement("a"); a.className = "ref-t"; a.href = r.h; a.textContent = m[1]; a.style.setProperty("--c", r.c); a.dataset.ref = m[1];
+        if (vistos.has(m[1])) a.classList.add("rep"); else vistos.add(m[1]);
         f.append(a); i = m.index + m[1].length; mudou = true;
       }
       if (!mudou) return; f.append(s.slice(i)); t.replaceWith(f);
@@ -6003,6 +5993,141 @@ ol.ap-cards4 li b::before,ol.ap-cards3 li b::before{content:counter(cc) ". ";col
   // impressão: abre todos os passos
   let nomes=null;addEventListener('beforeprint',()=>{nomes=P.map(d=>d.open);P.forEach(d=>{d.removeAttribute('name');d.open=true})});
   addEventListener('afterprint',()=>{if(!nomes)return;P.forEach((d,i)=>{d.open=nomes[i];d.setAttribute('name','passo')});nomes=null});
+})();
+</script>
+
+<style id="ins-css">
+@media (max-width:640px){nav.topnav .mais-btn{max-width:86px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+a.ref-t.rep{text-decoration:none}a.ref-t.rep:hover,a.ref-t.rep:focus-visible{text-decoration:underline dotted;text-decoration-color:var(--c,var(--ink-soft))}
+.ins-nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:6px 0 16px}
+.ins-nav button{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;font:400 13.5px/1.3 'Atkinson Hyperlegible',sans-serif}
+.ins-nav button b{font-size:15px}
+.ins-nav button small{font:600 12px 'IBM Plex Mono',monospace;color:var(--ink-faint)}
+.ins-nav button.on{border-color:var(--mark);background:var(--mark-soft);box-shadow:inset 0 -3px 0 var(--mark)}
+@media (max-width:640px){.ins-nav{grid-template-columns:1fr 1fr}.ins-nav button span{display:none}}
+@media (hover:hover){:is(#page-instrumentos,#page-extras) tr .copiar-fala{opacity:0;transition:opacity .15s}:is(#page-instrumentos,#page-extras) tr:hover .copiar-fala,:is(#page-instrumentos,#page-extras) .copiar-fala:focus-visible{opacity:1}}
+@media print{.ins-nav{display:none!important}}
+</style>
+<script>
+/* abas genéricas por página (prévia 05/11) */
+function abasPagina(pg,nome,itens,abrirIdx){
+  if(!pg||!itens.length)return;
+  const nav=document.createElement('nav');nav.className='ins-nav';nav.setAttribute('aria-label','Escolha');
+  const P=itens.map((it,k)=>{const d=document.createElement('details');d.className='passo';d.setAttribute('name',nome);
+    const sm=document.createElement('summary');sm.textContent=it.rot;d.appendChild(sm);it.el.before(d);d.appendChild(it.el);
+    const b=document.createElement('button');b.type='button';b.innerHTML=(it.k?'<small>'+it.k+'</small>':'')+'<b>'+it.rot+'</b>'+(it.desc?'<span>'+it.desc+'</span>':'');nav.appendChild(b);
+    b.onclick=()=>{P.forEach((x,i)=>x.open=i===k);const y=nav.getBoundingClientRect().bottom+scrollY-8;scrollTo({top:Math.max(0,Math.min(scrollY,y)),behavior:'smooth'});d.querySelector('h2,h3')?.focus?.()};
+    return d});
+  P[0].before(nav);
+  const B=[...nav.children];const marca=()=>{B.forEach((b,i)=>{b.classList.toggle('on',P[i].open);b.setAttribute('aria-pressed',P[i].open)})};
+  P.forEach(d=>d.addEventListener('toggle',marca));
+  if(abrirIdx!=null&&!P.some(d=>d.open))P[abrirIdx].open=true;marca();
+  let mem=null;addEventListener('beforeprint',()=>{if(document.body.classList.contains('print-solo'))return;mem=P.map(d=>d.open);P.forEach(d=>{d.removeAttribute('name');d.open=true})});
+  addEventListener('afterprint',()=>{if(!mem)return;P.forEach((d,i)=>{d.open=mem[i];d.setAttribute('name',nome)});mem=null});
+  return P;
+}
+/* recolhe as notas em negrito depois da última tabela de um bloco */
+function recolherNotas(box,rot){
+  const tw=[...box.querySelectorAll(':scope > .table-wrap')].pop();if(!tw)return;
+  const ps=[];for(let e=tw.nextElementSibling;e;e=e.nextElementSibling){if(e.tagName==='P'&&e.firstElementChild&&e.firstElementChild.tagName==='STRONG')ps.push(e);else break}
+  if(ps.length<2)return;const d=document.createElement('details');d.className='vermais';d.innerHTML='<summary>'+rot+'</summary>';ps[0].before(d);ps.forEach(p=>d.appendChild(p));
+}
+(function instrumentosAbas(){
+  const pg=document.getElementById('page-instrumentos');if(!pg)return;
+  const R={'folha-consulta':['Folha de consulta','Os 18 indicadores em uma folha para deixar ao lado','imprimir'],
+   'sec-5-1':['Bateria','As falas para testar o agente no Ciclo 1','5.1'],
+   'sec-5-2':['Mapa da bateria','Que indicadores cada item alimenta','5.2'],
+   'sec-5-3':['Ficha semáforo','Pontuar no papel, com um círculo por indicador','5.3'],
+   'sec-5-4':['Questionário do professor','Depois do uso com a turma','5.4'],
+   'sec-5-5':['Questionário do estudante','Como os estudantes viram o agente','5.5'],
+   'sec-5-6':['Termo de comunicação','Avisar estudantes e responsáveis','5.6'],
+   'sec-5-7':['Registro de versões','O que mudou no agente e quando','5.7'],
+   'sec-5-8':['Ficha-resumo','Fechar a rodada e compartilhar','5.8'],
+   'sec-5-9':['Atividade “Ache o erro da IA”','Para fazer com a turma','5.9'],
+   'prompt-do-avaliador-llm-opcional':['Prompt do avaliador LLM','Opcional, para a leitura da seção 3.6','3.6']};
+  const its=[];pg.querySelectorAll(':scope > section.instr, :scope > .llm-optional').forEach(el=>{const h=el.querySelector('h2');const r=h&&R[h.id];if(!r)return;its.push({el,rot:r[0],desc:r[1],k:r[2]});
+    recolherNotas(el,'Ver mais: como interpretar');});
+  const llm=pg.querySelector('.llm-optional pre.prompt-box');if(llm){const d=document.createElement('details');d.className='vermais';d.innerHTML='<summary>Ver o texto do prompt</summary>';llm.before(d);d.appendChild(llm)}
+  abasPagina(pg,'instr',its,1);
+})();
+</script>
+
+<script>
+/* Itens extras: abas e filtro por indicador (prévia 05/11) */
+(function extrasAbas(){
+  const pg=document.getElementById('page-extras');if(!pg)return;
+  const intro=pg.querySelector(':scope > p');
+  if(intro){const d=document.createElement('details');d.className='vermais';d.innerHTML='<summary>Ver mais sobre a numeração</summary>';
+    const top=document.createElement('div');top.className='ap-topo';top.innerHTML='<h1 class="ap-h1">Itens extras</h1><p class="ap-lede">Só para aprofundar um indicador que ficou em amarelo depois da bateria básica. Escolha o indicador e veja os itens que o testam.</p>';
+    intro.before(top);top.after(d);d.appendChild(intro);}
+  const hs=[...pg.querySelectorAll(':scope > h2')];const R={'Itens extras':['Itens extras','E01 a E29, para um indicador em dúvida'],'Testes-relâmpago':['Testes-relâmpago','Cerca de 1 minuto, sobre uma resposta já dada'],'Regras extras de pontuação':['Regras extras','Casos especiais na hora de pontuar']};
+  const its=hs.map(h=>{const g=document.createElement('div');g.className='ex-grupo';h.before(g);let e=h;const lista=[];while(e&&!(e!==h&&e.tagName==='H2')&&!e.classList?.contains('proximo')){lista.push(e);e=e.nextElementSibling}lista.forEach(x=>g.appendChild(x));const r=R[h.textContent.trim()]||[h.textContent.trim(),''];return {el:g,rot:r[0],desc:r[1]}});
+  // filtro
+  const tb=its[0]&&its[0].el.querySelector('table');
+  if(tb){const rows=[...tb.tBodies[0].rows];const codes=new Set();rows.forEach(r=>(r.cells[r.cells.length-1].textContent.match(/D\d\.\d/g)||[]).forEach(c=>codes.add(c)));
+    const L=[...codes].sort();const nomes={};(typeof DIMENSOES!=='undefined'?DIMENSOES:[]).forEach(d=>d.indicadores.forEach(i=>nomes[i.codigo]=i.nome));
+    const f=document.createElement('div');f.className='ex-filtro';f.innerHTML='<label for="ex-sel"><b>Indicador em dúvida:</b></label> <select id="ex-sel"><option value="">todos os itens</option><option value="*">★ os 12 mais úteis</option>'+L.map(c=>`<option value="${c}">${c}${nomes[c]?' '+nomes[c]:''}</option>`).join('')+'</select> <span id="ex-n" aria-live="polite"></span>';
+    tb.closest('.table-wrap').before(f);const sel=f.querySelector('select'),n=f.querySelector('#ex-n');
+    sel.onchange=()=>{const v=sel.value;let k=0;rows.forEach(r=>{const ok=!v||(v==='*'?/★/.test(r.cells[0].textContent):r.cells[r.cells.length-1].textContent.includes(v));r.hidden=!ok;if(ok)k++});n.textContent=v?k+(k===1?' item':' itens'):''};}
+  if(typeof abasPagina==='function')abasPagina(pg,'extras',its,0);
+})();
+</script>
+<style>.ex-filtro{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 12px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}.ex-filtro select{font:inherit;font-size:15px;padding:6px 8px;border:1.5px solid var(--ink);border-radius:6px;background:var(--surface);color:var(--ink);max-width:100%}#ex-n{font-size:14px;color:var(--ink-soft)}</style>
+
+<script>
+/* Dados: listas marcáveis (prévia 05/11) */
+(function dadosLista(){
+  const pg=document.getElementById('page-etica');if(!pg)return;
+  const intro=pg.querySelector(':scope > p:not(:has(> strong:only-child))');
+  if(intro){const d=document.createElement('details');d.className='vermais';d.innerHTML='<summary>Por que isso importa (LGPD e ECA Digital)</summary>';intro.before(d);d.appendChild(intro)}
+  const K='promac_dados';let st={};try{st=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+  const grade=document.createElement('div');grade.className='dl-grade';let primeiro=null;
+  [...pg.querySelectorAll(':scope > p')].filter(p=>p.children.length===1&&p.firstElementChild.tagName==='STRONG'&&p.textContent.trim()===p.firstElementChild.textContent.trim()&&p.nextElementSibling&&p.nextElementSibling.tagName==='UL').forEach((p,g)=>{
+    const ul=p.nextElementSibling;const box=document.createElement('section');box.className='dl-col';
+    const h=document.createElement('h2');h.className='dl-h';h.textContent=p.textContent.trim();const cont=document.createElement('span');cont.className='dl-n';h.appendChild(cont);
+    box.appendChild(h);if(!primeiro){primeiro=p;p.before(grade)}grade.appendChild(box);p.remove();box.appendChild(ul);ul.className='dl-lista';
+    const conta=()=>{const t=ul.children.length,m=[...ul.querySelectorAll('input')].filter(i=>i.checked).length;cont.textContent=m+' de '+t};
+    [...ul.children].forEach((li,i)=>{const k=g+'-'+i;const st0=li.querySelector(':scope > strong');if(!st0)return;
+      const tit=st0.textContent.replace(/[.:]\s*$/,'');st0.remove();const resto=li.innerHTML.replace(/^\s*[:.,]?\s*/,'');
+      li.innerHTML=`<input type="checkbox" id="dl-${k}" aria-label="${tit.replace(/"/g,'')}"><details><summary>${tit}</summary><p>${resto.charAt(0).toUpperCase()+resto.slice(1)}</p></details>`;
+      const cb=li.querySelector('input');cb.checked=!!st[k];li.classList.toggle('ok',cb.checked);cb.onchange=()=>{st[k]=cb.checked;li.classList.toggle('ok',cb.checked);try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}conta()}});
+    conta();});
+})();
+</script>
+<style>
+.dl-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 14px}
+@media (max-width:900px){.dl-grade{grid-template-columns:1fr}}
+.dl-col{border:1px solid var(--line);border-top:4px solid var(--d5);border-radius:8px;background:var(--surface);padding:10px 12px}
+.dl-h{font-size:17px!important;margin:0 0 6px!important;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dl-n{font:600 12.5px 'IBM Plex Mono',monospace;color:var(--ink-faint)}
+ul.dl-lista{list-style:none;padding:0;margin:0}
+ul.dl-lista li{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:start;padding:7px 0;border-top:1px solid var(--line);text-align:left!important}
+ul.dl-lista li:first-child{border-top:0}
+ul.dl-lista input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--good)}
+ul.dl-lista summary{hyphens:none;cursor:pointer;font-weight:700;font-size:15px;line-height:1.35;list-style:none}
+ul.dl-lista summary::-webkit-details-marker{display:none}
+ul.dl-lista summary::after{content:" ›";color:var(--ink-faint)}
+ul.dl-lista details[open] summary::after{content:" ⌄"}
+ul.dl-lista details p{font-size:14.5px;margin:5px 0 2px;text-align:left!important}
+ul.dl-lista li.ok summary{color:var(--ink-faint);text-decoration:line-through}
+</style>
+
+<script>
+/* Para saber mais: abas (prévia 05/11) */
+(function saberMais(){
+  const pg=document.getElementById('page-fundamentacao');if(!pg||typeof abasPagina!=='function')return;
+  const ch=[...pg.children];const ps=ch.filter(e=>e.tagName==='P');
+  const top=document.createElement('div');top.className='ap-topo';top.innerHTML='<h1 class="ap-h1">Para saber mais</h1><p class="ap-lede">As bases teóricas do ProMAC, leituras para aprofundar e o que vem pela frente.</p>';pg.prepend(top);
+  const grupo=(els)=>{const g=document.createElement('div');els[0].before(g);els.forEach(e=>g.appendChild(e));return g};
+  const iLeit=ch.findIndex(e=>e.tagName==='P'&&/Leituras para aprofundar/.test(e.textContent));
+  const bq=pg.querySelector(':scope > blockquote');const h2=[...pg.querySelectorAll(':scope > h2')].find(h=>/relance/.test(h.textContent));
+  const nasc=ps.find(p=>/nasceu de uma pesquisa/.test(p.textContent));
+  const g1=grupo([ps[0],ps[1]].concat(nasc?[nasc]:[]));
+  const g2=grupo([ch[iLeit],ch[iLeit+1]]);
+  const g3=grupo([bq]);
+  const rest=[];for(let e=h2;e;e=e.nextElementSibling)rest.push(e);const g4=grupo(rest);
+  pg.querySelectorAll(':scope > hr').forEach(h=>h.remove());
+  abasPagina(pg,'saber',[{el:g1,rot:'Bases teóricas',desc:'Vygotsky, Bakhtin e Grice nas dimensões'},{el:g2,rot:'Leituras para aprofundar',desc:'12 estudos e por que ler cada um'},{el:g3,rot:'Agentes que agem sozinhos',desc:'Três perguntas para o que vem pela frente'},{el:g4,rot:'Os 18 em um relance',desc:'O que cada indicador observa'}],0);
 })();
 </script>
 </body>
