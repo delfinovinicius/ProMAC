@@ -5093,7 +5093,7 @@ countUp();
   const ESC_P = [["4", "Muito pertinente"], ["3", "Pertinente"], ["2", "Pouco pertinente"], ["1", "Não pertinente"]];
   const VID = "Os vídeos práticos ajudam a entender os procedimentos do protocolo";
   const EST = [
-    "As cinco dimensões cobrem, em conjunto, o que importa avaliar num agente conversacional usado no ensino",
+    "As cinco dimensões cobrem, em conjunto, o que importa avaliar em um agente conversacional usado no ensino",
     "Os ciclos (Ciclo 0 e triagem, Ciclo 1, calibração com um colega e Ciclo 2) são viáveis na escola no tempo estimado",
     "A escala de três níveis, a regra do comportamento predominante, o N/A, as médias e as faixas orientam bem a decisão sobre o agente",
     "Os instrumentos para imprimir são úteis para aplicar o protocolo"];
@@ -5166,13 +5166,13 @@ countUp();
       <div class="vl-prog" aria-live="polite"><span>${feitos()} de ${totalItens} respostas</span><span class="bar"><i style="width:${pct}%"></i></span><span>${pct}%</span></div>
       <div class="vl-intro" ${S.parada === P.length - 1 ? "hidden" : ""}>
         <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. A validação é uma <b>trilha pelo site</b>, com ${P.length} paradas: em cada uma, o site mostra o trecho de que a pergunta trata, e você responde no painel ao lado (no celular, na parte de baixo da tela).</p>
-        <p><b>Escalas:</b> pertinência de 1 (Não pertinente) a 4 (Muito pertinente); clareza e estrutura de 1 (Inadequado) a 3 (Adequado). Se marcar 1 ou 2, diga no comentário o que mudaria. <b>Tempo:</b> 20 a 30 minutos.</p>
-        <p class="vl-priv">As respostas ficam salvas neste navegador até você clicar em <b>Enviar</b>, no fim da trilha. Então abre um formulário curto, já com as suas notas, para a identificação e o parecer final.</p>
+        <p><b>Escalas:</b> pertinência de 1 (Não pertinente) a 4 (Muito pertinente); clareza e estrutura de 1 (Inadequado) a 3 (Adequado). Se marcar 1 ou 2, explique o que mudaria no campo de comentários da dimensão, que aparece na parada de clareza. <b>Tempo:</b> 20 a 30 minutos.</p>
+        <p class="vl-priv">As respostas ficam salvas neste navegador até você clicar em <b>Enviar</b>, no fim da trilha. Ao clicar, você verá um formulário curto, já com as suas notas, para o consentimento, a identificação e o parecer final.</p>
         <p style="margin-bottom:0"><button type="button" class="vl-send" id="vl-comecar">${S.parada < 0 ? "Começar a trilha →" : `Retomar a trilha na parada ${S.parada + 1} →`}</button></p>
       </div>
       <section id="vl-enviar" class="vl-env" ${S.parada === P.length - 1 ? "" : "hidden"}><h2>Enviar</h2>
-      ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo: as que faltarem chegam em branco, sem problema.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário do Tally abre numa nova aba com as suas notas. Lá você completa o consentimento, a identificação e o parecer final e envia.</p>`}
-      <p><button type="button" class="vl-send" id="vl-send">Enviar e continuar no Tally →</button></p>
+      ${falta.length ? `<p>Ainda faltam ${falta.length} resposta${falta.length > 1 ? "s" : ""}. Você pode enviar assim mesmo; as respostas que faltarem chegarão em branco.</p>` : `<p>Tudo respondido. Ao clicar em Enviar, o formulário final se abre em uma nova aba, já com as suas notas. Nele, você confirma o consentimento, preenche a identificação e o parecer final e conclui o envio.</p>`}
+      <p><button type="button" class="vl-send" id="vl-send">Enviar e abrir o formulário final →</button></p>
       <p class="vl-priv">Seu código de validação: <b>${S.cod}</b>. Se o formulário não abrir, copie o resumo abaixo e envie-o ao autor por e-mail.</p>
       <details class="vl-more"><summary>Ver o resumo das respostas</summary><pre style="white-space:pre-wrap;font-size:12.5px">${esc(resumo())}</pre></details></section>`;
     root.innerHTML = h;
@@ -5189,7 +5189,7 @@ countUp();
 
   function corpo(p) {
     if (p.t === "vid") return `<h3>Vídeos práticos</h3>
-      <p class="vp-dica">O site abriu os vídeos. Clique em uma miniatura e assista a pelo menos um dos quatro vídeos práticos (do segundo em diante): cada um tem uma pausa para você decidir antes de ver a resposta.</p>
+      <p class="vp-dica">O site abriu os vídeos. Assista a pelo menos um dos quatro vídeos práticos, que são as quatro últimas miniaturas. Cada um faz uma pausa para que você decida antes de ver a resposta.</p>
       <fieldset><legend>${VID}</legend>${opts("vp_vid", S.vid, 'data-v="1"')}</fieldset>`;
     if (p.t === "ind") { const n = S.notas[k(p.ind.codigo)] || {};
       return `<h3><span class="vp-cod" style="--c:var(--${p.d.id})">${p.ind.codigo}</span> ${p.ind.nome}</h3>
@@ -5201,13 +5201,13 @@ countUp();
       <fieldset><legend><b>Clareza:</b> ${CLAR}</legend>${opts("vp_clar_" + p.j, S.clar[p.j], `data-cl="${p.j}"`)}</fieldset>
       <fieldset class="vp-pouco"><legend>Algum indicador ficou pouco claro? Marque os que precisam de ajuste (opcional).</legend>
       ${p.d.indicadores.map(ind => `<label><input type="checkbox" data-pc="${p.j}" value="${ind.codigo}" ${pc.includes(ind.codigo) ? "checked" : ""}><span><b>${ind.codigo}</b> ${ind.nome}</span></label>`).join("")}</fieldset>
-      ${campo("c" + p.d.id.slice(1), `Comentários e sugestões sobre a ${curto(p.d)} (indique o código do indicador)`, "Ex.: 3.1 – a diferença entre os níveis 2 e 3 não está clara porque...")}`; }
+      ${campo("c" + p.d.id.slice(1), `Comentários e sugestões sobre a ${curto(p.d)} (indique o código do indicador)`, "Ex.: D3.1 – a diferença entre os níveis 2 e 3 não está clara porque...")}`; }
     if (p.t === "est") return `<h3>Estrutura · ${p.rot}</h3><p class="vp-dica">${p.dica}</p>
       <fieldset><legend>${EST[p.e]}</legend>${opts("vp_est_" + p.e, S.est[p.e], `data-e="${p.e}"`)}</fieldset>
       ${(p.com || []).map(id => campo(id, ESTC[id])).join("")}`;
     const falta = P.filter(q => q.t !== "fim" && !feita(q)).length;
     return `<h3>Enviar</h3><p class="vp-dica">${falta ? `Faltam ${falta} resposta${falta > 1 ? "s" : ""}, mas você pode enviar assim mesmo.` : "Tudo respondido."} Clique no botão para abrir o formulário final, já com as suas notas.</p>
-      <p><button type="button" class="vl-send" data-enviar="1">Enviar e continuar no Tally →</button></p>`;
+      <p><button type="button" class="vl-send" data-enviar="1">Enviar e abrir o formulário final →</button></p>`;
   }
   function painel() {
     if (S.parada < 0) { pn.hidden = true; document.body.classList.remove("vl-trilha", "vl-min"); return; }
@@ -5488,7 +5488,7 @@ countUp();
     leg.innerHTML = "<b>Validação por especialistas</b>Obrigado por participar! Para começar, clique no botão verde abaixo.";
     ov.classList.add("en-validar");
     centro.setAttribute("tabindex", "-1"); centro.setAttribute("aria-hidden", "true");
-  } else leg.innerHTML = "<b>Cinco olhares sobre uma conversa</b>Cada pétala é uma dimensão. Toque numa delas para conhecê-la.";
+  } else leg.innerHTML = "<b>Cinco olhares sobre uma conversa</b>Cada pétala é uma dimensão. Toque em uma delas para conhecê-la.";
   const LEG0 = leg.innerHTML;
   D.forEach((d, i) => {
     const a = i * 72, cx = 105 + 52 * Math.sin(rad(a)), cy = 105 - 52 * Math.cos(rad(a));
