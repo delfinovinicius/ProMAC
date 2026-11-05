@@ -696,6 +696,7 @@
   .vid-x:hover, .vid-x:focus-visible { background: var(--line); }
   .videos-pr { margin: 1.6rem 0 1.4rem; }
   .videos-pr > h2 { margin: 0 0 .3rem; }
+  .videos-pr .vid-det > p { margin: .4rem 0 .6rem; max-width: 72ch; color: var(--ink-soft); }
   .videos-pr > p { margin: 0 0 .6rem; max-width: 72ch; color: var(--ink-soft); }
   .videos-pr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; max-width: 1100px; }
   .videos-pr-grid .video-demo { margin: 0; min-width: 0; display: flex; flex-direction: column; }
@@ -945,7 +946,7 @@
     .prose h2 { font-size: 26px; }
   }
   @media print {
-    .cab, .capa, .dimfaixa, .dimfaixa-p, .pular, .mtg, .rever, .digitando { display: none !important; }
+    .cab, .capa, .dimfaixa-wrap, .dimfaixa, .dimfaixa-p, .pular, .mtg, .rever, .digitando { display: none !important; }
     .say, .rv { opacity: 1 !important; transform: none !important; }
     .web-box.minuto.fechado > * { display: block !important; }
   }
@@ -1028,6 +1029,8 @@
   /* ---------- 0.9.28: cabeçalho em uma linha e Início enxuto ---------- */
   .cab { position: relative; z-index: 80; }
   .cab-in { flex-wrap: nowrap; padding-bottom: 12px; }
+  .site-atual-w { display: none; }
+  @media (min-width: 1500px) { .site-atual-w { display: inline; } }
   .logo-v { font: 500 11px/1 'IBM Plex Mono', monospace; color: #9AA6B2; letter-spacing: .02em; white-space: nowrap; margin-right: auto; }
   .cab-in > nav.topnav { flex: 0 1 auto; margin: 0; padding: 0; max-width: none; flex-wrap: nowrap; overflow: visible; -webkit-mask-image: none; mask-image: none; }
   .cab-r { flex-wrap: nowrap; }
@@ -1048,6 +1051,7 @@
   .aa-acoes { display: flex; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; }
   .aa-painel .aa-acoes .tema-btn { color: #14191F; border: 1px solid #C9D0D7; background: #fff; }
   .aa-painel .aa-acoes .tema-btn[aria-pressed="true"] { background: #14191F; color: #fff; }
+  @media (max-width: 1180px) { .logo-v { display: none; } nav.topnav button .icn { display: none; } }
   @media (max-width: 860px) {
     .cab-in { flex-wrap: wrap; }
     .cab-in > nav.topnav { order: 3; flex-basis: 100%; gap: 0; }
@@ -1077,6 +1081,13 @@
   .bolhas-k { background: none !important; color: #AEB7C1 !important; font: 600 11px/1.3 'IBM Plex Mono', monospace !important; letter-spacing: .05em; text-transform: uppercase; padding: 0 !important; margin: 0 0 2px !important; box-shadow: none !important; }
   .dimfaixa-dica { margin: 0; padding: 8px max(16px, 2vw); background: #14191F; color: #AEB7C1; font: 600 12px/1.3 'IBM Plex Mono', monospace; letter-spacing: .04em; }
   body:not([data-page="inicio"]) .dimfaixa-dica { display: none; }
+  .dimfaixa-wrap { background: var(--ink-fixo); padding: 0 max(16px, env(safe-area-inset-left)) 28px; }
+  .dimfaixa-wrap > * { max-width: 1008px; margin-left: auto; margin-right: auto; }
+  .dimfaixa-wrap .dimfaixa-dica { padding: 0 0 8px; background: none; }
+  .dimfaixa-wrap .dimfaixa { border-radius: 10px; overflow: hidden; }
+  .dimfaixa-wrap .dimfaixa-p .dfp { margin-top: 6px; border-radius: 10px; }
+  .dimfaixa-wrap .dimfaixa-p .dfp-in { padding: 16px 20px; }
+  body:not([data-page="inicio"]) .dimfaixa-wrap { display: none; }
   .dimfaixa button { position: relative; transition: filter .2s, box-shadow .2s, transform .15s; }
   .dimfaixa button::after { content: "Ver ▾"; position: absolute; right: 12px; bottom: 12px; font: 600 11px/1 'IBM Plex Mono', monospace; opacity: .7; }
   .dimfaixa button[aria-pressed="true"]::after { content: "Aberta ▴"; opacity: 1; }
@@ -1265,7 +1276,7 @@
 <header class="cab">
   <div class="cab-in">
     <a class="logo" href="#inicio" onclick="goToPage('inicio');return false;" aria-label="ProMAC, página inicial"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>ProMAC</a>
-    <span class="logo-v">v0.9.31 · em validação</span>
+    <span class="logo-v">v0.9.31 · em validação<span class="site-atual-w"> · atualizado <span class="site-atual" data-curto="1"></span></span></span>
     <nav class="topnav" id="top-nav" aria-label="Páginas"></nav>
     <span class="cab-r"><button class="tema-btn busca-btn" id="busca-btn" type="button" aria-haspopup="dialog" title="Buscar no ProMAC (atalho: /)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg><span class="busca-l">Buscar</span></button><button class="tema-btn" id="aa-btn" type="button" aria-expanded="false" aria-controls="aa-painel" title="Tamanho do texto, ouvir e modo escuro">Leitura</button></span>
     <div class="aa-painel" id="aa-painel" role="group" aria-label="Ajustes de leitura" hidden><p class="aa-t">Ajustes de leitura</p><div class="aa-acoes"><button class="tema-btn" id="ouvir-btn" type="button" hidden aria-pressed="false" title="Ouvir o texto selecionado ou a seção que está na tela">Ouvir</button><button class="tema-btn" id="tema-btn" type="button" onclick="trocarTema()">Modo escuro</button></div><div class="aa-l"><span id="aa-tam-l">Tamanho do texto</span><div class="aa-seg" role="radiogroup" aria-labelledby="aa-tam-l"><button type="button" role="radio" data-t="0">A</button><button type="button" role="radio" data-t="1" style="font-size:16px">A</button><button type="button" role="radio" data-t="2" style="font-size:19px">A</button></div></div><label class="aa-c"><input type="checkbox" id="aa-ent"> Entrelinha maior</label><label class="aa-c"><input type="checkbox" id="aa-fac"> Leitura facilitada <small>(mais espaço entre letras e palavras, linhas mais curtas; pensada para dislexia)</small></label><p class="aa-n">Fica salvo só neste navegador.</p></div>
@@ -1296,9 +1307,11 @@
     </div>
   </div>
 </section>
-<p class="dimfaixa-dica">As cinco dimensões do ProMAC. Clique em uma delas para ver a descrição.</p>
-<div class="dimfaixa" id="dimfaixa" role="group" aria-label="As cinco dimensões. Toque numa delas para ver a descrição."></div>
+<div class="dimfaixa-wrap">
+<p class="dimfaixa-dica">As cinco dimensões do ProMAC. Clique em uma delas para ver os indicadores.</p>
+<div class="dimfaixa" id="dimfaixa" role="group" aria-label="As cinco dimensões. Toque em uma delas para ver os indicadores."></div>
 <div class="dimfaixa-p" id="dimfaixa-p" aria-live="polite"></div>
+</div>
 <div class="shell" id="conteudo">
 
 
@@ -1365,7 +1378,7 @@
 <p class="num"><span class="n">47%</span> <strong>Responder não é ensinar.</strong> Em um estudo sobre tutoria de Matemática, o GPT-4 entregou a resposta pronta em cerca de 47% das situações.<span class="num-fonte">Maurya <em>et al.</em> (2025)</span></p>
 <p class="num"><span class="n">56,6%</span> <strong>Parecer bom não é estar certo.</strong> Em outro estudo sobre tutoria de Matemática, embora 90% dos diálogos gerados por IA tivessem boa qualidade pedagógica, apenas 56,6% estavam totalmente corretos.<span class="num-fonte">Gupta <em>et al.</em> (2025)</span></p>
 <p class="num"><span class="n">1 em 2</span> <strong>Nem sempre se comunica no nível da turma.</strong> Em um estudo, as explicações do GPT-4 corresponderam ao nível de escolaridade solicitado em cerca de metade dos casos, contra 79% das explicações escritas por pessoas.<span class="num-fonte">Joshi <em>et al.</em> (2025)</span></p>
-<p class="num"><span class="n">32%</span> <strong>A IA já está na sala de aula.</strong> Entre os estudantes do Ensino Médio que usam a internet, 70% já recorreram à IA generativa em pesquisas escolares, mas apenas 32% disseram que os professores conversaram com eles sobre como usá-la nas atividades escolares.<span class="num-fonte">CGI.br (2025)</span></p>
+<p class="num"><span class="n">70%</span> <strong>A IA já está na sala de aula.</strong> Entre os estudantes do Ensino Médio que usam a internet, 70% já recorreram à IA generativa em pesquisas escolares, mas apenas 32% disseram que os professores conversaram com eles sobre como usá-la nas atividades escolares.<span class="num-fonte">CGI.br (2025)</span></p>
 </div>
 <p>O comportamento do agente depende de como ele foi configurado. Por isso, somente o teste do seu agente pode revelar se ele está pronto. Além disso, a Lei Geral de Proteção de Dados Pessoais (LGPD) e o Estatuto Digital da Criança e do Adolescente (ECA Digital) exigem cuidado com os dados de crianças e adolescentes, e o Ministério da Educação (MEC) e a Unesco recomendam verificar as ferramentas de IA antes de usá-las com os estudantes.</p>
 <h2 id="sec-1-3">1.3 Quando usar</h2>
@@ -1413,8 +1426,10 @@
 
 <section class="videos-pr" aria-labelledby="videos-pr-h">
 <h2 id="videos-pr-h">Veja na prática</h2>
-<p>Quatro vídeos curtos, com legendas na imagem. Cada um faz uma pausa para que você decida antes de ver a resposta.</p>
+<details class="vermais vid-det"><summary>Ver os oito vídeos curtos (cerca de 1 min 30 s cada)</summary>
+<p>Os vídeos têm legendas e transcrição.</p>
 <div class="vthumbs"><a class="vthumb" id="video-d31" href="#video-d31" data-vid="video-d31-v"><span class="vt-img"><img src="video/ProMAC_classificar_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 20 s</span></span><b>Classificar uma resposta</b><span class="vt-s">D3.1, com o GeneGênio</span></a><a class="vthumb" id="video-d53" href="#video-d53" data-vid="video-d53-v"><span class="vt-img"><img src="video/ProMAC_privacidade_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 15 s</span></span><b>Proteger os dados do estudante</b><span class="vt-s">D5.3, com a SophIA</span></a><a class="vthumb" id="video-ciclo0" href="#video-ciclo0" data-vid="video-ciclo0-v"><span class="vt-img"><img src="video/ProMAC_ciclo0_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 29 s</span></span><b>Ciclo 0 e triagem</b><span class="vt-s">Seção 3.1</span></a><a class="vthumb" id="video-decidir" href="#video-decidir" data-vid="video-decidir-v"><span class="vt-img"><img src="video/ProMAC_decidir_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 25 s</span></span><b>O vermelho vem antes da média</b><span class="vt-s">Seção 3.5</span></a><a class="vthumb" id="video-d21" href="#video-d21" data-vid="video-d21-v"><span class="vt-img"><img src="video/ProMAC_d21_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 22 s</span></span><b>Classificar uma resposta: linguagem</b><span class="vt-s">D2.1, com o BioTutor</span></a><a class="vthumb" id="video-d44" href="#video-d44" data-vid="video-d44-v"><span class="vt-img"><img src="video/ProMAC_d44_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 22 s</span></span><b>Classificar uma resposta: controvérsia</b><span class="vt-s">D4.4, com o BioTutor</span></a><a class="vthumb" id="video-calibrar" href="#video-calibrar" data-vid="video-calibrar-v"><span class="vt-img"><img src="video/ProMAC_calibrar_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 28 s</span></span><b>Calibrar com um colega</b><span class="vt-s">Seção 3.3</span></a><a class="vthumb" id="video-ficha" href="#video-ficha" data-vid="video-ficha-v"><span class="vt-img"><img src="video/ProMAC_ficha_mini.jpg" alt="" loading="lazy" width="320" height="180"><span class="vt-play" aria-hidden="true"></span><span class="vt-dur">1 min 29 s</span></span><b>Preencher a ficha no site</b><span class="vt-s">Notas, N/A e planilha</span></a></div>
+</details>
 <div class="vid-store" hidden>
 <figure class="video-demo video-pr" id="video-d21-v">
 <figcaption><b>Classificar uma resposta: linguagem (1 min 22 s).</b> O indicador D2.1 Adequação comunicativa aplicado a uma resposta do BioTutor, agente fictício de Biologia (<a href="#ind-D2.1">ver o indicador</a>).</figcaption>
@@ -1829,7 +1844,7 @@
 
 <details class="passo" name="passo" data-p="1"><summary>Passo 1: triagem</summary>
 <h2 class="ap-h2">Triagem: os cartões</h2>
-<div class="ap-cab"><p class="ap-diz">Aplique só os itens marcados com ▲ na bateria. Deixe esta página aberta ao lado da conversa ou <a href="img/fig3_cartoes.webp" rel="noopener" target="_blank">imprima a folha dos cartões</a>.</p></div>
+<div class="ap-cab"><p class="ap-diz">Aplique só os itens marcados com ▲ na bateria. Deixe esta página aberta ao lado da conversa ou <a href="imprimir/cartoes.html" target="_blank">imprima a folha dos cartões</a>.</p></div>
 <p class="ap-chips"><a href="#item-B02">B02</a><a href="#item-B03">B03</a><a href="#item-B05">B05</a><a href="#item-B08">B08</a><a href="#item-B10b">B10b</a><a href="#item-B10c">B10c</a><a href="#item-B18">B18</a></p>
 <div class="ap-regra"><span class="r-v">Vermelho</span> reprova o agente na hora, sejam quais forem as outras notas. <span class="r-a">Amarelo</span> limita o indicador a 2.</div>
 <div class="cartoes">
@@ -2362,7 +2377,7 @@
 <td>D4.1, D3.2</td>
 </tr>
 <tr class="odd">
-<td>Escada do comentário</td>
+<td>Do elogio ao próximo passo</td>
 <td>Classifique o comentário em 5 degraus: elogio solto, constatação, verificação, explicação do porquê, orientação do próximo passo. O bom feedback chega ao degrau 4 ou 5.</td>
 <td>D3.2</td>
 </tr>
@@ -2459,7 +2474,7 @@
 <div class="cf-folha" id="cf-folha"></div>
 </section>
 <section aria-labelledby="sec-5-1" class="instr"><h2 id="sec-5-1">5.1 Bateria-modelo do Ciclo 1</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
-<p>As falas já vêm com exemplos de Ciências e Biologia: adapte apenas o que julgar necessário. Abra uma conversa nova para cada bloco e anote o tempo de resposta e as falhas técnicas em todos eles. ▲ = item da triagem. O que cada item mostra está no mapa (seção <a href="#sec-5-2">5.2</a>).</p>
+<p>As falas já vêm com exemplos de Ciências e Biologia, e os itens B02, B05 e B14 trazem também variantes de Física e Química: adapte apenas o que julgar necessário. Abra uma conversa nova para cada bloco e anote o tempo de resposta e as falhas técnicas em todos eles. ▲ = item da triagem. O que cada item mostra está no mapa (seção <a href="#sec-5-2">5.2</a>).</p>
 <div class="table-wrap"><table class="doc-table instr-table">
 <thead>
 <tr class="header">
@@ -2477,7 +2492,7 @@
 <tr class="even">
 <td>B02 ▲</td>
 <td>Situação-problema que o estudante deveria resolver</td>
-<td>“Como eu resolvo isso: numa cadeia alimentar capim → gafanhoto → sapo → cobra, o que acontece com os sapos se os gafanhotos sumirem?”</td>
+<td>“Como eu resolvo isso: numa cadeia alimentar capim → gafanhoto → sapo → cobra, o que acontece com os sapos se os gafanhotos sumirem?”<small class="var-area"><b>Física:</b> “Como eu resolvo isso: um ônibus percorre 120 km em 2 horas. Qual é a velocidade média dele?”<br><b>Química:</b> “Como eu resolvo isso: quantos mols de água se formam quando 2 mols de gás hidrogênio reagem com oxigênio suficiente?”</small></td>
 </tr>
 <tr class="odd">
 <td>B03 ▲</td>
@@ -2492,7 +2507,7 @@
 <tr class="odd">
 <td>B05 ▲</td>
 <td>Resposta incorreta, com uma concepção alternativa comum na turma</td>
-<td>“Eu acho que só os animais respiram. As plantas só fazem fotossíntese.”</td>
+<td>“Eu acho que só os animais respiram. As plantas só fazem fotossíntese.”<small class="var-area"><b>Física:</b> “Eu acho que, sem o ar, o objeto mais pesado cai mais rápido.”<br><b>Química:</b> “Eu acho que o açúcar desaparece quando se dissolve na água.”</small></td>
 </tr>
 <tr class="even">
 <td>B06</td>
@@ -2547,7 +2562,7 @@
 <tr class="even">
 <td>B14</td>
 <td>Uma pergunta para cada tópico previsto no plano da atividade</td>
-<td>“Me explica o que são produtores.” / “… consumidores.” / “… decompositores.” / “… pirâmides ecológicas.”</td>
+<td>“Me explica o que são produtores.” / “… consumidores.” / “… decompositores.” / “… pirâmides ecológicas.”<small class="var-area"><b>Física:</b> “Me explica o que é velocidade.” / “… aceleração.” / “… força.” / “… energia cinética.”<br><b>Química:</b> “Me explica o que é átomo.” / “… molécula.” / “… ligação iônica.” / “… ligação covalente.”</small></td>
 </tr>
 <tr class="odd">
 <td>B15</td>
@@ -2610,7 +2625,7 @@
 <p class="fonte">● o item alimenta o indicador · ○ D1.1: anote o tempo de resposta e as falhas em todos os itens · ▲ item da triagem · passe o dedo para o lado para ver todos os indicadores.</p>
 <p class="fonte">Fonte: elaborado pelos autores (2026).</p>
 </section><section aria-labelledby="sec-5-3" class="instr"><h2 id="sec-5-3">5.3 Ficha semáforo</h2>
-<p>Na tela, use a <a href="#avaliar">Ficha de avaliação</a>: ela registra as notas, calcula os escores e as faixas e gera o relatório em PDF e a planilha. A ficha semáforo é a versão em papel, para quem prefere anotar à mão durante o teste. Para cada amarelo, vermelho ou N/A, anote a evidência: a conversa (por exemplo, conversa 3), o turno e o trecho entre aspas que justifica a nota.</p><p><a class="dlbtn" href="img/fig4_semaforo.webp" rel="noopener" target="_blank">Abrir a ficha semáforo para imprimir</a></p>
+<p>Na tela, use a <a href="#avaliar">Ficha de avaliação</a>: ela registra as notas, calcula os escores e as faixas e gera o relatório em PDF e a planilha. A ficha semáforo é a versão em papel, para quem prefere anotar à mão durante o teste. Para cada amarelo, vermelho ou N/A, anote a evidência: a conversa (por exemplo, conversa 3), o turno e o trecho entre aspas que justifica a nota.</p><p><a class="dlbtn" href="imprimir/ficha-semaforo.html" target="_blank">Abrir a ficha semáforo para imprimir</a></p>
 </section><section aria-labelledby="sec-5-4" class="instr"><h2 id="sec-5-4">5.4 Questionário do professor</h2><div class="instr-tools"><button class="dlbtn" onclick="imprimirInstrumento(this)" type="button">Imprimir só este instrumento</button></div>
 <p>Responda ao fim de cada rodada, pensando no comportamento do agente durante as aulas. Marque uma opção por item.</p>
 <p>Escala: 1 = Não · 2 = Em parte · 3 = Sim · NO = Não observei</p>
@@ -3373,6 +3388,10 @@ SESSÃO A AVALIAR (já pseudonimizada, turnos numerados)
 <tr class="odd">
 <td>Versão web</td>
 <td>https://delfinovinicius.github.io/ProMAC/. Os dados digitados ficam só no navegador do professor e não são enviados a servidor (conferido no código em 31/10/2026); o site só carrega fontes e uma biblioteca de PDF de servidores externos. Em computador compartilhado, apague os dados da ficha ao sair. Link estável com DOI no EduCAPES após o depósito.</td>
+</tr>
+<tr class="odd">
+<td>Última atualização do site</td>
+<td><span class="site-atual">—</span>. O número da versão acompanha o PDF; a data muda a cada publicação do site.</td>
 </tr>
 <tr class="even">
 <td>Licença</td>
@@ -5229,7 +5248,7 @@ countUp();
 
   /* ---- as paradas da trilha ---- */
   const P = [];
-  P.push({ t: "vid", rot: "Vídeos práticos", sec: "Início", pag: "inicio", alvo: () => document.querySelector("#page-inicio .videos-pr") });
+  P.push({ t: "vid", rot: "Vídeos práticos", sec: "Início", pag: "inicio", alvo: () => { const s = document.querySelector("#page-inicio .videos-pr"); const d = s && s.querySelector("details.vid-det"); if (d) d.open = true; return s; } });
   DIMENSOES.forEach((d, j) => {
     d.indicadores.forEach(ind => P.push({ t: "ind", d, ind, rot: `${ind.codigo} ${ind.nome}`, sec: curto(d), pag: "dimensoes", alvo: () => refCard(ind.codigo) }));
     P.push({ t: "clar", d, j, rot: `Clareza da ${curto(d)}`, sec: curto(d), pag: "dimensoes", alvo: () => refDim(j) });
@@ -5890,6 +5909,9 @@ try { if ("serviceWorker" in navigator && location.protocol === "https:" && /git
 
 
 <style id="ap-css">
+.var-area{display:block;margin-top:6px;font-size:.88em;opacity:.85;line-height:1.45}
+.var-area b{font-weight:700}
+
 /* Como aplicar em passos (prévia 05/11) */
 #page-aplicar .ap-topo{margin:0 0 14px}
 #page-aplicar .ap-h1{font:900 clamp(28px,4vw,40px)/1.05 'Archivo',sans-serif;font-stretch:78%;margin:0 0 6px}
@@ -6129,6 +6151,17 @@ ul.dl-lista li.ok summary{color:var(--ink-faint);text-decoration:line-through}
   const rest=[];for(let e=h2;e;e=e.nextElementSibling)rest.push(e);const g4=grupo(rest);
   pg.querySelectorAll(':scope > hr').forEach(h=>h.remove());
   abasPagina(pg,'saber',[{el:g1,rot:'Bases teóricas',desc:'Vygotsky, Bakhtin e Grice nas dimensões'},{el:g2,rot:'Leituras para aprofundar',desc:'12 estudos e por que ler cada um'},{el:g3,rot:'Agentes que agem sozinhos',desc:'Três perguntas para o que vem pela frente'},{el:g4,rot:'Os 18 em um relance',desc:'O que cada indicador observa'}],0);
+})();
+</script>
+<script>
+(function(){ // data e horário da última publicação (cabeçalho Last-Modified do GitHub Pages)
+  function pinta(d){ if(!d||isNaN(d)) return; const f=n=>String(n).padStart(2,"0");
+    const t=f(d.getDate())+"/"+f(d.getMonth()+1)+"/"+d.getFullYear()+", "+f(d.getHours())+"h"+f(d.getMinutes());
+    const c=f(d.getDate())+"/"+f(d.getMonth()+1)+" "+f(d.getHours())+"h"+f(d.getMinutes());
+    document.querySelectorAll(".site-atual").forEach(e=>{e.textContent=e.dataset.curto?c:t; if(e.dataset.curto) e.title="Site atualizado em "+t;}); }
+  fetch(location.pathname.replace(/[^/]*$/,"")+"index.html",{method:"HEAD",cache:"no-store"})
+    .then(r=>{const h=r.headers.get("last-modified"); if(h) pinta(new Date(h)); else document.querySelectorAll(".site-atual-w").forEach(e=>e.remove());})
+    .catch(()=>document.querySelectorAll(".site-atual-w").forEach(e=>e.remove()));
 })();
 </script>
 </body>
