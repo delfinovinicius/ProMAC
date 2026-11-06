@@ -3684,7 +3684,11 @@ const DIMENSOES = [
      {
       "titulo": "Do elogio ao próximo passo",
       "texto": "Classifique o comentário em 5 degraus: elogio solto, constatação, verificação, explicação do porquê, orientação do próximo passo. O bom feedback chega ao degrau 4 ou 5."
-     },]
+     },
+     {
+      "titulo": "Fonte",
+      "texto": "Os três movimentos do feedback (aonde ir, onde o estudante está e qual é o próximo passo) seguem o modelo de Hattie e Timperley (2007). Veja as <a href=\"#referencias\">Referências</a>."
+     }]
    },
    {
     "id": "acolhimento_afetivo",
@@ -6326,6 +6330,47 @@ nav.subnav button{font-size:14px}
   addEventListener("popstate",irPara);
   if(location.hash.length>1)irPara();
   titulo();
+})();
+</script>
+<style>
+/* cartões na ficha: vermelho trava o indicador em 1; amarelo, no máximo em 2 (seção 3.5) */
+.cart-f{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin:4px 0 12px;font-size:14px;color:var(--ink-soft)}
+.cart-f .cart-t{font-weight:600;color:var(--ink);margin-right:4px}
+.cart-o{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid var(--line);border-radius:20px;cursor:pointer;min-height:32px;box-sizing:border-box}
+.cart-o:has(input:checked){border-color:var(--ink);color:var(--ink);font-weight:600}
+.cart-o.cart-a:has(input:checked){background:var(--mid-soft);border-color:var(--mid)}
+.cart-o.cart-v:has(input:checked){background:var(--bad-soft);border-color:var(--bad)}
+.cart-msg{flex-basis:100%;margin:2px 0 0;font-weight:600;color:var(--ink)}
+.cart-msg:empty{display:none}
+.level.bloq{opacity:.4;cursor:not-allowed}
+@media (max-width:640px),(pointer:coarse){.cart-o{min-height:44px}}
+@media print{.cart-o:not(:has(input:checked)){display:none}}
+</style>
+<script>
+(function cartoesFicha(){
+  const KEY="promac_cartoes_v1";let C={};
+  try{C=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){}
+  const salva=()=>{try{localStorage.setItem(KEY,JSON.stringify(C));}catch(e){}};
+  const MSG={v:"Cartão vermelho: o indicador fica em 1, Inadequado.",a:"Cartão amarelo: o indicador fica, no máximo, em 2, Parcialmente adequado."};
+  function aplica(id){
+    const w=document.querySelector(`#dims-container .levels[data-ind="${id}"]`);if(!w)return;
+    const c=C[id]||"",max=c==="v"?1:c==="a"?2:3;
+    w.querySelectorAll(".level").forEach(l=>{const v=l.dataset.val,b=v==="na"?!!c:+v>max;l.classList.toggle("bloq",b);l.querySelector("input").disabled=b;});
+    const sel=w.querySelector("input:checked");
+    if(sel&&sel.disabled){const alvo=w.querySelector(`input[value="${max}"]`);if(alvo){alvo.checked=true;onScore(id);}}
+    const m=document.querySelector(`.cart-msg[data-ind="${id}"]`);if(m)m.textContent=MSG[c]||"";
+  }
+  document.querySelectorAll("#dims-container .levels").forEach(w=>{
+    const id=w.dataset.ind,cod=(w.closest(".card")?.querySelector(".indcode")?.textContent||"").trim();
+    const f=document.createElement("div");f.className="cart-f";f.setAttribute("role","radiogroup");f.setAttribute("aria-label","Houve cartão no indicador "+cod+"?");
+    f.innerHTML='<span class="cart-t" aria-hidden="true">Houve cartão?</span>'+[["","Não"],["a","Amarelo"],["v","Vermelho"]].map(([v,t])=>`<label class="cart-o cart-${v||"n"}"><input type="radio" name="cart_${id}" value="${v}"${(C[id]||"")===v?" checked":""}> ${t}</label>`).join("")+`<p class="cart-msg" data-ind="${id}" aria-live="polite"></p>`;
+    w.after(f);
+    f.addEventListener("change",e=>{const v=e.target.value;if(v)C[id]=v;else delete C[id];salva();aplica(id);if(currentDim==="resultado"&&typeof renderResults==="function")renderResults();});
+    aplica(id);
+  });
+  const _cl=clearDraft;
+  clearDraft=function(){_cl.apply(this,arguments);let vazio=true;try{vazio=localStorage.getItem(STORAGE_KEY)===null;}catch(e){}
+    if(!vazio)return;C={};salva();document.querySelectorAll('.cart-f input[value=""]').forEach(i=>i.checked=true);document.querySelectorAll("#dims-container .levels").forEach(w=>aplica(w.dataset.ind));};
 })();
 </script>
 </body>
