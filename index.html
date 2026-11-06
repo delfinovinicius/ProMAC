@@ -6169,5 +6169,57 @@ ul.dl-lista li.ok summary{color:var(--ink-faint);text-decoration:line-through}
     .catch(()=>document.querySelectorAll(".site-atual-w").forEach(e=>e.remove()));
 })();
 </script>
+<style>
+/* Tabelas de itens em cartões recolhidos (Bateria 5.1 e Itens extras) */
+table.tab-rec,table.tab-rec tbody{display:block;width:100%}
+table.tab-rec thead{display:none}
+table.tab-rec tbody tr{display:grid;grid-template-columns:4.6rem 1fr auto;gap:4px 14px;align-items:baseline;padding:10px 14px;margin:0 0 6px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table.tab-rec tbody tr[hidden]{display:none}
+table.tab-rec tbody tr:hover{border-color:var(--line-strong)}
+table.tab-rec td{display:block;padding:0;border:0;background:none}
+table.tab-rec td.rc-cod{font-weight:700;white-space:nowrap}
+table.tab-rec td.rc-sit{font-weight:500}
+table.tab-rec td.rc-ind{grid-column:3;grid-row:1;font-size:14px;white-space:nowrap}
+table.tab-rec td.rc-det{grid-column:2/-1;display:none;padding-top:4px}
+table.tab-rec tr.aberta td.rc-det{display:block}
+table.tab-rec td.rc-det::before{content:attr(data-rot);display:block;font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px}
+.rc-bt{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:28px}
+.rc-bt::before{content:"+";display:inline-grid;place-items:center;width:20px;height:20px;border:1.5px solid currentColor;border-radius:4px;font-weight:700;line-height:1;font-size:14px}
+.rc-bt[aria-expanded="true"]::before{content:"−"}
+.rc-bt:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.rc-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 10px;font-size:14px;color:var(--ink-soft)}
+@media (max-width:640px){table.tab-rec tbody tr{grid-template-columns:3.8rem 1fr}table.tab-rec td.rc-ind{grid-column:2;grid-row:2}table.tab-rec td.rc-det{grid-column:1/-1}}
+@media print{table.tab-rec{display:table}table.tab-rec thead{display:table-header-group}table.tab-rec tbody{display:table-row-group}table.tab-rec tbody tr{display:table-row;border:0}table.tab-rec td{display:table-cell!important;padding:4px 6px;border-bottom:1px solid #ccc}table.tab-rec td.rc-det::before{content:none}.rc-bt::before,.rc-ctl{display:none!important}}
+</style>
+<script>
+(function tabelasRecolhidas(){
+  const alvo=[];
+  const bat=document.querySelector('#sec-5-1')?.closest('.instr')?.querySelector('table.instr-table');if(bat)alvo.push(bat);
+  const ex=[...document.querySelectorAll('#page-extras table')].find(t=>/^E\d\d/.test((t.tBodies[0]?.rows[0]?.cells[0]?.textContent||'').trim()));if(ex)alvo.push(ex);
+  alvo.forEach(t=>{
+    const rot=[...t.tHead.rows[0].cells].map(th=>th.textContent.trim());const ultimoInd=/indicador/i.test(rot[rot.length-1]);
+    t.classList.add('tab-rec');const rows=[...t.tBodies[0].rows];
+    rows.forEach((r,k)=>{const c=[...r.cells];c[0].classList.add('rc-cod');c[1].classList.add('rc-sit');
+      c.slice(2).forEach((td,i)=>{const j=i+2;if(ultimoInd&&j===c.length-1){td.classList.add('rc-ind');}else{td.classList.add('rc-det');td.dataset.rot=rot[j];}});
+      const id='rc-'+(r.id||k);const b=document.createElement('button');b.type='button';b.className='rc-bt';b.setAttribute('aria-expanded','false');
+      while(c[0].firstChild)b.appendChild(c[0].firstChild);c[0].appendChild(b);
+      const dets=c.filter(td=>td.classList.contains('rc-det'));dets.forEach((d,i)=>d.id=id+'-'+i);b.setAttribute('aria-controls',dets.map(d=>d.id).join(' '));
+      b.setAttribute('aria-label',(b.textContent.trim()+' '+c[1].textContent.trim()).slice(0,120)+': mostrar a fala');
+      b.onclick=e=>{e.stopPropagation();abre(r,!r.classList.contains('aberta'))};
+      r.addEventListener('click',e=>{if(e.target.closest('a,button,select,input'))return;if(getSelection&&String(getSelection()).length)return;abre(r,!r.classList.contains('aberta'))});
+    });
+    const ctl=document.createElement('div');ctl.className='rc-ctl';ctl.innerHTML='<span>Clique em um item para ver a fala.</span> <button type="button" class="dlbtn">Abrir todos</button>';
+    const bt=ctl.querySelector('button');bt.onclick=()=>{const vai=bt.textContent==='Abrir todos';rows.filter(r=>!r.hidden).forEach(r=>abre(r,vai));bt.textContent=vai?'Fechar todos':'Abrir todos'};
+    t.closest('.table-wrap').before(ctl);
+  });
+  function abre(r,on){r.classList.toggle('aberta',on);const b=r.querySelector('.rc-bt');if(b){b.setAttribute('aria-expanded',on);b.setAttribute('aria-label',b.getAttribute('aria-label').replace(/: (mostrar|esconder) a fala$/,on?': esconder a fala':': mostrar a fala'))}}
+  // links para um item (#item-B05) abrem o cartão certo
+  window.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[href^="#item-"]');if(!a)return;const tr=document.getElementById(a.getAttribute('href').slice(1));if(tr&&tr.closest('.tab-rec'))abre(tr,true)},true);
+  // filtro dos itens extras: com poucos itens, eles já aparecem abertos
+  const sel=document.getElementById('ex-sel');if(sel&&ex)sel.addEventListener('change',()=>{const vis=[...ex.tBodies[0].rows].filter(r=>!r.hidden);vis.forEach(r=>abre(r,!!sel.value&&vis.length<=6))});
+  // impressão: tudo aberto
+  addEventListener('beforeprint',()=>document.querySelectorAll('.tab-rec tr').forEach(r=>r.classList.add('rc-imp')));
+})();
+</script>
 </body>
 </html>
