@@ -6263,5 +6263,70 @@ table.tab-rec td.rc-det::before{content:attr(data-rot);display:block;font-family
   const llm=pg.querySelector('.llm-optional pre.prompt-box');if(llm){const d=document.createElement('details');d.className='vermais';d.innerHTML='<summary>Ver o texto do prompt</summary>';llm.before(d);d.appendChild(llm)}
   abasPagina(pg,'alem',its,0);})();
 </script>
+<style>
+/* 0.9.32 UX: texto maior em Dimensões e na Ficha; alvos de toque no celular; h1 só para leitores de tela */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.cv p{font-size:15px}
+.cv-why{font-size:14px!important}
+.ref-card .rdef{font-size:15px}
+.ref-level{font-size:14.5px}
+.ref-meta{font-size:14px}
+.ref-meta .lbl,details.meta .metabox .lbl{font-size:12px}
+.level .txt{font-size:15px}
+details.meta .metabox{font-size:14px}
+details.meta>summary{font-size:14px}
+nav.subnav button{font-size:14px}
+@media (max-width:640px),(pointer:coarse){
+  #top-nav button,.mais-btn,.tema-btn,nav.subnav button,.dlbtn,.navbtns button,.rc-bt,.mais-pop button,.aa-seg button{min-height:44px}
+  details>summary{min-height:44px;box-sizing:border-box}
+  input[type=checkbox],input[type=radio]{min-width:24px;min-height:24px}
+  .level{min-height:44px}
+  .ap-nav button,.ap-ir,.q-filters button,.ref-cta button,.dbtns .dlbtn{min-height:44px}
+  .ck0-b button{width:44px;height:44px}
+  .rever{min-height:36px;font-size:12.5px}
+  input[type=file]{min-height:44px}
+}
+</style>
+<script>
+(function rotas(){
+  /* cada página tem endereço próprio (#dimensoes, #avaliar...), o botão Voltar volta à página anterior e a aba mostra o nome da página */
+  const BASE="ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais";
+  const ids=()=>PAGES.map(p=>p.id);
+  const rot=id=>{const p=PAGES.find(x=>x.id===id);return p?p.label:"";};
+  const validar=/[?&]validar\b/.test(location.search);
+  let voltando=false;
+  // h1 para leitores de tela nas páginas que não têm título principal
+  document.querySelectorAll(".page").forEach(pg=>{const id=pg.id.slice(5);if(id==="inicio"||pg.querySelector("h1"))return;const h=document.createElement("h1");h.className="sr-only";h.textContent=rot(id)||id;pg.prepend(h);});
+  function paginaDoHash(){
+    const h=decodeURIComponent(location.hash.slice(1));
+    if(!h)return "inicio";
+    if(ids().includes(h))return h;
+    if(h.startsWith("ind-"))return "dimensoes";
+    const el=document.getElementById(h),pg=el&&el.closest(".page");
+    return pg?pg.id.slice(5):null;
+  }
+  function titulo(){document.title=currentPage==="inicio"?BASE:rot(currentPage)+" · ProMAC";}
+  const _rp=renderPage;
+  renderPage=function(){
+    _rp();titulo();
+    if(voltando||validar)return;
+    if(paginaDoHash()===currentPage)return;
+    history.pushState({p:currentPage},"",currentPage==="inicio"?location.pathname+location.search:"#"+currentPage);
+  };
+  function irPara(){
+    const h=decodeURIComponent(location.hash.slice(1)),pg=paginaDoHash();
+    if(!pg)return;
+    voltando=true;
+    try{
+      if(pg!==currentPage){currentPage=pg;renderPage();if(!h||ids().includes(h))window.scrollTo(0,0);}
+      if(h.startsWith("ind-")&&typeof selQuadro==="function"){selQuadro(h.slice(4));const det=document.getElementById("q-detail");if(det)setTimeout(()=>det.scrollIntoView({block:"start"}),80);}
+      else if(h&&!ids().includes(h)){const el=document.getElementById(h);if(el){for(let d=el.closest("details");d;d=d.parentElement&&d.parentElement.closest("details"))d.open=true;setTimeout(()=>el.scrollIntoView({block:"start"}),60);}}
+    }finally{voltando=false;}
+  }
+  addEventListener("popstate",irPara);
+  if(location.hash.length>1)irPara();
+  titulo();
+})();
+</script>
 </body>
 </html>
