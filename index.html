@@ -44,7 +44,7 @@
     margin: 0; background-color: var(--bg); background-image: var(--grain); color: var(--ink);
     font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; font-size: 15px; line-height: 1.55;
   }
-  .shell { max-width: 1040px; margin: 0 auto; padding: 1.75rem 1.25rem 5rem; }
+  .shell { max-width: 1200px; margin: 0 auto; padding: 1.75rem 1.25rem 5rem; }
 
   header.top { margin-bottom: 1.25rem; position: relative; }
   .eyebrow { font-size: 12.5px; color: var(--ink-faint); letter-spacing: 0.02em; margin: 0 0 0.35rem; }
@@ -103,7 +103,7 @@
   .prose h2 { font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; font-weight: 600; font-size: 21px; margin: 2rem 0 0.6rem; }
   .prose h2:first-child { margin-top: 0; }
   .prose h3 { font-size: 15.5px; font-weight: 600; margin: 1.25rem 0 0.4rem; }
-  .prose p { color: var(--ink-soft); font-size: 14px; line-height: 1.65; margin: 0 0 0.9rem; max-width: 72ch; }
+  .prose p { color: var(--ink-soft); font-size: 14px; line-height: 1.65; margin: 0 0 0.9rem; max-width: 54ch; }
   .prose ul { margin: 0 0 0.9rem; padding-left: 1.2rem; color: var(--ink-soft); font-size: 14px; line-height: 1.65; }
   .prose li { margin-bottom: 0.4rem; }
   .prose strong { color: var(--ink); font-weight: 600; }
@@ -309,7 +309,7 @@
   .disclosure summary .dchev { color: var(--ink-faint); font-family: 'IBM Plex Mono', monospace; font-size: 19px; font-weight: 600; transition: transform .2s ease; flex-shrink: 0; }
   .disclosure[open] summary .dchev { transform: rotate(90deg); color: var(--mark); }
   .disclosure .dbody { padding: 0 18px 16px; }
-  .disclosure .dbody p, .disclosure .dbody ul { margin: 0 0 0.8rem; max-width: 72ch; }
+  .disclosure .dbody p, .disclosure .dbody ul { margin: 0 0 0.8rem; max-width: 54ch; }
   .disclosure .dbody p:last-child, .disclosure .dbody ul:last-child { margin-bottom: 0; }
   .disclosure.small summary { font-family: 'Atkinson Hyperlegible', system-ui, sans-serif; font-size: 14px; font-weight: 600; padding: 12px 16px; }
   @media (max-width: 560px) { .disclosure { transform: none; } }
@@ -668,7 +668,7 @@
   .web-box.proximo { border-left-color: var(--good); margin-top: 1.6rem; }
   .hero-sec { background: transparent !important; color: var(--ink) !important; border: 1px solid var(--line-strong); text-decoration: none; display: inline-flex; align-items: center; }
   .video-demo { margin: 1.4rem 0 1.2rem; }
-  .video-demo figcaption { font-size: 14px; color: var(--ink-soft); margin: 0 0 8px; max-width: 72ch; }
+  .video-demo figcaption { font-size: 14px; color: var(--ink-soft); margin: 0 0 8px; max-width: 54ch; }
   .video-demo figcaption b { color: var(--ink); }
   .video-demo video { display: block; width: 100%; max-width: 860px; aspect-ratio: 16 / 9; background: #14191F; border: 1px solid var(--line); border-radius: var(--radius); }
   .video-transc { margin-top: 8px; max-width: 860px; font-size: 13px; color: var(--ink-soft); }
@@ -696,8 +696,8 @@
   .vid-x:hover, .vid-x:focus-visible { background: var(--line); }
   .videos-pr { margin: 1.6rem 0 1.4rem; }
   .videos-pr > h2 { margin: 0 0 .3rem; }
-  .videos-pr .vid-det > p { margin: .4rem 0 .6rem; max-width: 72ch; color: var(--ink-soft); }
-  .videos-pr > p { margin: 0 0 .6rem; max-width: 72ch; color: var(--ink-soft); }
+  .videos-pr .vid-det > p { margin: .4rem 0 .6rem; max-width: 54ch; color: var(--ink-soft); }
+  .videos-pr > p { margin: 0 0 .6rem; max-width: 54ch; color: var(--ink-soft); }
   .videos-pr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; max-width: 1100px; }
   .videos-pr-grid .video-demo { margin: 0; min-width: 0; display: flex; flex-direction: column; }
   .videos-pr-grid .video-demo figcaption { flex: 1; }
@@ -823,7 +823,7 @@
   .card .def { font-size: 15px; }
   /* cabeçalho */
   .cab { background: var(--ink-fixo); color: #fff; padding-top: env(safe-area-inset-top); }
-  .cab-in { max-width: 1040px; margin: 0 auto; padding: 12px max(16px, env(safe-area-inset-left)) 6px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .cab-in { max-width: 1200px; margin: 0 auto; padding: 12px max(16px, env(safe-area-inset-left)) 6px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
   .logo { color: #fff; text-decoration: none; font-family: 'Archivo', sans-serif; font-stretch: 72%; font-weight: 900; font-size: 26px; display: inline-flex; align-items: center; gap: 10px; }
   .dots { display: inline-flex; gap: 6px; }
   .dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
@@ -832,7 +832,7 @@
   .cab .testbadge { background: transparent; color: #D7DDE3; border-color: #4A5560; font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 4px 10px; }
   .cab .tema-btn { color: #D7DDE3; border-color: #4A5560; }
   .cab .tema-btn:hover { color: #fff; border-color: #fff; }
-  nav.topnav { max-width: 1040px; margin: 0 auto; padding: 4px max(16px, env(safe-area-inset-left)) 0; border-bottom: 0; gap: 2px 4px; }
+  nav.topnav { max-width: 1200px; margin: 0 auto; padding: 4px max(16px, env(safe-area-inset-left)) 0; border-bottom: 0; gap: 2px 4px; }
   nav.topnav button { color: #C9D0D7; font-size: 14px; border: 0; border-radius: 0; padding: 10px 10px 11px; top: 0; margin-bottom: 0; box-shadow: none; }
   nav.topnav button .icn { color: currentColor; }
   nav.topnav button:hover:not(.active) { background: rgba(255,255,255,.08); color: #fff; }
@@ -848,7 +848,7 @@
   .shell { padding-top: 2rem; }
   /* capa */
   .capa { background: var(--ink-fixo); color: #fff; }
-  .capa-in { max-width: 1040px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-left)) 34px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; align-items: center; }
+  .capa-in { max-width: 1200px; margin: 0 auto; padding: 28px max(16px, env(safe-area-inset-left)) 34px; display: grid; grid-template-columns: 1.25fr 1fr; gap: 32px; align-items: center; }
   .capa .eyebrow { color: #AAB3BD; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .04em; }
   .capa h1 { color: #fff; font-size: clamp(38px, 6.4vw, 66px); line-height: .95; margin: 6px 0 14px; display: block; }
   .capa h1 .sigla { display: block; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px; letter-spacing: .1em; color: #FFD089; margin-bottom: 8px; font-stretch: normal; }
@@ -873,10 +873,10 @@
   .dimfaixa button:focus-visible { outline: 3px solid #fff; outline-offset: -6px; }
   .dimfaixa-p .dfp { background: var(--surface); border-bottom: 6px solid var(--c); animation: sobe .3s ease; }
   .dimfaixa-p .dfp-ind { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; text-align: left !important; }
-  .dimfaixa-p .dfp-in { max-width: 1040px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)); }
+  .dimfaixa-p .dfp-in { max-width: 1200px; margin: 0 auto; padding: 16px max(16px, env(safe-area-inset-left)); }
   .dfp .k { font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600; color: var(--c); }
   .dfp b { display: block; font-family: 'Archivo', sans-serif; font-stretch: 72%; font-weight: 900; font-size: 26px; line-height: 1.1; margin: 2px 0 4px; }
-  .dfp p { margin: 0 0 8px; max-width: 76ch; color: var(--ink-soft); }
+  .dfp p { margin: 0 0 8px; max-width: 58ch; color: var(--ink-soft); }
   .dfp button { background: none; border: 0; padding: 0; color: var(--c); font: inherit; font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
   body:not([data-page="inicio"]) .capa, body:not([data-page="inicio"]) .dimfaixa, body:not([data-page="inicio"]) .dimfaixa-p { display: none; }
   .dim-stripe { display: none; }
@@ -980,7 +980,7 @@
   html.leit-t2 .shell { zoom: 1.25; }
   html.leit-ent .prose p, html.leit-ent .prose li, html.leit-ent .dbody p, html.leit-ent .dbody li, html.leit-ent td { line-height: 1.9 !important; }
   html.leit-fac .prose p, html.leit-fac .prose li, html.leit-fac .dbody p, html.leit-fac .dbody li, html.leit-fac td, html.leit-fac .q-detail p { letter-spacing: .035em; word-spacing: .16em; text-align: left !important; font-style: normal; }
-  html.leit-fac .prose p, html.leit-fac .prose li { max-width: 62ch; }
+  html.leit-fac .prose p, html.leit-fac .prose li { max-width: 50ch; }
   .lendo { outline: 3px solid var(--d1); outline-offset: 4px; border-radius: 2px; }
 
   .bento { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-auto-rows: minmax(110px, auto); gap: 12px; margin: 18px 0 8px; }
@@ -1082,7 +1082,7 @@
   .dimfaixa-dica { margin: 0; padding: 8px max(16px, 2vw); background: #14191F; color: #AEB7C1; font: 600 12px/1.3 'IBM Plex Mono', monospace; letter-spacing: .04em; }
   body:not([data-page="inicio"]) .dimfaixa-dica { display: none; }
   .dimfaixa-wrap { background: var(--ink-fixo); padding: 0 max(16px, env(safe-area-inset-left)) 28px; }
-  .dimfaixa-wrap > * { max-width: 1008px; margin-left: auto; margin-right: auto; }
+  .dimfaixa-wrap > * { max-width: 1168px; margin-left: auto; margin-right: auto; }
   .dimfaixa-wrap .dimfaixa-dica { padding: 0 0 8px; background: none; }
   .dimfaixa-wrap .dimfaixa { border-radius: 10px; overflow: hidden; }
   .dimfaixa-wrap .dimfaixa-p .dfp { margin-top: 6px; border-radius: 10px; }
@@ -1403,7 +1403,7 @@
 </div></div></div>
 <p class="fonte">Fonte: elaborado pelos autores (2026).</p>
 <p>O ProMAC avalia o agente, nunca o estudante. Mais precisamente, observa o que o agente faz com o estudante na conversa, e não a tecnologia por trás dele, porque o mesmo modelo de IA pode se tornar um bom ou um mau agente, conforme as instruções e o material que recebe. Também não avalia a infraestrutura, a atividade como um todo, os chatbots de uso geral sem configuração pedagógica nem a comparação entre modelos de IA.</p>
-<p>O protocolo foi pensado para conversas por texto. Se os estudantes enviarem fotos do caderno ou áudios, teste também esses formatos com o item extra E14 (página <a href="#extras">Itens extras</a>) e registre à parte o que o agente compreendeu. Os exemplos provêm das Ciências da Natureza, mas o protocolo pode ser adaptado ao Ensino Superior. Para isso, substitua as falas da bateria de testes (as mensagens simuladas do Ciclo 1) por falas sobre o conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
+<p>O protocolo foi pensado para conversas por texto. Se os estudantes enviarem fotos do caderno ou áudios, teste também esses formatos com o item extra E14 (página <a href="#extras">Itens extras</a>) e registre à parte o que o agente compreendeu. Para adaptar o protocolo ao Ensino Superior, substitua as falas da bateria de testes (as mensagens simuladas do Ciclo 1) por falas sobre o conteúdo da disciplina e ajuste a linguagem esperada ao público adulto.</p>
 <h2 id="sec-1-4">1.4 Como usar este site</h2>
 <div class="table-wrap"><table class="doc-table"><thead><tr class="header"><th>Se você quer…</th><th>Vá para…</th></tr></thead><tbody><tr><td>Ver o caminho mais curto</td><td><a href="#sec-3">Início de Como aplicar</a></td></tr><tr><td>Saber o que reprova o agente imediatamente</td><td><a href="#sec-3-1">3.1 Antes de começar</a> (cartões)</td></tr><tr><td>Entender o que cada indicador observa</td><td><a href="#dimensoes">Dimensões</a></td></tr><tr><td>Testar o agente antes de levá-lo à turma</td><td><a href="#sec-3-2">3.2 Ciclo 1</a> e <a href="#sec-5-1">5.1 Bateria-modelo</a></td></tr><tr><td>Pontuar com a ficha que faz as contas</td><td><a href="#avaliar">Ficha de avaliação</a></td></tr><tr><td>Acompanhar o agente durante as aulas</td><td><a href="#sec-3-4">3.4 Ciclo 2</a> e <a href="#sec-5-4">5.4 a 5.6</a></td></tr><tr><td>Pontuar e decidir o que fazer</td><td><a href="#sec-3-5">3.5 Pontuar e decidir</a></td></tr><tr><td>Comparar as notas de dois avaliadores</td><td><a href="#comparar">Comparar</a></td></tr><tr><td>Aprofundar um indicador em amarelo</td><td><a href="#extras">Itens extras</a></td></tr></tbody></table></div>
 <details class="disclosure fontes"><summary><span>Fontes desta seção</span><span class="dchev">›</span></summary><div class="dbody">
@@ -2031,7 +2031,7 @@
     <section class="dim" id="sec-resultado">
       <div class="dim-head">
         <h2>Painel de resultados</h2>
-        <p>Leitura visual dos escores brutos — nenhuma nota é alterada aqui, apenas traduzida em porcentagem, classificação e no gráfico radar abaixo.</p>
+        <p>Leitura visual dos escores brutos. Nenhuma nota é alterada aqui: elas são apenas traduzidas em porcentagem, em classificação e no gráfico radar abaixo.</p>
       </div>
 
       <div class="flor-agente" id="flor-agente"></div>
@@ -4049,12 +4049,12 @@ function buildDims() {
         const val = idx + 1;
         html += `<label class="level" data-val="${val}">
           <input type="radio" name="score_${ind.id}" value="${val}" onchange="onScore('${ind.id}')">
-          <span class="txt"><b>${labels[idx]}</b> — ${texto}</span>
+          <span class="txt"><b>${labels[idx]}</b>: ${texto}</span>
         </label>`;
       });
       html += `<label class="level na-level" data-val="na">
           <input type="radio" name="score_${ind.id}" value="na" onchange="onScore('${ind.id}')">
-          <span class="txt"><b>N/A</b> — não se aplica a este agente ou a esta amostra (justifique nas observações)</span>
+          <span class="txt"><b>N/A</b>: não se aplica a este agente ou a esta amostra (justifique nas observações)</span>
         </label>`;
       html += `</div>`;
       html += `${ind.exemplo ? `<details class="meta ex-det"><summary>Ver exemplo de conversa</summary><div class="ex-box"><span class="lbl">Exemplo</span><span>${ind.exemplo}</span></div></details>` : ""}`;
