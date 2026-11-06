@@ -5302,8 +5302,8 @@ countUp();
   });
   P.push({ t: "est", e: 0, rot: "As cinco dimensões juntas", sec: "Estrutura", pag: "dimensoes", alvo: () => document.getElementById("quadro"), com: ["ce1", "ce2"],
            dica: "O site abriu o quadro dos 18 indicadores. Clique em qualquer um para ver a pergunta e a rubrica." });
-  P.push({ t: "est", e: 1, rot: "Os ciclos e o tempo", sec: "Estrutura", pag: "aplicar", alvo: () => document.querySelector("#page-aplicar .web-box.minuto"),
-           dica: "O site abriu o resumo da página Como aplicar, com o tempo de cada ciclo. As seções 3.1 a 3.4, logo abaixo, detalham cada um." });
+  P.push({ t: "est", e: 1, rot: "Os ciclos e o tempo", sec: "Estrutura", pag: "aplicar", alvo: () => { const t = document.querySelector("#page-aplicar .ap-tempo"); return t ? (t.closest(".ap-topo") || t) : null; },
+           dica: "O site abriu o início da página Como aplicar, com o caminho essencial e o tempo de cada ciclo. Clique em um passo, logo abaixo, para ver os detalhes." });
   P.push({ t: "est", e: 2, rot: "Pontuar e decidir", sec: "Estrutura", pag: "aplicar", alvo: () => document.getElementById("sec-3-5"),
            dica: "O site abriu a seção 3.5, com as médias, as faixas e a tabela de decisão." });
   P.push({ t: "est", e: 3, rot: "Os instrumentos", sec: "Estrutura", pag: "instrumentos", alvo: () => document.querySelector("#page-instrumentos .web-box"), com: ["ce3"],
