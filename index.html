@@ -4834,7 +4834,7 @@ const findInd = cod => { for (const d of DIMENSOES) { const ind = d.indicadores.
   const txt = el => { const c = el.cloneNode(true); c.querySelectorAll("button").forEach(b => b.remove()); return c.textContent; };
   document.querySelectorAll("table tr").forEach(tr => {
     const td = tr.querySelectorAll("td"); if (td.length < 3) return;
-    const m = td[0].textContent.trim().match(/^([BE]\d\d)\b/); if (!m || REF[m[1]]) return;
+    const m = td[0].textContent.trim().match(/^([BE]\d\d[a-c]?)(?![A-Za-zÀ-ú])/); if (!m || REF[m[1]]) return;
     tr.id = tr.id || "item-" + m[1];
     const e = m[1][0] === "E";
     REF[m[1]] = { c: "var(--ink-soft)", k: e ? "Item extra" : "Bateria básica", t: `<span>${m[1]}</span> ${corta(txt(td[1]), 70)}`, p: "Exemplo: " + corta(txt(td[2]), 150) + (e && td[4] ? ` Indicadores: ${td[4].textContent.trim()}.` : ""), h: "#" + tr.id, l: e ? "Ver nos itens extras" : "Ver na bateria" };
