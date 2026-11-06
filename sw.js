@@ -2,7 +2,7 @@
    Página: rede primeiro (para receber atualizações) e cópia guardada quando não há conexão.
    Imagens, fontes, PDF e bibliotecas: cópia guardada primeiro, atualizada em segundo plano.
    Vídeos (mp4) não são guardados, porque ocupam muito espaço. */
-const VERSAO = "promac-v0.9.31-3";
+const VERSAO = "promac-v0.9.33-1";
 const BASE = ["./", "index.html",
   "img/fig1_usos.webp", "img/fig2_fluxo.webp", "img/fig3_cartoes.webp", "img/fig4_semaforo.webp",
   "img/fig5_mapa.webp", "img/fig6_resumo.webp", "img/fig7_decisao.webp", "img/fig8_relance.webp",
