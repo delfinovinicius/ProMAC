@@ -5350,6 +5350,12 @@ countUp();
         <p>Obrigado por avaliar o <b>ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais</b>. A validação é uma <b>trilha pelo site</b>, com ${P.length} paradas: em cada uma, o site mostra o trecho de que a pergunta trata, e você responde no painel ao lado (no celular, na parte de baixo da tela).</p>
         <p><b>Escalas:</b> pertinência de 1 (Não pertinente) a 4 (Muito pertinente); clareza e estrutura de 1 (Inadequado) a 3 (Adequado). Se marcar 1 ou 2, explique o que mudaria no campo de comentários da dimensão, que aparece na parada de clareza. <b>Tempo:</b> 20 a 30 minutos.</p>
         <p class="vl-priv">As respostas ficam salvas neste navegador até você clicar em <b>Enviar</b>, no fim da trilha. Ao clicar, você verá um formulário curto, já com as suas notas, para o consentimento, a identificação e o parecer final.</p>
+        <details class="vl-more" id="vl-criterios"><summary>Como as respostas serão analisadas (critérios definidos antes da coleta)</summary>
+          <p class="vl-lbl"><b>Pertinência (IVC).</b> Para cada indicador, o IVC é a proporção de especialistas que atribuem nota 3 ou 4. O indicador é mantido com IVC de pelo menos 0,78, se houver seis ou mais especialistas, ou com a concordância de todos, se houver cinco ou menos. Para o protocolo como um todo, a média dos IVC dos 18 indicadores deve chegar a 0,90; o valor de 0,80 é registrado apenas como referência mínima (Alexandre; Coluci, 2011).</p>
+          <p class="vl-lbl"><b>Clareza.</b> Uma dimensão é revista quando menos de 80% dos especialistas a julgam clara (nota 3, Adequado). Um indicador é revisto quando dois ou mais especialistas o marcam como pouco claro.</p>
+          <p class="vl-lbl"><b>Estrutura.</b> Cada item de estrutura é revisto quando menos de 80% dos especialistas lhe atribuem nota 3.</p>
+          <p class="vl-lbl">Indicadores abaixo do critério são reformulados, fundidos ou retirados, e cada decisão é registrada com sua justificativa.</p>
+        </details>
         <p style="margin-bottom:0"><button type="button" class="vl-send" id="vl-comecar">${S.parada < 0 ? "Começar a trilha →" : `Retomar a trilha na parada ${S.parada + 1} →`}</button></p>
       </div>
       <section id="vl-enviar" class="vl-env" ${S.parada === P.length - 1 ? "" : "hidden"}><h2>Enviar</h2>
