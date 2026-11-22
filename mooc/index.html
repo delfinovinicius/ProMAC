@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Proposta do MOOC ProMAC</title>
+<style>
+:root{--bg:#F6F4EE;--panel:#fff;--ink:#1B232C;--mute:#55606B;--line:#DCD6C8;--amar:#9a6a00;--chip:#F0EDE4;--link:#0b6f6a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F151C;--panel:#18212B;--ink:#EEF2F6;--mute:#A9B6C3;--line:#2C3A48;--amar:#E3A51A;--chip:#1F2A36;--link:#7CCBBE}}
+:root[data-theme="dark"]{--bg:#0F151C;--panel:#18212B;--ink:#EEF2F6;--mute:#A9B6C3;--line:#2C3A48;--amar:#E3A51A;--chip:#1F2A36;--link:#7CCBBE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:32px 16px 60px}
+.stripe{display:flex;height:8px}.stripe i{flex:1}
+.kicker{color:var(--amar);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(28px,5.5vw,40px);line-height:1.15;margin:.3em 0 .3em}
+h2{font-size:22px;margin:1.8em 0 .5em}
+a{color:var(--link)}
+.mute{color:var(--mute)}
+.status{background:var(--chip);border-left:4px solid var(--amar);padding:10px 14px;border-radius:0 8px 8px 0;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;color:var(--ink);display:block}
+.card:hover{border-color:var(--amar)}
+.card b{display:block;font-size:18px;margin-bottom:4px;color:var(--link)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto}
+ul{padding-left:1.2em}
+footer{margin-top:40px;font-size:13px;color:var(--mute)}
+</style>
+</head>
+<body>
+<div class="stripe" aria-hidden="true"><i style="background:#8DB6E0"></i><i style="background:#7CCBBE"></i><i style="background:#E9A27F"></i><i style="background:#B9A5E3"></i><i style="background:#E79AA8"></i></div>
+<div class="wrap">
+  <div class="kicker">Proposta de MOOC · rascunho para as orientadoras</div>
+  <h1>Você deixaria esse chatbot entrar na sua sala?</h1>
+  <p>Um curso aberto de 15 h em que o professor atua como <b>banca de um processo seletivo</b>: um chatbot se candidata a uma vaga na turma, e o professor decide, com o ProMAC, se ele entra, entra com condições ou fica de fora.</p>
+  <p class="status">Rascunho de 22/11/2026. A versão final depende do ProMAC validado. O MOOC é um desdobramento futuro da pesquisa: não amplia o escopo da dissertação, não é usado para coleta de dados e não entra na submissão atual ao CEP.</p>
+
+  <h2>Veja por dentro</h2>
+  <div class="cards">
+    <a class="card" href="sala/"><b>Sala simulada no Moodle</b>Todas as etapas abrem: páginas, roteiros dos vídeos, entregas, questionários com correção, fóruns, banco de falas, notas e blocos de progresso.</a>
+    <a class="card" href="desafio/"><b>Desafio da banca (15 min)</b>Página aberta, para antes da inscrição: três rodadas de "qual candidato você contrataria?", carimbo e rodada bônus com o chatbot que o professor já usa.</a>
+  </div>
+
+  <h2>Estrutura</h2>
+  <div class="tbl"><table>
+    <tr><th>Etapa</th><th>O que o professor faz</th><th class="n">Tempo</th><th class="n">Pontos</th></tr>
+    <tr><td>1. Edital</td><td>Escolhe entre dois candidatos e define a vaga</td><td class="n">2 h</td><td class="n">10</td></tr>
+    <tr><td>2. Currículo</td><td>Investiga quem é o candidato</td><td class="n">1 h</td><td class="n">10</td></tr>
+    <tr><td>3. Entrevista</td><td>Conversa como quatro alunos diferentes e faz o teste de estresse</td><td class="n">4 h</td><td class="n">20</td></tr>
+    <tr><td>4. Banca</td><td>Pontua as conversas com o ProMAC</td><td class="n">4 h</td><td class="n">30</td></tr>
+    <tr><td>5. Segunda chamada</td><td>Ajusta o candidato e entrevista de novo</td><td class="n">2 h</td><td class="n">15</td></tr>
+    <tr><td>6. Resultado</td><td>Aprova, aprova com condições ou reprova, com contrato de uso</td><td class="n">2 h</td><td class="n">15</td></tr>
+  </table></div>
+  <p class="mute">Formato dos MOOCs do Ifes/Cefor: sem tutoria, questionários de correção automática, certificado com 60 de 100 pontos.</p>
+
+  <h2>O que o torna diferente</h2>
+  <ul>
+    <li><b>Narrativa de processo seletivo</b>, com três viradas: a pegadinha dos Candidatos A e B, a candidata surpresa e a revelação final.</li>
+    <li><b>Teste de estresse:</b> o professor tenta fazer o chatbot falhar em cinco fases (Atalho, Teimosia, Fuga, Segredo e Alerta). Inspirado em jogos como o Bad News, da Universidade de Cambridge, e o Gandalf, da Lakera.</li>
+    <li><b>Banco aberto de falas:</b> falas típicas de alunos por área, série e língua, com licença CC BY 4.0. O curso continua crescendo depois de pronto.</li>
+    <li><b>Desafio da banca:</b> uma porta de entrada aberta e compartilhável, que mostra em 15 minutos por que vale fazer o curso.</li>
+  </ul>
+
+  <h2>Pontos para decidir com as orientadoras</h2>
+  <ul>
+    <li>Oferta no Cefor, quando e com qual prazo.</li>
+    <li>Onde publicar o Desafio da banca e o banco de falas fora do Moodle.</li>
+    <li>Uso das atividades Escolha, H5P e Glossário, que estão propostas mas ainda não foram aplicadas.</li>
+    <li>Revisão dos textos, roteiros e questionários pela equipe.</li>
+  </ul>
+
+  <footer>Equipe: Vinícius Delfino Silva, Profa. Vanessa Battestin e Profa. Rutinelli da Penha Fávero · Educimat/Ifes · Base: ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais.</footer>
+</div>
+</body>
+</html>
