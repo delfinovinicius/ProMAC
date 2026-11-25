@@ -440,11 +440,12 @@ details.mais.ia .ia-b{padding:0 16px 16px}
 
 </style>
 
+<style>@media(max-width:520px){.vs-l{display:none}}</style>
 </head>
 <body>
 <div class="entrada" id="entrada" role="dialog" aria-modal="true" aria-label="Entrada do ProMAC" hidden><p class="marca">ProMAC</p><p class="sub">Protocolo Multidimensional de Avaliação de Agentes Conversacionais</p><div id="en-flor"></div><p class="fleg" id="fleg" aria-live="polite"></p><div class="acoes"><button type="button" class="entrar" id="entrar">Entrar no ProMAC →</button><a class="pdf2" href="ProMAC_guia.pdf" target="_blank" rel="noopener">Guia em PDF</a></div></div>
 <header class="top"><div class="wrap">
-<a class="logo" href="#inicio" aria-label="ProMAC, início"><span id="logo-flor" aria-hidden="true"></span>ProMAC</a>
+<a class="logo" href="#inicio" aria-label="ProMAC, versão 2, início"><span id="logo-flor" aria-hidden="true"></span>ProMAC<small style="font:600 11px/1 var(--mono,ui-monospace,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-left:8px;white-space:nowrap" class="vs-l">Versão 2</small></a>
 <nav aria-label="Principal"><a href="#avaliar" data-v="avaliar">Avaliar</a><a href="#indicadores" data-v="indicadores">Dimensões</a><a class="pdf" href="ProMAC_guia.pdf" target="_blank" rel="noopener">Guia em PDF</a></nav>
 </div></header>
 <main class="wrap">
@@ -464,7 +465,7 @@ details.mais.ia .ia-b{padding:0 16px 16px}
 <li><b>4</b>Conversa 3<span>7 min</span></li>
 <li><b>5</b>Decidir<span>2 min</span></li>
 </ol>
-<p class="muted small">Suas notas ficam só neste navegador.</p>
+<p class="muted small">Suas notas ficam só neste navegador. <span style="white-space:nowrap">Versão 2 do ProMAC.</span></p>
 </section>
 
 <section class="view" id="v-avaliar" aria-labelledby="h-av" hidden>
@@ -688,7 +689,7 @@ function relPDF(b){
     nv.forEach(k=>{ const ls=doc.splitTextToSize("Verificação inicial, item "+(+k+1)+": “Não”. O agente "+lp(D.verif[k][1]),CW-6); cabe(ls.length*4.8+2); fill(CN[1]); doc.circle(M+1.4,y-1.2,1.1,"F"); doc.text(ls,M+6,y); y+=ls.length*4.8+2; });
     { const tp=topicos(), N={t:"tratado",r:"raso",a:"ausente"}; if(tp.length&&Object.keys(S.top||{}).length){ const ls=doc.splitTextToSize("Tópicos da atividade (D3.2): "+lp(tp.map((x,i)=>x+", "+(N[(S.top||{})[i]]||"não marcado")).join("; "))+".",CW); cabe(ls.length*4.8+2); y+=1; doc.text(ls,M,y); y+=ls.length*4.8; } }
     /* rodapé */
-    const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); traco(LINE); doc.setLineWidth(.2); doc.line(M,285,W-M,285); font("normal",7.5); ink(SOFT); doc.text("ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais",M,289.5); doc.text("Página "+p+" de "+n,W-M,289.5,{align:"right"}); }
+    const n=doc.getNumberOfPages(); for(let p=1;p<=n;p++){ doc.setPage(p); traco(LINE); doc.setLineWidth(.2); doc.line(M,285,W-M,285); font("normal",7.5); ink(SOFT); doc.text("ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais (versão 2)",M,289.5); doc.text("Página "+p+" de "+n,W-M,289.5,{align:"right"}); }
     baixa("ProMAC_relatorio.pdf",doc.output("blob")); };
   if(window.jspdf) return go(); b.textContent="Preparando…"; const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"; s.onload=()=>{ b.textContent="PDF"; go(); }; s.onerror=()=>{ b.textContent="PDF indisponível"; }; document.head.appendChild(s);
 }
