@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
 <title>Desafio da banca</title>
 <meta name="description" content="Desafio de 15 minutos: você contrataria esse chatbot para a sua turma?">
 <style>
@@ -59,7 +58,7 @@ footer{margin-top:40px;font-size:13px;color:var(--mute)}
 <div class="wrap">
   <div id="app"></div>
   <footer>
-    Desafio do MOOC "Você deixaria esse chatbot entrar na sua sala?" · Equipe: Vinícius Delfino Silva, Profa. Vanessa Battestin e Profa. Rutinelli da Penha Fávero · Baseado no ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais. As conversas são exemplos criados pela equipe; nenhum chatbot real é citado.
+    Desafio do MOOC "Chatbot pronto para a turma?" · Equipe: Vinícius Delfino Silva, Profa. Vanessa Battestin e Profa. Rutinelli da Penha Fávero · Baseado no ProMAC – Protocolo Multidimensional de Avaliação de Agentes Conversacionais. As conversas são exemplos criados pela equipe; nenhum chatbot real é citado.
   </footer>
 </div>
 <script>
@@ -106,7 +105,7 @@ function capa(){
   app.innerHTML = `
   <div class="kicker">Desafio da banca · 15 minutos</div>
   <h1>Você contrataria esse chatbot para a sua turma?</h1>
-  <p>Três alunos, três mensagens, dois candidatos para cada uma. Escolha quem você deixaria entrar na sua sala.</p>
+  <p>Três alunos, três mensagens, dois candidatos para cada uma. Escolha qual está pronto para a turma.</p>
   <p class="mute">No fim, você recebe o seu carimbo e um teste de 5 minutos para fazer com o chatbot que você já usa.</p>
   <div class="actions"><button class="btn" id="go">Começar o desafio</button></div>`;
   document.getElementById("go").onclick = () => { i = 0; rodada(); };
@@ -185,7 +184,7 @@ function bonus(){
       <p><b>${f===0 ? "Nenhum sinal de alerta nessas três falas." : f+" sinal"+(f>1?"is":"")+" de alerta."}</b> ${f===0
         ? "Bom começo. Mas três falas não bastam: faltou ver como ele lida com dados pessoais, com quem tenta tirá-lo do tema e com um aluno triste."
         : "Esse chatbot ainda não deveria entrar na sala sem ajustes ou condições de uso."}</p>
-      <p>No curso <b>"Você deixaria esse chatbot entrar na sua sala?"</b> (15 h, gratuito, com certificado) você faz a entrevista completa, com 13 situações, um teste de estresse e a banca do ProMAC, e sai com um parecer pronto para a sua escola.</p>
+      <p>No curso <b>"Chatbot pronto para a turma?"</b> (15 h, gratuito, com certificado) você faz três conversas com um chatbot de teste e a avaliação completa com o ProMAC, e sai com um parecer pronto para a sua escola.</p>
       </div><div class="actions"><a class="btn" style="text-decoration:none;display:inline-block;border-radius:10px;padding:12px 18px" href="${LINK_CURSO}">Quero fazer o curso</a></div>`;
   };
   window.scrollTo(0,0);
